@@ -1,0 +1,3 @@
+[submodule "chengying-web"]
+	path = chengying-web
+	url = https://github.com/DTStack/chengying-web.git
