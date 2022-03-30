@@ -4,3 +4,9 @@
 [submodule "chengying-agent"]
 	path = chengying-agent
 	url = https://github.com/DTStack/chengying-agent.git
+[submodule "chengying-schema"]
+	path = chengying-schema
+	url = https://github.com/DTStack/chengying-schema.git
+[submodule "chengying-server"]
+	path = chengying-server
+	url = https://github.com/DTStack/chengying-server.git
