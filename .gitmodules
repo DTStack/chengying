@@ -10,3 +10,6 @@
 [submodule "chengying-server"]
 	path = chengying-server
 	url = https://github.com/DTStack/chengying-server.git
+[submodule "chengying-front"]
+	path = chengying-front
+	url = https://github.com/DTStack/chengying-front.git
