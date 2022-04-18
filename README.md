@@ -31,7 +31,7 @@ Chengying来源于数栈运维管家-EasyManager，是袋鼠云数栈运维保�
 ### 节点扩容/缩容
 * 支持根据集群运行状况，产品化支持主机资源扩充与缩减。
 
-##整体架构
+## 整体架构
 ![架构图](docs/architecture.png)
 
 ## Contributing
