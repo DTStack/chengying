@@ -34,10 +34,13 @@ Chengying来源于数栈运维管家-EasyManager，是袋鼠云数栈运维保�
 ## 整体架构
 ![架构图](docs/architecture.png)
 
-## Contributing
-Refer to the Contributing
+## 快速开始
+请点击[快速开始](https://dtstack.github.io/chengying-web/docs/chengyingDocs/quickstart)
+
+## 如何贡献
+请点击[如何贡献](https://dtstack.github.io/chengying-web/docs/chengyingDocs/contributing)
 
 ## Lincence
-Chengying is under the Apache 2.0 license. See the LINCENCE file for details.
+Chengying is under the Apache 2.0 license. See the [LINCENCE](http://www.apache.org/licenses/LICENSE-2.0) file for details.
 
 
