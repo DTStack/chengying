@@ -43,4 +43,8 @@ Chengying来源于数栈运维管家-EasyManager，是袋鼠云数栈运维保�
 ## Lincence
 Chengying is under the Apache 2.0 license. See the [LINCENCE](http://www.apache.org/licenses/LICENSE-2.0) file for details.
 
+## 技术交流
+我们使用[钉钉](https://www.dingtalk.com/) 沟通交流，可以搜索群号[30537511]或者扫描下面的二维码加入钉钉群
+![钉钉群](docs/ding%20(1).jpeg)
+
 
