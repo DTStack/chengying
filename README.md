@@ -1,8 +1,8 @@
-# Chengying
+# ChengYing
 
-Chengying名字由来为中国古代十大名剑之一-承影。
+ChengYing名字由来为中国古代十大名剑之一-承影。
 
-Chengying来源于数栈运维管家-EasyManager，是袋鼠云数栈运维保障团队出品的一款支持标准化schema定义、自动化部署产品包的软件，旨在对产品包下每个服务进行部署、升级、卸载、配置等操作，解放人工运维成本。
+ChengYing来源于数栈运维管家-EasyManager，是袋鼠云数栈运维保障团队出品的一款支持标准化schema定义、自动化部署产品包的软件，旨在对产品包下每个服务进行部署、升级、卸载、配置等操作，解放人工运维成本。
 
 ## 功能特征
 ### 统一的产品包schema定义
@@ -41,7 +41,7 @@ Chengying来源于数栈运维管家-EasyManager，是袋鼠云数栈运维保�
 请点击[如何贡献](https://dtstack.github.io/chengying-web/docs/chengyingDocs/contributing)
 
 ## Lincence
-Chengying is under the Apache 2.0 license. See the [LINCENCE](http://www.apache.org/licenses/LICENSE-2.0) file for details.
+ChengYing is under the Apache 2.0 license. See the [LINCENCE](http://www.apache.org/licenses/LICENSE-2.0) file for details.
 
 ## 技术交流
 我们使用[钉钉](https://www.dingtalk.com/) 沟通交流，可以搜索群号[30537511]或者扫描下面的二维码加入钉钉群
