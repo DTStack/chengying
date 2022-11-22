@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: loki-grafana
+  name: loki-grafana
+  namespace: {{.NameSpace}}
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: {{.GrafanaPort}}
+      name: tcp
+  selector:
+    app: loki-grafana

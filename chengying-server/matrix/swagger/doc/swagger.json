@@ -1,0 +1,1820 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "matrtix swagger api doc",
+        "title": "maxtrix",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "2.0"
+    },
+    "host": "localhost:8864",
+    "basePath": "/api/v2",
+    "paths": {
+        "/agent/install/hostdelete": {
+            "post": {
+                "description": "delete agent",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "删除agent",
+                "parameters": [
+                    {
+                        "description": "主机信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/impl.hostDeleteParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/checkinstall": {
+            "post": {
+                "description": "check status by aid",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "检查agent",
+                "parameters": [
+                    {
+                        "description": "agent id",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/util.ApiShipperCheck"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"aid\":\"\",\"ip\":\"\",\"status_msg\":\"\",\"status\":\"\"}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/checkinstallall": {
+            "get": {
+                "description": "check status all",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "检查agent",
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"list\":\"\",\"total\":\"\"}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/checkinstallbyip": {
+            "post": {
+                "description": "check status by ip",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "检查agent",
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"ip\":\"\",\"status\":\"\",\"status_msg\":\"\"}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/checkinstallbysid": {
+            "get": {
+                "description": "check status by ip",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "检查agent",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "7bfad86f-576b-474a-8697-f66b9fcbac9d",
+                        "name": "sid",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"aid\":\"\",\"ip\":\"\",\"status\":\"\",\"status_msg\":\"\"}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/hostService": {
+            "get": {
+                "description": "list service by pid",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "查看主机服务",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "[",
+                        "name": "pid_list",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "主机ip",
+                        "name": "ip",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":[{\"product_name\":\"\",\"product_name_display\":\"\",\"group\":\"\",\"service_name_list\":\"\",\"service_name_display_list\":\"service_name_display_list\"}]}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/hostgroup_rename": {
+            "post": {
+                "description": "rename group name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "重命名组",
+                "parameters": [
+                    {
+                        "description": "命名参数",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/impl.hostGroupRenameParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/hostgroups": {
+            "post": {
+                "description": "通过密码安装agent",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "安装agent",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "host ip",
+                        "name": "host_or_ip",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "product name",
+                        "name": "product_name",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "parent product name",
+                        "name": "parent_product_name",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "agent group",
+                        "name": "group",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":[\"default\"]}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/hostmove": {
+            "post": {
+                "description": "move host group",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "改变主机组名",
+                "parameters": [
+                    {
+                        "description": "主机密码信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/impl.hostMoveParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/installCmd": {
+            "post": {
+                "description": "install agent by cmd",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "安装agent",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "host",
+                        "description": "集群类型",
+                        "name": "type",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "1",
+                        "description": "集群id",
+                        "name": "clusterId",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "Etcd,Control,Worker",
+                        "description": "集群角色",
+                        "name": "role",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "curl -s 'http://172.16.82.176:8889/api/v1/deploy/sidecar/install/shell?TargetPath=/opt/dtstack/easymanager/easyagent\u0026CallBack=aHR0cDovLzE3Mi4xNi44Mi4xNzY6ODg2NC9hcGkvdjIvYWdlbnQvaW5zdGFsbC9jYWxsYmFjaz9haWQ9LTE=\u0026Type=hosts\u0026ClusterId=1\u0026Roles=Etcd,Control,Worker' | sh",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/pkconnect": {
+            "post": {
+                "description": "通过秘钥检查ssh连通性检查",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "秘钥连通性测试",
+                "parameters": [
+                    {
+                        "description": "主机秘钥信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/util.PkConnectParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/pkinstall": {
+            "post": {
+                "description": "install agent by pk",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "安装agent",
+                "parameters": [
+                    {
+                        "description": "秘钥信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/util.PkInstallParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/pwdconnect": {
+            "post": {
+                "description": "通过password密码检查ssh连通性检查",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "密码连通性测试",
+                "parameters": [
+                    {
+                        "description": "主机密码信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/util.PwdConnectParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/agent/install/pwdinstall": {
+            "get": {
+                "description": "list agent",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "查询所有agent",
+                "parameters": [
+                    {
+                        "description": "主机密码信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/util.PwdInstallParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"hosts\":\"\",\"count\":\"\"}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/common/deployInfo/download": {
+            "get": {
+                "description": "部署信息文档下载",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "common"
+                ],
+                "summary": "部署信息文档下载",
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/common/deployInfo/generate": {
+            "post": {
+                "description": "生成部署信息文档",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "common"
+                ],
+                "summary": "生成部署信息文档",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "EM 版本号",
+                        "name": "em_version",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/platform/inspect/baseInfo/name_node": {
+            "get": {
+                "description": "大数据运行服务基础信息",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Inspect"
+                ],
+                "summary": "大数据运行服务基础信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Cluster ID",
+                        "name": "cluster_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/impl.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/platform/inspect/baseInfo/status": {
+            "get": {
+                "description": "获取巡检报告基本信息",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Inspect"
+                ],
+                "summary": "获取巡检报告基本信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Cluster ID",
+                        "name": "cluster_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/impl.Result"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/platform/inspect/form/data": {
+            "get": {
+                "description": "获取巡检报告表格信息",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Inspect"
+                ],
+                "summary": "获取巡检报告表格信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Cluster ID",
+                        "name": "cluster_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "form_title",
+                        "name": "form_title",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/impl.FromStruct"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/platform/inspect/graph/config": {
+            "get": {
+                "description": "获取图表配置列表",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Inspect"
+                ],
+                "summary": "获取图表配置列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Cluster ID",
+                        "name": "cluster_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.BaseTemplateConfig"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/platform/inspect/graph/config/update": {
+            "post": {
+                "description": "修改巡检报告统计配置",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Inspect"
+                ],
+                "summary": "修改巡检报告统计配置",
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/platform/inspect/statisticsConfig": {
+            "get": {
+                "description": "获取巡检报告统计配置",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Inspect"
+                ],
+                "summary": "获取巡检报告统计配置",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/cache.InspectConfig"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/backup": {
+            "get": {
+                "description": "Get Cluster Service Backup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "获取集群服务备份目录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "集群ID",
+                        "name": "clusterId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "product": {
+                                        "type": "string"
+                                    },
+                                    "service": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "host_info": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "ip": {
+                                                                "type": "string"
+                                                            },
+                                                            "sid": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "version": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/backup/getconfig": {
+            "post": {
+                "description": "get cluster backup path",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "查看备份路径",
+                "parameters": [
+                    {
+                        "description": "[{",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"count\":4,\"data\":{\"clusterId\":\"\",\"clusterName\":\"\",\"path\":\"\"}}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/backup/setconfig": {
+            "post": {
+                "description": "set cluster backup path",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "设置备份路径",
+                "parameters": [
+                    {
+                        "description": "[{",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/cancel_upload": {
+            "post": {
+                "description": "Cancel Upload",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "取消上传包",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "上传ID",
+                        "name": "record_id",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/check_param": {
+            "post": {
+                "description": "异步上传预检查",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "upload async check",
+                "parameters": [
+                    {
+                        "description": "主机密码信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/impl.uploadAsyncParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/clean": {
+            "post": {
+                "description": "Clean Cluster Backup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "清理备份文件夹",
+                "parameters": [
+                    {
+                        "description": "备份信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "product": {
+                                        "type": "string"
+                                    },
+                                    "service": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "host_info": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "ip": {
+                                                                "type": "string"
+                                                            },
+                                                            "sid": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "version": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/in_progress": {
+            "get": {
+                "description": "Get Uploading Products",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "查询包上传状态",
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"total\":\"\",\"data\":\"\"}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/productList": {
+            "get": {
+                "description": "GET Product List",
+                "consumes": [
+                    "application/json",
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "获取产品包列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "产品名称",
+                        "name": "product_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "产品类型",
+                        "name": "product_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "部署状态",
+                        "name": "deploy_status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"list\":\"\",\"count\":\"\"}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/upload": {
+            "post": {
+                "description": "upload package",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "上传产品包",
+                "parameters": [
+                    {
+                        "description": "-F 'package=@Trino_0.359-tdh_centos7_x86_64.tar'",
+                        "name": "package",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/uploadAsync": {
+            "post": {
+                "description": "upload package async",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "异步上传包",
+                "parameters": [
+                    {
+                        "description": "主机密码信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/impl.uploadAsyncParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/workloadinit": {
+            "get": {
+                "description": "workload加载接口",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "workload加载接口",
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/{pid}/start": {
+            "get": {
+                "description": "Start Product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "启动组件",
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/{pid}/stop": {
+            "get": {
+                "description": "Stop Product",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "停止组件",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "停止类型",
+                        "name": "type",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/{pid}/unchecked_services": {
+            "get": {
+                "description": "Get Unchecked Services",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "查看未部署组件",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "命名空间",
+                        "name": "namespace",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":[\"\"]}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/{product_name}/service/{service_name}/get_ip": {
+            "get": {
+                "description": "Get Service Host",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "查看服务的主机",
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"ip\":[],\"count\":\"\"}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/{product_name}/service/{service_name}/modify_schema_field": {
+            "post": {
+                "description": "Modify Schema Field",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "修改schema字段",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "field key",
+                        "name": "field_path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "field value",
+                        "name": "field",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/{product_name}/service/{service_name}/modify_schema_field_batch": {
+            "post": {
+                "description": "Modify Schema Field",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "修改scheme多个字段",
+                "parameters": [
+                    {
+                        "description": "[{",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/{product_name}/service/{service_name}/reset_schema_field": {
+            "post": {
+                "description": "Reset Schema Field",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "重置schema字段",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "field key",
+                        "name": "field_path",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "版本号",
+                        "name": "product_version",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/{product_name}/service/{service_name}/set_ip": {
+            "post": {
+                "description": "Set Service Host",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "查看服务的主机",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "命名空间",
+                        "name": "namespace",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/product/{product_name}/version/{product_version}": {
+            "get": {
+                "description": "GET Product Info",
+                "consumes": [
+                    "application/json",
+                    "application/json"
+                ],
+                "tags": [
+                    "product"
+                ],
+                "summary": "获取产品信息",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "部署状态",
+                        "name": "deploy_status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "父级产品包名称",
+                        "name": "parentProductName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "产品名称",
+                        "name": "productName",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "集群ID",
+                        "name": "clusterId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "产品类型",
+                        "name": "product_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "模式",
+                        "name": "mode",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":{\"list\":\"\",\"count\":\"\"}}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/apv/v2/agent/install/pwdinstall": {
+            "post": {
+                "description": "install agent by pwd",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "agent"
+                ],
+                "summary": "安装agent",
+                "parameters": [
+                    {
+                        "description": "主机密码信息",
+                        "name": "message",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/util.PwdInstallParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"msg\":\"ok\",\"code\":0,\"data\":null}",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "cache.InspectConfig": {
+            "type": "object",
+            "properties": {
+                "dir_size": {
+                    "type": "integer"
+                },
+                "fullGC_frequency": {
+                    "type": "integer"
+                },
+                "fullGC_time": {
+                    "type": "integer"
+                },
+                "node_cpu_usage": {
+                    "type": "integer"
+                },
+                "node_disk_usage": {
+                    "type": "integer"
+                },
+                "node_inode_usage": {
+                    "type": "integer"
+                },
+                "node_mem_usage": {
+                    "type": "integer"
+                }
+            }
+        },
+        "impl.FromStruct": {
+            "type": "object",
+            "properties": {
+                "form_head": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "form_value": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "impl.NodeInfo": {
+            "type": "object",
+            "properties": {
+                "agent_error_num": {
+                    "type": "integer"
+                },
+                "alerting_num": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "impl.Response": {
+            "type": "object",
+            "properties": {
+                "data_node_dead_nums": {
+                    "type": "integer"
+                },
+                "data_node_live_nums": {
+                    "type": "integer"
+                },
+                "data_node_mem": {
+                    "type": "string"
+                },
+                "hdfs_file_num": {
+                    "type": "integer"
+                },
+                "name_node_mem": {
+                    "type": "string"
+                }
+            }
+        },
+        "impl.Result": {
+            "type": "object",
+            "properties": {
+                "have_name_node": {
+                    "type": "integer"
+                },
+                "mysql_slave_status": {
+                    "type": "integer"
+                },
+                "node_status": {
+                    "$ref": "#/definitions/impl.NodeInfo"
+                },
+                "service_status": {
+                    "$ref": "#/definitions/impl.ServiceInfo"
+                }
+            }
+        },
+        "impl.ServiceInfo": {
+            "type": "object",
+            "properties": {
+                "alerting_num": {
+                    "type": "integer"
+                },
+                "healthy_check_error_num": {
+                    "type": "integer"
+                },
+                "host_down_num": {
+                    "type": "integer"
+                },
+                "running_fail_num": {
+                    "type": "integer"
+                }
+            }
+        },
+        "impl.hostDeleteParam": {
+            "type": "object",
+            "properties": {
+                "aid": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "impl.hostGroupRenameParam": {
+            "type": "object",
+            "properties": {
+                "new": {
+                    "type": "string"
+                },
+                "old": {
+                    "type": "string"
+                }
+            }
+        },
+        "impl.hostMoveParam": {
+            "type": "object",
+            "properties": {
+                "aid": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "to_group": {
+                    "type": "string"
+                }
+            }
+        },
+        "impl.uploadAsyncParam": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "model.BaseTemplateConfig": {
+            "type": "object",
+            "properties": {
+                "decimal": {
+                    "type": "integer"
+                },
+                "metric": {
+                    "type": "string"
+                },
+                "module": {
+                    "type": "string"
+                },
+                "targets": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "integer"
+                },
+                "unit": {
+                    "type": "string"
+                }
+            }
+        },
+        "util.ApiShipperCheck": {
+            "type": "object",
+            "properties": {
+                "aid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "util.PkConnectParams": {
+            "type": "object",
+            "properties": {
+                "cluster_id": {
+                    "type": "integer"
+                },
+                "cluster_type": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "pk": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                }
+            }
+        },
+        "util.PkInstallParams": {
+            "type": "object",
+            "properties": {
+                "cluster_id": {
+                    "type": "integer"
+                },
+                "cluster_type": {
+                    "type": "string"
+                },
+                "cmd": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "pk": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                }
+            }
+        },
+        "util.PwdConnectParams": {
+            "type": "object",
+            "properties": {
+                "cluster_id": {
+                    "type": "integer"
+                },
+                "cluster_type": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                }
+            }
+        },
+        "util.PwdInstallParams": {
+            "type": "object",
+            "properties": {
+                "cluster_id": {
+                    "type": "integer"
+                },
+                "cluster_type": {
+                    "type": "string"
+                },
+                "cmd": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
+        }
+    }
+}

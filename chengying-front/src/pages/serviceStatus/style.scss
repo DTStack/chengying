@@ -1,0 +1,564 @@
+.side-product {
+  font-size: 20px;
+  color: #ffffff;
+  letter-spacing: 0;
+  line-height: 32px;
+  padding: 14px 20px 10px;
+  background: white;
+  overflow: auto;
+
+  .product-filter-wrapper {
+    font-size: 14px;
+    color: #3f87ff;
+  }
+
+  .product-name {
+    font-size: 20px;
+  }
+
+  .product-ss-option {
+    padding-left: 10px;
+  }
+}
+
+.service-container {
+  .service-attention{
+    margin: 0 20px;
+    vertical-align: middle;
+    height: 44px;
+    background: #FFFBE6;
+    .attention-content{
+      // vertical-align: middle;
+      padding-top: 12px;
+    }
+    .attention-title{
+      font-size: 12px;
+      height: 20px;
+      vertical-align: middle;
+    }
+    .red-attention{
+      color: #ff5f5c;
+    }
+    .attention-more{
+      display: inline-block;
+      width: calc(100vw - 76px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .service-content{
+    // padding: 20px 0 0 20px;
+    margin: 20px;
+    .collapse-config {
+      .run-setting {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .ant-input {
+          width: 205px;
+          line-height: 24px;
+          height: 24px;
+          font-size: 12px;
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+}
+.config-tips{
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    background: rgba(63, 135, 255, 0.1);
+    padding-left: 16px;
+    color: #333;
+}
+.config-progress{
+  padding:20px 0px 12px;
+  margin:0 auto;
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #FAFAFA;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0);
+  background-color: #cccccc;
+}
+.service-version {
+  float: right;
+  background: #f0f8ff;
+  border: 1px solid #3f87ff;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #3f87ff;
+  text-align: left;
+  line-height: 20px;
+  padding: 0 5px;
+  margin: 10px 0;
+  transform: scale(0.84);
+}
+
+.service-opts {
+  margin: 10px;
+}
+
+.service-list {
+  margin: 10px;
+  height: 100%;
+  background: #ffffff;
+
+  .ant-table-scroll {
+    .ant-table-body {
+      overflow-y: auto !important;
+    }
+  }
+
+  .ant-btn-background-ghost {
+    background-color: rgba(24, 144, 255, 0.1) !important;
+  }
+
+  .instance-opt-btn {
+    margin: 0 5px;
+  }
+
+  .hide {
+    display: none;
+  }
+}
+
+.service-config-pre {
+  white-space: pre-wrap;
+  /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;
+  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+}
+.service-config {
+  max-height: 400px;
+}
+
+.dot-cls {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: #ff5f5c;
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  left: 25px;
+}
+
+pre {
+  width: 845px;
+  white-space: pre-wrap;
+  /*css-3*/
+  white-space: -moz-pre-wrap;
+  /*Mozilla,since1999*/
+  white-space: -pre-wrap;
+  /*Opera4-6*/
+  white-space: -o-pre-wrap;
+  /*Opera7*/
+  word-wrap: break-word;
+  /*InternetExplorer5.5+*/
+}
+
+.ant-menu-inline,
+.ant-menu-vertical {
+  border-right: 0;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+  position: relative;
+}
+
+.product-filter-wrapper {
+  font-size: 14px;
+
+  .product-ss-btn {
+    padding-left: 10px;
+    color: #ffffff;
+  }
+}
+
+.service-tab {
+  &.ant-tabs {
+    overflow: unset;
+  }
+  .ant-tabs-bar {
+    .ant-tabs-nav-wrap {
+      margin-left: -1px;
+    }
+  }
+}
+
+.card-wrapper {
+  &.has-card-extra {
+    .text-title-bold {
+      margin-bottom: 0;
+      line-height: 32px;
+    }
+  }
+  .ant-card {
+    .ant-card-body {
+      padding: 0;
+    }
+  }
+  .service-list {
+    margin: 0;
+
+    .ant-btn-background-ghost {
+      border-radius: 20px;
+    }
+    .ant-collapse {
+      border: 0;
+      border-radius: 0;
+      .ant-collapse-item:last-child {
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+.ss-confirm-modal {
+  .ant-modal-confirm-body {
+    .ant-modal-confirm-content {
+      margin-top: 0;
+    }
+  }
+}
+
+$ok_color: #51c419;
+$pending_color: #f9db13;
+$alerting_color: #ff4d4f;
+$no_data_color: #ffa941;
+$paused_color: #bfbfbf;
+
+.color-ok {
+  color: $ok_color;
+}
+
+.color-pending {
+  color: $pending_color;
+}
+
+.color-alerting {
+  color: $alerting_color;
+}
+
+.color-no-data {
+  color: $no_data_color;
+}
+
+.color-paused {
+  color: $paused_color;
+}
+
+.setting-tooltip {
+  .ant-tooltip-inner {
+    padding: 0;
+  }
+
+  .ant-tooltip-content {
+    .ant-tooltip-arrow {
+      border-bottom-color: #202124;
+    }
+  }
+
+  .dt-em-menu-black {
+    background-color: #ffffff;
+
+    .ant-menu-item-selected {
+      background-color: #ffffff;
+    }
+
+    li {
+      color: #262626;
+      height: 32px !important;
+      line-height: 32px !important;
+    }
+
+    li:hover {
+      background-color: #3f87ff;
+    }
+  }
+}
+
+.service-dt-em-dropdown-black {
+  width: 180px;
+  left: 240px !important;
+  margin-top: 16px !important;
+
+  .ant-dropdown-menu {
+    border-radius: 0;
+    .ant-dropdown-menu-item {
+      position: relative;
+      padding: 5px 20px;
+      .dot-cls {
+        top: 12px;
+        left: 10px;
+      }
+    }
+  }
+}
+
+.service-dt-em-dropdown-setting {
+  width: 180px;
+  left: 256px !important;
+  margin-top: 24px !important;
+}
+
+a {
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.config-opt-bar {
+  display: inline;
+  position: fixed;
+  z-index: 999;
+  bottom: 10px;
+  right: 17px;
+}
+
+.c-paramConfig-toolbar {
+  text-align: right;
+  margin-bottom: 16px;
+
+  .c-paramConfig-toolbar__btn {
+    color: #3f87ff;
+    background-color: #fff;
+    border-color: #3f87ff;
+  }
+  .c-paramConfig-toolbar__btn:hover,
+  .c-paramConfig-toolbar__btn:focus {
+    color: #fff;
+    background-color: #3f87ff;
+    border-color: #3f87ff;
+  }
+}
+
+.ace_print-margin {
+  width: 0px !important;
+}
+.icon-style {
+  vertical-align: middle;
+  margin-left: 12px;
+  margin-right: 5px;
+  font-size: 32px;
+  &.emicon-wyy {
+    color: #818997;
+  }
+  &.emicon-new {
+    color: #ffb310;
+  }
+  &.emicon-revise {
+    color: #9eabb2;
+    transition: all 0.3s;
+    font-size: 20px;
+    &:hover {
+      color: #3f87ff;
+    }
+  }
+}
+// 多配置操作ICON展示
+.operate-icon{
+  color: #3f87ff;
+  .plus-icon, .dynamic-delete-button,.link-icon{
+    margin-left: 12px;
+    width: 20px;
+    height: 20px
+  }
+}
+// 关联主机模态框操作
+.linkhosts-modal{
+  color: #333333;
+  .ant-modal-body{
+    padding: 0;
+    .linkhosts-title{
+      height: 44px;
+      line-height: 44px;
+      background-color: rgba(63, 135, 255, 0.1);
+      padding: 0 0 0 20px;
+      span{
+        line-height: 20px;
+        font-size: 14px;
+        vertical-align: middle
+      }
+    }
+    .linkhosts-content{
+      padding: 20px 40px;
+      padding-bottom: 8px;
+    }
+  }
+}
+//未关联主机提示
+.nohosts-span{
+  font-size: 12px;
+  color: #ff5f5c;
+  float: left; 
+  margin-left: -130px;
+  margin-right: 10px;
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
+//输入重复值提示信息
+.repeatparams-span{
+  font-size: 12px;
+  color: #ff5f5c;
+  margin-top: -10px;
+  margin-bottom: -12px;
+}
+//多行配置样式修改
+.config-array{
+  margin-bottom: 0;
+}
+
+.labelBox{
+  height: 32px;
+  margin-top: 4px;
+  padding-right: 10px;
+  display: inline-block;
+  line-height: 32px;
+}
+.ant-form-item-label > label::after {
+  content: ':';
+  right: 5px;
+  top: 0px;
+}
+
+.c-paramConfig__ant-input {
+  .ant-input-disabled + span.ant-input-group-addon {
+    background: #f5f5f5;
+  }
+}
+
+.auto-smoke {
+  p {
+    margin-top: 15px;
+    .error {
+      color: red;
+    }
+  }
+  .exec-error-log {
+    margin-top: 15px;
+    code {
+      display: block;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  }
+}
+.service-tab {
+  .max-content__scroll {
+    max-height: calc(100vh - 130px);
+    overflow-y: auto;
+  }
+  .status-card {
+    margin-bottom: 20px;
+    .ant-card-head {
+      border-bottom: 0;
+      .ant-tabs-tab {
+        padding: 12px 16px;
+      }
+    }
+    .ant-card-body {
+      padding: 12px 16px 20px 16px;
+      .ant-table-scroll {
+        overflow: hidden;
+      }
+    }
+  }
+}
+.box-shadow-style {
+  .recordSelectedRow td {
+    background-color: #F2F9FF;;
+  }
+}
+
+.status-card {
+  background: #fff;
+  .ant-tabs-tab {
+    padding-top: 12px!important;
+  }
+}
+.afteron {
+  padding: 0 11px;
+  font-size: 14px;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.65);
+  text-align: center;
+  background-color: #fafafa;
+  border: 1px solid #d9d9d9;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  width: 37px;
+  height: 31.5px;
+  display: inline-block;
+  line-height: 31.5px;
+  border-radius: 0px 5px 5px 0px;
+  border-left: 0;
+  cursor: pointer;
+}
+
+.extra-sider {
+  
+  h2 {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .ant-select {
+    width: 115px;
+  }
+
+  .extra-ul {
+    max-height: 472px;
+    overflow-y: auto;
+    li {
+      display: block;
+      width: 100%;
+      padding: 8px 10px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      cursor: pointer;
+      &.extra-selected {
+        color: #3f87ff;
+        &::before {
+          content: ' ';
+          margin-left: -10px;
+          margin-right: 8px;
+          border: 1px solid #3f87ff;
+        }
+      }
+    }
+  }
+}
+.config-box {
+  .ant-form-item  {
+    .anticon-lock {
+      vertical-align: 6px;
+    }
+  }
+}

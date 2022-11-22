@@ -1,0 +1,24 @@
+parent_product_name: DTEM
+product_name: DTAddons
+product_version: 1.1
+
+service:
+  easyfiler:
+    version: 1.1
+    instance:
+      cmd: sbin/easyfiler -c conf/config.yml
+      config_paths:
+      - conf/config.yml
+      healthcheck:
+        shell: sh bin/health.sh ${@easyfiler} 7788
+        period: 20s #default 60s
+      logs:
+      - logs/*.log
+    config:
+      rpc_port: 7788
+      mysql_ip: 127.0.0.1
+      mysql_user: root
+      mysql_password: dtstack
+      withdb: "false"
+      rate: 500 #KB/s
+      isziped: "false"

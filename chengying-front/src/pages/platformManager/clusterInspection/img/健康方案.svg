@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>健康方案</title>
+    <defs>
+        <rect id="path-1" x="220" y="112" width="1200" height="1556" rx="2"></rect>
+        <filter x="-1.1%" y="-0.7%" width="102.2%" height="101.7%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.0235294118   0 0 0 0 0.0549019608   0 0 0 0 0.101960784  0 0 0 0.08 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-3" x="240" y="164" width="1160" height="1300" rx="1"></rect>
+        <filter x="-0.9%" y="-0.6%" width="101.7%" height="101.5%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-5" x="0" y="177" width="260" height="60" rx="4"></rect>
+        <filter x="-5.8%" y="-25.0%" width="111.5%" height="150.0%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="v4.4.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="运行部署向导-配置服务-资源分配备份" transform="translate(-279.000000, -365.000000)">
+            <g id="编组">
+                <rect id="矩形" fill="#F2F7FA" x="0" y="0" width="1440" height="900"></rect>
+                <g id="矩形">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FAFAFA" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="矩形">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                </g>
+                <g id="编组-2" transform="translate(263.000000, 172.000000)">
+                    <g id="矩形备份-6">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-5"></use>
+                    </g>
+                    <path d="M0,177 L56,177 C58.209139,177 60,178.790861 60,181 L60,233 C60,235.209139 58.209139,237 56,237 L0,237 L0,237 L0,177 Z" id="矩形备份-22" fill="#E2EDFF" transform="translate(30.000000, 207.000000) scale(-1, 1) translate(-30.000000, -207.000000) "></path>
+                </g>
+            </g>
+            <g id="健康方案" transform="translate(279.000000, 365.000000)" fill="#3F87FF">
+                <path d="M20.9991416,4 L3.00085837,4 C1.34248927,4 0,5.34248927 0,7.00085837 L0,24.9991416 C0,26.6575107 1.34248927,28 3.00085837,28 L20.9991416,28 C22.6575107,28 24,26.6575107 24,24.9991416 L24,6.99742489 C24,5.34248927 22.6575107,4 20.9991416,4 Z M21.751073,24.9991416 C21.751073,25.4111588 21.4145923,25.7476395 21.0025751,25.7476395 L3.00085837,25.7476395 C2.5888412,25.7476395 2.25236052,25.4111588 2.25236052,24.9991416 L2.25236052,6.99742489 C2.25236052,6.58540773 2.5888412,6.24892704 3.00085837,6.24892704 L20.9991416,6.24892704 C21.4111588,6.24892704 21.7476395,6.58540773 21.7476395,6.99742489 L21.7476395,24.9991416 L21.751073,24.9991416 Z" id="形状" fill-rule="nonzero"></path>
+                <g id="编组-6" transform="translate(11.000000, 9.000000)">
+                    <rect id="Path" x="0.492718567" y="0" width="2.01456287" height="8.4"></rect>
+                    <rect id="Path" x="0" y="11.2" width="3" height="2.8"></rect>
+                </g>
+                <path d="M27.8043158,0.494521668 C27.6017656,0.19574816 27.25846,0 26.8705248,0 L8.12604218,0 C7.50465915,0 7,0.504824203 7,1.12641047 C7,1.74799673 7.50465915,2.25282093 8.12604218,2.25282093 L25.7479156,2.25282093 L25.7479156,19.8735895 C25.7479156,20.4951758 26.2525748,21 26.8739578,21 C27.4953409,21 28,20.4951758 28,19.8735895 L28,1.12297629 C27.9965669,0.889452167 27.9279058,0.673098937 27.8043158,0.494521668 L27.8043158,0.494521668 Z" id="路径" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

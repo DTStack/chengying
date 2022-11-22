@@ -1,0 +1,6 @@
+mute
+mute.exe
+.*.swp
+.DS_*
+.idea
+*.tar

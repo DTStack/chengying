@@ -1,0 +1,8 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafanaconf
+  namespace: {{.NameSpace}}
+data:
+ datasource.yml: "apiVersion: 1\n\ndatasources:\n- name: 'prometheus'\n  type: 'prometheus'\n  access: 'proxy'\n  org_id: 1\n  url: 'http://prometheus:9090'\n  is_default: true\n  version: 1\n  editable: false\n"

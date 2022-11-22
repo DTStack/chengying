@@ -1,0 +1,8 @@
+hadoop_pkg=2.8.5
+hdfs_namenode=2.8.5
+hdfs_datanode=2.8.5
+hdfs_journalnode=2.8.5
+hdfs_zkfc=2.8.5
+jobhistory=2.8.5
+yarn_resourcemanager=2.8.5
+yarn_nodemanager=2.8.5

@@ -1,0 +1,421 @@
+parent_product_name: DTHadoop
+product_name: Hadoop
+product_version: 2.8.5
+
+service:
+  zookeeper@Zookeeper.zookeeper@optional:
+    config:
+      port: 2181
+
+  hadoop_pkg:
+    version: 2.8.5
+    instance:
+      pseudo: true
+      cmd: ./waiting.sh
+      config_paths:
+      - post_deploy.sh
+      - etc/hadoop/hdfs-site.xml
+      - etc/hadoop/core-site.xml
+      - etc/hadoop/yarn-site.xml
+      - etc/hadoop/mapred-site.xml
+      - etc/hadoop/capacity-scheduler.xml
+      - etc/hadoop/hadoop-env.sh
+      - etc/hadoop/yarn-env.sh
+      - etc/hadoop/mapred-env.sh
+      - etc/hadoop/log4j.properties
+      - etc/hadoop/container-executor.cfg
+      post_deploy: ./post_deploy.sh
+    config:
+      namenode_ip: ${@hdfs_namenode}
+      zk_ip: ${@zookeeper}
+      zk_port: ${zookeeper.port}
+      data_dir: "file:/data/hadoop/hdfs/data"
+      name_dir: "file:/data/hadoop/hdfs/name"
+      dfs_journalnode_edits_dir: "/data/hadoop/hdfs/journal"
+      journalnode_ip: ${@hdfs_journalnode}
+      resourcemanager_ip: ${@yarn_resourcemanager}
+      jobhistory_ip: ${@jobhistory}
+      dfs_replication: ${hdfs_datanode.dfs_replication}
+      rpc_address_port: ${hdfs_namenode.rpc_address_port}
+      nameservices: ${hdfs_namenode.nameservices}
+      ha_namenode_id1: ${hdfs_namenode.ha_namenode_id1}
+      ha_namenode_id2: ${hdfs_namenode.ha_namenode_id2}
+      ha_rm_id1: ${yarn_resourcemanager.ha_rm_id1}
+      ha_rm_id2: ${yarn_resourcemanager.ha_rm_id2}
+      dt_center_analysis_ip: 127.0.0.1
+      cpu_vcores: 8
+      memory_mb: 12288
+      yarn_minmb: 512
+      yarn_maxmb: 12288
+      warehouse_dir: "/dtInsight/hive/warehouse"
+      scratchdir: "/dtInsight/hive/warehouse"
+      yarn_nodemanager_disk_health_checker_interval_ms: 120000
+      disk_min_health_checker: 0.25
+      disk_max_per_disk_percentage: 90.0
+      min_free_space_per_disk_mb: 10240
+      yarn_log_aggregation_retain_seconds: 604800
+      dfs_namenode_handler_count: 64
+      ipc_server_read_threadpool_size: 1
+      hdfs_edit_text: " "
+      yarn_edit_text: " "
+      core_edit_text: " "
+      hive_edit_text: " "
+      capacity_edit_text: ""
+      namenode_opts: "-Xmx1024m -Xms1024m"
+      datanode_opts: "-Xmx1024m -Xms1024m"
+      journalnode_opts: "-Xmx1024m -Xms1024m"
+      zkfc_opts: "-Xmx512m -Xms512m"
+      resourcemanager_opts: "-Xmx1024m -Xms1024m"
+      nodemanager_opts: "-Xmx1024m -Xms1024m"
+      job_history_opts: "-Xmx256m -Xms256m"
+      HADOOP_CLIENT_OPTS: "-Xmx512m"
+      yarn_cache_mb: "10240"
+      yarn_cache_ms: "3600000"
+      dfs_ha_automatic_failover_enabled: "true"
+      namenode_http_address_port: 60070
+      ha_zookeeper_session_timeout_ms: "5000"
+      dfs_ha_fencing_methods: "sshfence"
+      dfs_client_failover_proxy_provider_nameservices: "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider"
+      dfs_journalnode_rpc_address: "8485"
+      dfs_journalnode_http_address: "18480"
+      dfs_datanode_http_address: "60075"
+      dfs_safemode_threshold_pct: "0.5"
+      dfs_namenode_datanode_registration_ip_hostname_check: "false"
+      dfs_datanode_failed_volumes_tolerated: "0"
+      dfs_datanode_du_reserved: "20971520"
+      dfs_datanode_address: "50010"
+      dfs_datanode_ipc_address: "50020"
+      dfs_namenode_name_dir_restore: "FALSE"
+      dfs_namenode_edits_journal_plugin_qjournal: "org.apache.hadoop.hdfs.qjournal.client.QuorumJournalManager"
+      dfs_permissions_enabled: "TRUE"
+      dfs_permissions_superusergroup: "supergroup"
+      dfs_replication_max: "512"
+      dfs_namenode_replication_min: 1
+      dfs_blocksize: 134217728
+      dfs_client_block_write_retries: "3"
+      dfs_client_block_write_replace_datanode_on_failure_enable: "TRUE"
+      dfs_client_block_write_replace_datanode_on_failure_policy: "DEFAULT"
+      dfs_heartbeat_interval: 3
+      dfs_namenode_safemode_threshold_pct: "0.999f"
+      dfs_namenode_safemode_extension: 30000
+      dfs_datanode_balance_bandwidthPerSec: 1048576
+      dfs_hosts: "null"
+      dfs_hosts_exclude: "null"
+      dfs_stream_buffer_size: 4096
+      dfs_namenode_num_extra_edits_retained: 1000000
+      dfs_datanode_handler_count: 10
+      dfs_namenode_support_allow_format: "true"
+      dfs_client_failover_max_attempts: 15
+      dfs_client_failover_connection_retries: "0"
+      dfs_client_failover_connection_retries_on_timeouts: "0"
+      dfs_namenode_avoid_write_stale_datanode: "FALSE"
+      dfs_namenode_write_stale_datanode_ratio: "0.5f"
+      dfs_https_enable: "FALSE"
+      dfs_datanode_dns_interface: "default"
+      dfs_datanode_dns_nameserver: "default"
+      dfs_default_chunk_view_size: 32768
+      dfs_namenode_fs_limits_max_component_length: "0"
+      dfs_namenode_fs_limits_max_directory_items: 1048576
+      dfs_namenode_fs_limits_min_block_size: 1048576
+      dfs_namenode_fs_limits_max_blocks_per_file: 1048576
+      dfs_blockreport_intervalMsec: 21600000
+      dfs_datanode_directoryscan_interval: 21600
+      dfs_blockreport_initialDelay: "0"
+      dfs_datanode_directoryscan_threads: 1
+      dfs_bytes_per_checksum: 512
+      dfs_client_write_packet_size: 65536
+      dfs_image_compress: "FALSE"
+      dfs_image_compression_codec: "org.apache.hadoop.io.compress.DefaultCodec"
+      dfs_datanode_max_transfer_threads: 8192
+      dfs_namenode_avoid_read_stale_datanode: "FALSE"
+      dfs_namenode_stale_datanode_interval: 60000
+      dfs_webhdfs_enabled: "true"
+      dfs_client_file_block_storage_locations_num_threads: 10
+      dfs_blockreport_split_threshold: 500000
+      dfs_datanode_fsdataset_volume_choosing_policy: "org.apache.hadoop.hdfs.server.datanode.fsdataset.AvailableSpaceVolumeChoosingPolicy"
+      fs_trash_interval: 4320
+      hadoop_http_filter_initializers: "org.apache.hadoop.http.lib.StaticUserWebFilter"
+      hadoop_http_authentication_type: "simple"
+      hadoop_http_authentication_signature_secret_file: "/data/hadoop_base/etc/hadoop/hadoop-http-auth-signature-secret"
+      hadoop_http_authentication_simple_anonymous_allowed: "true"
+      hadoop_http_authentication_token_validity: 36000
+      hadoop_security_authorization: "true"
+      fs_trash_checkpoint_interval: 0
+      fs_permissions_umask_mode: "022"
+      io_native_lib_available: "TRUE"
+      hadoop_security_authentication: "simple"
+      io_bytes_per_checksum: 512
+      fs_df_interval: 60000
+      io_seqfile_compress_blocksize: 1000000
+      hadoop_util_hash_type: "murmur"
+      ipc_client_idlethreshold: 4000
+      ipc_client_kill_max: 10
+      ipc_client_connection_maxidletime: 10000
+      ipc_client_connect_max_retries: 10
+      ipc_client_connect_max_retries_on_timeouts: 45
+      ipc_server_listen_queue_size: 128
+      net_topology_node_switch_mapping_impl: "org.apache.hadoop.net.ScriptBasedMapping"
+      net_topology_script_number_args: 100
+      ha_zookeeper_parent_znode: "/hadoop-ha"
+      ha_zookeeper_acl: "world:anyone:rwcda"
+      ha_health_monitor_connect_retry_interval_ms: 1000
+      ha_health_monitor_check_interval_ms: 1000
+      ha_health_monitor_sleep_after_disconnect_ms: 1000
+      ha_health_monitor_rpc_timeout_ms: 45000
+      ha_failover_controller_new_active_rpc_timeout_ms: 60000
+      ha_failover_controller_graceful_fence_rpc_timeout_ms: 5000
+      ha_failover_controller_graceful_fence_connection_retries: 1
+      ha_failover_controller_cli_check_rpc_timeout_ms: 20000
+      ipc_maximum_data_length: 134217728
+      yarn_resourcemanager_cluster_id: "yarn-rm-cluster"
+      yarn_resourcemanager_ha_enabled: "true"
+      yarn_resourcemanager_recovery_enabled: "true"
+      yarn_resourcemanager_store_class: "org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore"
+      yarn_nodemanager_aux_services_mapreduce_shuffle_class: "org.apache.hadoop.mapred.ShuffleHandler"
+      yarn_nodemanager_aux_services: "mapreduce_shuffle"
+      yarn_resourcemanager_ha_automatic_failover_enabled: "true"
+      yarn_nodemanager_vmem_check_enabled: "false"
+      yarn_nodemanager_vmem_pmem_ratio: "4.1"
+      yarn_nodemanager_pmem_check_enabled: "true"
+      yarn_nodemanager_webapp_address: 18042
+      yarn_resourcemanager_address: 8032
+      yarn_resourcemanager_scheduler_address: 8030
+      yarn_resourcemanager_resource_tracker_address: 8031
+      yarn_resourcemanager_admin_address: 8033
+      yarn_resourcemanager_webapp_address: 18088
+      yarn_client_failover_proxy_provider: "org.apache.hadoop.yarn.client.ConfiguredRMFailoverProxyProvider"
+      yarn_resourcemanager_ha_automatic_failover_zk_base_path: "/yarn-leader-election"
+      yarn_log_aggregation_retain_check_interval_seconds: 604800
+      yarn_log_aggregation_enable: "true"
+      yarn_nodemanager_remote_app_log_dir: "/tmp/logs"
+      yarn_nodemanager_delete_debug_delay_sec: 600
+      yarn_log_server_url_port: 19888
+      yarn_nodemanager_disk_health_checker_enable: "true"
+      yarn_webapp_api_service_enable: "false"
+      yarn_admin_acl: "*"
+      yarn_resourcemanager_am_max_retries: 1
+      yarn_resourcemanager_scheduler_class: "org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler"
+      yarn_resourcemanager_max_completed_applications: 1000
+      yarn_nodemanager_env_whitelist: "JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,YARN_HOME"
+      yarn_nodemanager_log_retain_seconds: 10800
+      yarn_nodemanager_remote_app_log_dir_suffix: "logs"
+      yarn_nodemanager_log_aggregation_compression_type: "none"
+      yarn_app_mapreduce_am_job_task_listener_thread_count: 30
+      yarn_app_mapreduce_am_job_client_port_range: "50100-50200"
+      yarn_app_mapreduce_am_job_committer_cancel_timeout: 60000
+      yarn_app_mapreduce_am_scheduler_heartbeat_interval_ms: 1000
+      yarn_app_mapreduce_client_am_ipc_max_retries: 3
+      yarn_app_mapreduce_client_max_retries: 3
+      yarn_resourcemanager_client_thread_count: 50
+      yarn_am_liveness_monitor_expiry_interval_ms: 600000
+      yarn_resourcemanager_scheduler_client_thread_count: 50
+      yarn_acl_enable: "FALSE"
+      yarn_resourcemanager_admin_client_thread_count: 1
+      yarn_resourcemanager_amliveliness_monitor_interval_ms: 1000
+      yarn_resourcemanager_container_liveness_monitor_interval_ms: 600000
+      yarn_nm_liveness_monitor_expiry_interval_ms: 600000
+      yarn_resourcemanager_nm_liveness_monitor_interval_ms: 1000
+      yarn_resourcemanager_resource_tracker_client_thread_count: 50
+      yarn_nodemanager_container_manager_thread_count: 20
+      yarn_nodemanager_delete_thread_count: 4
+      log_maxfilesize: "128MB"
+      log_maxbackupindex: 10
+      config_user_name: "admin"
+      isCgroup: "true"
+      yarn_nodemanager_linux_container_executor_group: "admin"
+      yarn_nodemanager_linux_container_executor_cgroups_mount: "false"
+      yarn_nodemanager_linux_container_executor_cgroups_mount_path: "/sys/fs/cgroup"
+      yarn_nodemanager_resource_percentage_physical_cpu_limit: "80"
+      yarn_nodemanager_linux_container_executor_cgroups_strict_resource_usage: "false"
+      yarn_nodemanager_resource_count_logical_processors_as_cores: "true"
+      yarn_nodemanager_linux_container_executor_cgroups_hierarchy: "/hadoop-yarn"
+      yarn_scheduler_minimum_allocation_vcores: 1
+      yarn_scheduler_maximum_allocation_vcores: 4
+      yarn_nodemanager_linux_container_executor_nonsecure_mode_local_use: "admin"
+      yarn_nodemanager_linux_container_executor_nonsecure_mode_limit_users: "true"
+      external_log_dir: ""
+      allowed_system_users: "admin"
+      min_user_id: "-1"
+      banned_users: "dtstacktest"
+
+
+
+
+  hdfs_namenode:
+    version: 2.8.5
+    instance:
+      cmd: bin/start_namenode.sh
+      config_paths:
+      - namenode_init
+      - namenode_list
+      - bin/start_namenode.sh
+      healthcheck:
+        shell: bin/healthcheck.sh ${@hdfs_namenode} 60070 ${rpc_address_port}
+        period: 20s
+        retries: 3
+      logs:
+      - logs/*
+      post_deploy: bin/post_deploy.sh >> logs/post_deploy.log
+      max_replica: 2
+      update_recreate: true
+      prometheus_port: 9509
+      ha_role_cmd: bin/show_namenode_state.sh ${@hdfs_namenode} 2>/dev/null
+      home_page: http://link_ip:60070/?user.name=DtStack1024
+    group: hdfs
+    depends_on:
+    - hadoop_pkg
+    - hdfs_journalnode
+    config:
+      namenode_ip: ${@hdfs_namenode}
+      journalnode_ip: ${@hdfs_journalnode}
+      rpc_address_port: 9000
+      nameservices: ns1
+      ha_namenode_id1: nn1
+      ha_namenode_id2: nn2
+      external_log_dir: ${hadoop_pkg.external_log_dir}
+
+  hdfs_zkfc:
+    version: 2.8.5
+    instance:
+      cmd: bin/start_zkfc.sh
+      config_paths:
+      - zkfc_init
+      - bin/start_zkfc.sh
+      healthcheck:
+        shell: bin/healthcheck.sh ${@hdfs_zkfc} 8019
+        period: 20s
+        retries: 3
+      logs:
+      - logs/*
+      post_deploy: bin/post_deploy.sh >> logs/post_deploy.log
+      max_replica: 2
+      update_recreate: true
+      prometheus_port: 9518
+    group: hdfs
+    depends_on:
+    - hadoop_pkg
+    - hdfs_namenode
+    - hdfs_journalnode
+    config:
+      zkfc_ip: ${@hdfs_zkfc}
+      external_log_dir: ${hadoop_pkg.external_log_dir}
+
+  hdfs_datanode:
+    version: 2.8.5
+    instance:
+      cmd: bin/start_datanode.sh
+      config_paths:
+      - bin/start_datanode.sh
+      healthcheck:
+        shell: bin/healthcheck.sh ${@hdfs_datanode} 50020 60075
+        period: 20s
+        retries: 3
+      logs:
+      - logs/*
+      post_deploy: bin/post_deploy.sh >> logs/post_deploy.log
+      prometheus_port: 9501
+    group: hdfs
+    depends_on:
+    - hadoop_pkg
+    - hdfs_namenode
+    config:
+      namenode_ip: ${@hdfs_namenode}
+      dfs_replication: 3
+      external_log_dir: ${hadoop_pkg.external_log_dir}
+
+  hdfs_journalnode:
+    version: 2.8.5
+    instance:
+      cmd: bin/start_journalnode.sh
+      config_paths:
+      - bin/start_journalnode.sh
+      healthcheck:
+        shell: bin/healthcheck.sh ${@hdfs_journalnode} 8485 18480
+        period: 20s
+        retries: 3
+      prometheus_port: 9502
+      logs:
+      - logs/*.log
+      - logs/userlogs/*/*
+    depends_on:
+    - hadoop_pkg
+    group: hdfs
+    config:
+      external_log_dir: ${hadoop_pkg.external_log_dir}
+
+
+  yarn_resourcemanager:
+    version: 2.8.5
+    instance:
+      cmd: bin/start_resourcemanager.sh
+      config_paths:
+      -  bin/start_resourcemanager.sh
+      healthcheck:
+        shell: bin/healthcheck.sh ${@yarn_resourcemanager} 18088
+        period: 20s
+        retries: 3
+      logs:
+        - logs/*
+      max_replica: 2
+      update_recreate: true
+      prometheus_port: 9503
+      ha_role_cmd: bin/show_resourcemanager_state.sh ${@yarn_resourcemanager} 2>/dev/null
+      home_page: http://link_ip:18088/cluster?user.name=DtStack1024
+    group: yarn
+    depends_on:
+      - hadoop_pkg
+      - hdfs_datanode
+      - jobhistory
+    config:
+      resourcemanager_ip: ${@yarn_resourcemanager}
+      zk_ip: ${@zookeeper}
+      jobhistory_ip: ${@jobhistory}
+      ha_rm_id1: rm1
+      ha_rm_id2: rm2
+      external_log_dir: ${hadoop_pkg.external_log_dir}
+
+  yarn_nodemanager:
+    version: 2.8.5
+    instance:
+      cmd: bin/start_nodemanager.sh
+      config_paths:
+        - bin/start_nodemanager.sh
+      healthcheck:
+        shell: bin/healthcheck.sh ${@yarn_nodemanager} 18042
+        period: 20s
+        retries: 3
+      post_deploy: ./post_deploy.sh
+      logs:
+        - logs/*
+      prometheus_port: 9504
+    group: yarn
+    depends_on:
+      - yarn_resourcemanager
+    config:
+      resourcemanager_ip: ${@yarn_resourcemanager}
+      allowed_system_users: ${hadoop_pkg.allowed_system_users}
+      yarn_nodemanager_linux_container_executor_group: ${hadoop_pkg.yarn_nodemanager_linux_container_executor_group}
+      external_log_dir: ${hadoop_pkg.external_log_dir}
+
+
+  jobhistory:
+    version: 2.8.5
+    instance:
+      cmd: bin/start_jobhistory.sh
+      config_paths:
+      - bin/start_jobhistory.sh
+      healthcheck:
+        shell: bin/healthcheck.sh ${@jobhistory} 19888 10020
+        period: 20s
+        retries: 3
+      max_replica: 1
+      logs:
+        - logs/*
+      prometheus_port: 9519
+    group: yarn
+    depends_on:
+      - hdfs_datanode
+    config:
+      namenode_ip: ${@hdfs_namenode}
+      external_log_dir: ${hadoop_pkg.external_log_dir}
+

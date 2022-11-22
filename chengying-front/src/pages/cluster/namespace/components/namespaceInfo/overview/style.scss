@@ -1,0 +1,23 @@
+.namespace-overview-page {
+    .c-namespace__overview {
+        max-height: calc(100vh - 121px - 44px - 88px);
+        overflow: auto;
+        border: 1px solid #dddddd;
+        .ant-collapse-item:last-child {
+            border-bottom: 0;
+        }
+        .c-overview__ant-tag {
+            height: 24px;
+            line-height: 23px;
+            border-radius: 12px;
+            color: #3f87ff;
+            border-color: #3f87ff;
+            background: rgba(63, 135, 255, 0.1);
+        }
+    }
+    .overview-empty {
+        position: relative;
+        height: calc(100vh - 121px - 44px - 88px);
+        overflow: hidden;
+    }
+}

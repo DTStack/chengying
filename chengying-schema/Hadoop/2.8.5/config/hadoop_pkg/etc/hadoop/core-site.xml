@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/data/hadoop_{{.config_user_name}}</value>
+    </property>
+
+   <property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>{{.dfs_ha_fencing_methods}}</value>
+        <description>切换到ssh登录到另一台NameNode杀死旧的主进程.缺省是ssh,可设为shell.</description>
+    </property>
+
+    <property>
+           <name>dfs.ha.fencing.ssh.private-key-files</name>
+           <value>~/.ssh/id_rsa</value>
+    </property>
+
+    <property>
+        <name>ha.zookeeper.quorum</name>
+        <value>{{.Joinx "zk_ip" "," ":" $.zk_port}}</value>
+    </property>
+
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://{{.nameservices}}</value>
+    </property>
+
+    <property>
+        <name>hadoop.proxyuser.{{.config_user_name}}.hosts</name>
+        <value>*</value>
+    </property>
+
+    <property>
+        <name>hadoop.proxyuser.{{.config_user_name}}.groups</name>
+        <value>*</value>
+    </property>
+
+    <property>
+       <name>fs.trash.interval</name>
+       <value>{{.fs_trash_interval}}</value>
+    </property>
+
+    <property>
+        <name>hadoop.http.filter.initializers</name>
+        <value>{{.hadoop_http_filter_initializers}}</value>
+    </property>
+
+     <property>
+        <name>hadoop.http.authentication.type</name>
+        <value>{{.hadoop_http_authentication_type}}</value>
+    </property>
+
+    <property>
+        <name>hadoop.http.authentication.signature.secret.file</name>
+	<value>{{.hadoop_http_authentication_signature_secret_file}}</value>
+    </property>
+
+    <property>
+        <name>hadoop.http.authentication.simple.anonymous.allowed</name>
+        <value>{{.hadoop_http_authentication_simple_anonymous_allowed}}</value>
+    </property>
+    <property>
+        <name>hadoop.http.authentication.token.validity</name>
+        <value>{{.hadoop_http_authentication_token_validity}}</value>
+    </property>
+
+    <property>
+        <name>hadoop.security.authorization</name>
+        <value>{{.hadoop_security_authorization}}</value>
+    </property>
+
+    <property>
+        <name>security.job.submission.protocol.acl</name>
+        <value>{{.config_user_name}}</value>
+    </property>
+
+    <property>
+        <name>fs.trash.checkpoint.interval</name>
+        <value>{{.fs_trash_checkpoint_interval}}</value>
+    </property>
+
+    <property>
+        <name>ha.zookeeper.session-timeout.ms</name>
+        <value>{{.ha_zookeeper_session_timeout_ms}}</value>
+    </property>
+
+    <property>
+        <name>fs.permissions.umask-mode</name>
+        <value>{{.fs_permissions_umask_mode}}</value>
+    </property>
+
+    <property>
+        <name>io.native.lib.available</name>
+        <value>{{.io_native_lib_available}}</value>
+    </property>
+
+    <property>
+        <name>hadoop.security.authentication</name>
+        <value>{{.hadoop_security_authentication}}</value>
+    </property>
+
+    <property>
+        <name>io.bytes.per.checksum</name>
+        <value>{{.io_bytes_per_checksum}}</value>
+    </property>
+
+    <property>
+        <name>fs.df.interval</name>
+        <value>{{.fs_df_interval}}</value>
+    </property>
+
+    <property>
+        <name>io.seqfile.compress.blocksize</name>
+        <value>{{.io_seqfile_compress_blocksize}}</value>
+    </property>
+
+    <property>
+        <name>hadoop.util.hash.type</name>
+        <value>{{.hadoop_util_hash_type}}</value>
+    </property>
+
+    <property>
+        <name>ipc.client.idlethreshold</name>
+        <value>{{.ipc_client_idlethreshold}}</value>
+    </property>
+
+    <property>
+        <name>ipc.client.kill.max</name>
+        <value>{{.ipc_client_kill_max}}</value>
+    </property>
+
+    <property>
+        <name>ipc.client.connection.maxidletime</name>
+        <value>{{.ipc_client_connection_maxidletime}}</value>
+    </property>
+
+    <property>
+        <name>ipc.client.connect.max.retries</name>
+        <value>{{.ipc_client_connect_max_retries}}</value>
+    </property>
+
+    <property>
+        <name>ipc.client.connect.max.retries.on.timeouts</name>
+        <value>{{.ipc_client_connect_max_retries_on_timeouts}}</value>
+    </property>
+
+    <property>
+        <name>ipc.server.listen.queue.size</name>
+        <value>{{.ipc_server_listen_queue_size}}</value>
+    </property>
+
+    <property>
+        <name>net.topology.node.switch.mapping.impl</name>
+        <value>{{.net_topology_node_switch_mapping_impl}}</value>
+    </property>
+
+    <property>
+        <name>net.topology.script.number.args</name>
+        <value>{{.net_topology_script_number_args}}</value>
+    </property>
+
+    <property>
+        <name>ha.zookeeper.parent-znode</name>
+        <value>{{.ha_zookeeper_parent_znode}}</value>
+    </property>
+
+    <property>
+        <name>ha.zookeeper.acl</name>
+        <value>{{.ha_zookeeper_acl}}</value>
+    </property>
+
+    <property>
+        <name>ha.health-monitor.connect-retry-interval.ms</name>
+        <value>{{.ha_health_monitor_connect_retry_interval_ms}}</value>
+    </property>
+
+    <property>
+        <name>ha.health-monitor.check-interval.ms</name>
+        <value>{{.ha_health_monitor_check_interval_ms}}</value>
+    </property>
+
+    <property>
+        <name>ha.health-monitor.sleep-after-disconnect.ms</name>
+        <value>{{.ha_health_monitor_sleep_after_disconnect_ms}}</value>
+    </property>
+
+    <property>
+        <name>ha.health-monitor.rpc-timeout.ms</name>
+        <value>{{.ha_health_monitor_rpc_timeout_ms}}</value>
+    </property>
+
+    <property>
+        <name>ha.failover-controller.new-active.rpc-timeout.ms</name>
+        <value>{{.ha_failover_controller_new_active_rpc_timeout_ms}}</value>
+    </property>
+
+    <property>
+        <name>ha.failover-controller.graceful-fence.rpc-timeout.ms</name>
+        <value>{{.ha_failover_controller_graceful_fence_rpc_timeout_ms}}</value>
+    </property>
+
+    <property>
+        <name>ha.failover-controller.graceful-fence.connection.retries</name>
+        <value>{{.ha_failover_controller_graceful_fence_connection_retries}}</value>
+    </property>
+
+    <property>
+        <name>ha.failover-controller.cli-check.rpc-timeout.ms</name>
+        <value>{{.ha_failover_controller_cli_check_rpc_timeout_ms}}</value>
+        <description>
+            Timeout that the CLI (manual) FC waits for monitorHealth, getServiceState
+        </description>
+    </property>
+
+    <property>
+        <name>ipc.maximum.data.length</name>
+        <value>{{.ipc_maximum_data_length}}</value>
+        <description>This indicates the maximum IPC message length (bytes) that can be
+            accepted by the server. Messages larger than this value are rejected by the
+            immediately to avoid possible OOMs. This setting should rarely need to be
+            changed.
+        </description>
+    </property>
+    {{.core_edit_text}}
+</configuration>

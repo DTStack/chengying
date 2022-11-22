@@ -1,0 +1,21 @@
+- binary-path: notepad.exe
+  agentId: cccccbba-5be4-4c85-9b05-f313b1ee8888
+  configuration-path: notepad.conf
+  parameter: [notepad.conf]
+  name: notepad
+  health-shell: jjww
+  health-period: 2s
+  enabled: true
+  environment:
+    pwd: abc123
+    user: guyan
+- binary-path: /usr/bin/filebeat
+  agentId: ddddcbba-5be4-4c85-9b05-f313b1ee9999
+  configuration-path: /etc/graylog/collector-sidecar/generated/filebeat.yml
+  parameter: [-c, /etc/graylog/collector-sidecar/generated/filebeat.yml]
+  workdir: /usr/bin/
+  name: filebeat
+  enabled: true
+  cpu-limit: 0.1
+  mem-limit: 10485760
+  net-limit: 100000

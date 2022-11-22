@@ -1,0 +1,22 @@
+.ant-layout-sider {
+    .dt-sidemenu-dark {
+        &,
+        .ant-menu-inline,
+        .ant-menu-inline.ant-menu-sub {
+            background: #0f1427;
+        }
+        .ant-menu.ant-menu-dark {
+            .ant-menu-item-selected {
+                background-color: rgba(63, 135, 255, 0.1);
+                // &::after {
+                //     position: absolute;
+                //     top: 0;
+                //     left: 0;
+                //     bottom: 0;
+                //     border-left: 3px solid #3f87ff;
+                //     content: "";
+                // }
+            }
+        }
+    }
+}

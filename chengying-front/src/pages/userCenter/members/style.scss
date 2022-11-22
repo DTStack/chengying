@@ -1,0 +1,20 @@
+.members-container {
+    .members-container-header {
+        display: flex;
+        justify-content: space-between;
+    }
+    .ant-table {
+        tr {
+            td {
+                .name {
+                    word-break: keep-all;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 80px;
+                    display: block;
+                }
+            }
+        }
+    }
+}

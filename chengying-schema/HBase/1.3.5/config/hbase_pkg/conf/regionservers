@@ -1,0 +1,2 @@
+{{range $i, $v := .IPList "regionservers_iplist"}}{{$v}}
+{{end}}

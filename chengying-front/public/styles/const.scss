@@ -1,0 +1,26 @@
+@import 'ant-design-dtinsight-theme/theme/dt-theme/const.scss';
+
+$prefix: 'dt'; // 变量前缀
+$bgColor: #484e54; // 定义CSS变量
+$fontColor: #fff; // 字体颜色
+
+// 侧边栏
+$side_nav_width: 200px;
+
+// 一级导航
+$first_nav_height: 48px;
+
+// 二级导航
+$second_nav_height: 48px;
+$head_bgColor: #070A1A;// #2e3943;  注释的为原黑色主题
+$head_fontColor: #fff;
+
+$blue_light_bgcolor:#f2f7fa;
+$blus_deep_color: #3F87FF; // #108ee9;
+
+$border_color: #e9e9e9;
+
+$line-height:36px;  //固定行高
+$line-height-2:34px;
+
+$breadH: 0;  //面包屑导航高度

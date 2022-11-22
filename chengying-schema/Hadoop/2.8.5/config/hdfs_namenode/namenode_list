@@ -1,0 +1,2 @@
+{{.Join "namenode_ip" ","}}
+{{.JoinHost "namenode_ip" ","}}

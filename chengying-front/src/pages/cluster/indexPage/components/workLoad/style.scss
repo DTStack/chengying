@@ -1,0 +1,13 @@
+.work-load-page {
+  &.index-view-card {
+    height: 220px;
+  }
+  .work-load-content {
+    display: flex;
+    justify-content: space-between;
+    & > div {
+      text-align: center;
+      font-weight: 600px;
+    }
+  }
+}

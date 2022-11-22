@@ -1,0 +1,13 @@
+.reset-password {
+  .ant-modal-body {
+    padding: 0;
+    .ant-alert {
+      padding: 12px 12px 12px 35px;
+    }
+    .ant-form-item {
+      &:first-child {
+        margin-top: 20px;
+      }
+    }
+  }
+}

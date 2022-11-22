@@ -1,0 +1,34 @@
+.member-modal {
+    .title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 20px 0 35px;
+    }
+    .ant-steps {
+        padding: 0 20px;
+        margin: 20px auto 35px;
+        width: 60%;
+    }
+    .new-user-info {
+        position: relative;
+        .success-prompt {
+            text-align: center;
+        }
+        .info {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%, 0);
+            p {
+                text-align: left;
+            }
+        }
+        p {
+            margin-bottom: 10px;
+        }
+    }
+}

@@ -1,0 +1,29 @@
+.security-wrapper {
+  height: calc(100vh - 100px);
+  margin: 24px;
+  padding: 24px;
+  background-color: #fff;
+
+  .ant-select {
+    width: 50%;
+    min-width: 50%;
+  }
+
+  .ant-input {
+    width: 108px;
+  }
+
+  .ant-form-text {
+    margin-left: 8px;
+  }
+
+  .ant-alert {
+    margin-bottom: 20px;
+  }
+
+  .footer-submit {
+    .ant-form-item-control {
+      text-align: center;
+    }
+  }
+}

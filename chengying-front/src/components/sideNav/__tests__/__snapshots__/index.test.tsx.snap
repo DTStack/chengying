@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sidenav render sider snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="dt-sidemenu-dark"
+    style="min-height: calc(100vh - 40px); height: 100%;"
+  >
+    <ul
+      class="ant-menu ant-menu-dark ant-menu-root ant-menu-inline"
+      role="menu"
+      style="width: 200px;"
+    />
+  </div>
+</DocumentFragment>
+`;

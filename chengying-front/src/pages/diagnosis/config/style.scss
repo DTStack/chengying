@@ -1,0 +1,122 @@
+.config-page {
+  padding: 20px;
+  height: calc(100vh - 88px);
+  overflow-y: auto;
+  .config-content {
+    background-color: #fff !important;
+  }
+  .config-sider {
+    border-right: 1px solid #e8e8e8;
+    .dt-em-menu {
+      border-right: 0;
+      .ant-menu-submenu-title {
+        border-top: 0;
+        border-bottom: 1px solid #e8e8e8;
+        background-color: #fafafa;
+        margin-top: 0;
+        margin-bottom: 0;
+        height: 41px !important;
+        width: 249px;
+      }
+      .submenu-title-style {
+        display: flex;
+        justify-content: space-between;
+        .anticon-down {
+          font-size: 12px;
+          line-height: 46px;
+          transition: all 0.3s;
+          margin-right: -6px;
+          &.up {
+            transform: rotate(180deg) translate(0, 5px);
+          }
+        }
+      }
+      .ant-menu-submenu-arrow {
+        display: none;
+      }
+      .ant-menu-inline {
+        border-bottom: 1px solid #e8e8e8;
+      }
+      .ant-menu-inline .ant-menu-item::after {
+        border-right-width: 2px;
+      }
+    }
+  }
+  .ant-collapse {
+    margin-left: -1px;
+    border-radius: 0;
+    .ant-collapse-item {
+      border-color: #e8e8e8;
+      &.ant-collapse-item-active:last-child {
+        border-bottom: 0;
+      }
+      &:last-child {
+        border-radius: 0;
+      }
+    }
+    .ant-collapse-item > .ant-collapse-header {
+      height: 40px;
+      line-height: 40px;
+    }
+    .ant-collapse-item > .ant-collapse-content {
+      background-color: #fff;
+      border-top: 1px solid #e8e8e8;
+      .ant-collapse-content-box {
+        padding-top: 16px;
+      }
+    }
+  }
+
+  .config-empty {
+    background: white;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .config-sider,
+  .config-empty,
+  .ant-spin-nested-loading > div > .ant-spin {
+    min-height: calc(100vh - 128px);
+  }
+  .ant-input-disabled + span.ant-input-group-addon {
+    background: #f5f5f5;
+  }
+}
+
+.text-ellipsis {
+  &,
+  &.input .ant-input {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+  }
+  &.label {
+    max-width: 140px;
+  }
+  &.input .ant-input {
+    max-width: 363px;
+  }
+}
+.icon-style {
+  vertical-align: middle;
+  margin-left: 12px;
+  margin-right: 5px;
+  &.emicon-new {
+    color: #ffb310;
+    font-size: 32px;
+  }
+  &.emicon-revise {
+    color: #9eabb2;
+    transition: all 0.3s;
+    font-size: 20px;
+    &:hover {
+      color: #3f87ff;
+    }
+  }
+}

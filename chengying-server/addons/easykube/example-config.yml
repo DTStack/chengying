@@ -1,0 +1,11 @@
+# logger
+log.dir: /tmp/easykube
+log.max-logger-size: 100
+log.max-logger-backups: 3
+log.days-to-keep: 1
+
+# api
+api.port: 8899
+api.host: 0.0.0.0
+
+monitor.enabled: true

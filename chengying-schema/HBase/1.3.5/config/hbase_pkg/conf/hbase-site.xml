@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>hbase.rootdir</name>
+    <value>hdfs://{{.nameservices}}/user/hbase/</value>
+  </property>
+
+  <!--指定hbase集群为分布式集群-->
+  <property>
+    <name>hbase.cluster.distributed</name>
+    <value>{{.hbase_cluster_distributed}}</value>
+  </property>
+
+  <property>
+    <name>hbase.zookeeper.property.clientPort</name>
+    <value>{{.zk_port}}</value>
+  </property>
+  <property>
+    <name>hbase.zookeeper.quorum</name>
+    <value>{{.Joinx "zk_iplist" ","}}</value>
+  </property>
+  <property>
+    <name>hbase.unsafe.stream.capability.enforce</name>
+    <value>{{.hbase_unsafe_stream_capability_enforce}}</value>
+  </property>
+
+  <property>
+    <name>hbase.master.info.port</name>
+    <value>{{.hbase_master_info_port}}</value>
+  </property>
+
+  <property>
+    <name>zookeeper.znode.parent</name>
+    <value>{{.zookeeper_znode_parent}}</value>
+  </property>
+
+  <property>
+    <name>hbase.master.maxclockskew</name>
+    <value>{{.hbase_master_maxclockskew}}</value>
+  </property>
+
+  <property>
+    <name>hbase.rpc.timeout</name>
+    <value>{{.rpc_timeout}}</value>
+  </property>
+
+  <!--phoenix-->
+  <property>
+    <name>phoenix.queryserver.http.port</name>
+    <value>{{.phoenix_queryserver_http_port}}</value>
+  </property>
+
+
+
+  <property>
+    <name>hbase.master.logcleaner.ttl</name>
+    <value>{{.master_logcleaner_ttl}}</value>
+  </property>
+  <property>
+    <name>hbase.regionserver.handler.count</name>
+    <value>{{.regionserver_handler_count}}</value>
+  </property>
+  <property>
+    <name>hbase.regionserver.optionalcacheflushinterval</name>
+    <value>{{.regionserver_optionalcacheflushinterval}}</value>
+  </property>
+
+
+
+  <!--Client configurations-->
+  <property>
+    <name>hbase.client.write.buffer</name>
+    <value>{{.client_write_buffer}}</value>
+  </property>
+  <property>
+    <name>hbase.client.pause</name>
+    <value>{{.client_pause}}</value>
+  </property>
+  <property>
+    <name>hbase.client.retries.number</name>
+    <value>{{.client_retries_number}}</value>
+  </property>
+  <property>
+    <name>hbase.client.keyvalue.maxsize</name>
+    <value>{{.client_keyvalue_maxsize}}</value>
+  </property>
+  <property>
+    <name>hbase.server.keyvalue.maxsize</name>
+    <value>{{.server_keyvalue_maxsize}}</value>
+  </property>
+  <property>
+    <name>hbase.client.perserver.requests.threshold</name>
+    <value>{{.hbase_client_perserver_requests_threshold}}</value>
+  </property>
+
+  <!--其他配置-->
+
+  <property>
+    <name>hfile.format.version</name>
+    <value>{{.hfile_format_version}}</value>
+  </property>
+  <property>
+    <name>hbase.master.balancer.maxRitPercent</name>
+    <value>{{.hbase_master_balancer_maxRitPercent}}</value>
+  </property>
+  <property>
+    <name>hbase.hregion.memstore.flush.size</name>
+    <value>{{.hbase_hregion_memstore_flush_size}}</value>
+  </property>
+  <property>
+    <name>hbase.regionserver.offheap.global.memstore.size</name>
+    <value>{{.hbase_regionserver_offheap_global_memstore_size}}</value>
+  </property>
+  <property>
+    <name>hbase.hregion.max.filesize</name>
+    <value>{{.hbase_hregion_max_filesize}}</value>
+  </property>
+  <property>
+    <name>hbase.hstore.compactionThreshold</name>
+    <value>{{.hbase_hstore_compactionThreshold}}</value>
+  </property>
+  <property>
+    <name>hbase.hstore.compaction.kv.max</name>
+    <value>{{.hbase_hstore_compaction_kv_max}}</value>
+  </property>
+  <property>
+    <name>hfile.block.cache.size</name>
+    <value>{{.hfile_block_cache_size}}</value>
+  </property>
+  <property>
+    <name>io.storefile.bloom.block.size</name>
+    <value>{{.io_storefile_bloom_block_size}}</value>
+  </property>
+  <property>
+    <name>hbase.rpc.timeout</name>
+    <value>{{.hbase_rpc_timeout}}</value>
+  </property>
+  <property>
+    <name>hbase.client.operation.timeout</name>
+    <value>{{.hbase_client_operation_timeout}}</value>
+  </property>
+  <property>
+    <name>hbase.table.max.rowsize</name>
+    <value>{{.hbase_table_max_rowsize}}</value>
+  </property>
+
+
+
+
+</configuration>

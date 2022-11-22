@@ -1,0 +1,124 @@
+.host-list {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 14px;
+}
+
+.host-side-nav {
+    background-color: #ffffff;
+    width: 240px;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    font-size: 14px;
+}
+
+.host-container {
+    display: flex;
+    width: 100%;
+    padding: 20px 0 20px 20px;
+    .ant-tabs {
+        height: calc(100% - 32px);
+        .ant-tabs-content {
+            height: calc(100% - 60px);
+        }
+    }
+
+    .style-iframe {
+        .scroll-canvas {
+            .dashboard-container {
+                padding-bottom: 300px;
+            }
+        }
+    }
+
+    .host-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .host-detail-page {
+        .services-box {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .detail-card {
+            .ant-card-body {
+                padding: 0 24px;
+            }
+        }
+
+        .status-card {
+            margin-bottom: 20px; 
+            background: #fff; 
+            .ant-card-head {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    // 主机 - 运行状态 - 详细信息
+    .detail-card {
+        .ant-row {
+            height: 44px;
+            line-height: 44px;
+            border-bottom: 1px dashed #e8e8e8;
+
+            &:nth-last-child(1) {
+                border-bottom: none;
+                margin-bottom: 15px;
+            }
+
+            .ant-col-8 {
+                // overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                padding-right: 20px;
+            }
+        }
+
+        .stauts-text {
+            font-size: 11px;
+            color: #333;
+            line-height: 20px;
+            letter-spacing: 0;
+            margin-bottom: -4px;
+        }
+    }
+
+    .detail-container {
+        // overflow: hidden;
+        padding: 0 20px;
+        padding-bottom: 0;
+        width: 100%;
+
+        .main-title {
+            font-size: 20px;
+            color: #262626;
+            letter-spacing: 0;
+            line-height: 32px;
+        }
+        .ant-tabs {
+            overflow: unset;
+        }
+        .ant-tabs-nav .ant-tabs-tab {
+            padding-top: 0;
+        }
+    }
+
+    .progress-box {
+        display: flex;
+        flex-direction: column;
+        .ant-progress {
+            max-width: 160px;
+            margin-top: -12px;
+        }
+    }
+
+    .table {
+        table {
+            width: 100%;
+        }
+    }
+}

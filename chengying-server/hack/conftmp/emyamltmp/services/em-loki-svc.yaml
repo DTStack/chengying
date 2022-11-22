@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "3100"
+  labels:
+    app: loki
+  name: loki
+  namespace: {{.NameSpace}}
+spec:
+  ports:
+    - port: 3100
+      targetPort: 3100
+      name: tcp
+  selector:
+    app: loki

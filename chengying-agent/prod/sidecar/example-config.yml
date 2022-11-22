@@ -1,0 +1,22 @@
+# logger
+log:
+  dir: /tmp/
+  max-logger-size: 100
+  max-logger-backups: 3
+  days-to-keep: 1
+
+# rpc
+rpc:
+  server: localhost
+  port: 8890
+  cert:
+  tls:
+  tls-skip-verify:
+
+easyagent:
+  uuid: 87dacbba-5be4-4c85-9b05-f313b1ee80b9
+  monitor-interval: 30s
+
+callback:
+  - SshHost=192.168.1.1&CallBack=aHR0cDovL3d3dy5iYWlkdS5jb20vYWJj
+  - SshHost=192.168.1.2&CallBack=aHR0cHM6Ly93d3cuYmFpZHUuY29tL3Rlc3RhP3Rva2VuPXR0

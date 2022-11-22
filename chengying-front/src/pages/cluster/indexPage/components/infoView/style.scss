@@ -1,0 +1,11 @@
+.index-view-card {
+  .c-cluster__description {
+    margin-top: 12px;
+    &.ant-descriptions-bordered .ant-descriptions-item-label,
+    &.ant-descriptions-bordered .ant-descriptions-item-content {
+      padding: 0 20px;
+      height: 28px;
+      line-height: 28px;
+    }
+  }
+}

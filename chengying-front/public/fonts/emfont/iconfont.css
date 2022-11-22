@@ -1,0 +1,307 @@
+@font-face {
+  font-family: "emicon"; /* Project id 925135 */
+  src: url('iconfont.woff2?t=1652773865170') format('woff2'),
+       url('iconfont.woff?t=1652773865170') format('woff'),
+       url('iconfont.ttf?t=1652773865170') format('truetype');
+}
+
+.emicon {
+  font-family: "emicon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.emicon-agentjiedianyichang:before {
+  content: "\e611";
+}
+
+.emicon-yunhangyichang:before {
+  content: "\e610";
+}
+
+.emicon-mysqlzhucongtongbu:before {
+  content: "\e60f";
+}
+
+.emicon-zhujidownji:before {
+  content: "\e60e";
+}
+
+.emicon-jiankangjiancha:before {
+  content: "\e60d";
+}
+
+.emicon-jiedianzongshu:before {
+  content: "\e60c";
+}
+
+.emicon-gaojingjiedian:before {
+  content: "\e60b";
+}
+
+.emicon-gaojingfuwushu:before {
+  content: "\e60a";
+}
+
+.emicon-quanjupeizhi:before {
+  content: "\e609";
+}
+
+.emicon-jiqunxunjian:before {
+  content: "\e608";
+}
+
+.emicon-yunweijiaobenpingtaibeifen:before {
+  content: "\e606";
+}
+
+.emicon-zhuji:before {
+  content: "\e656";
+}
+
+.emicon-zhenduan:before {
+  content: "\e657";
+}
+
+.emicon-gailan:before {
+  content: "\e658";
+}
+
+.emicon-fuwu:before {
+  content: "\e659";
+}
+
+.emicon-jiankonggaojing2:before {
+  content: "\e653";
+}
+
+.emicon-jiqunguanli1:before {
+  content: "\e654";
+}
+
+.emicon-zujianguanli:before {
+  content: "\e655";
+}
+
+.emicon-mingling:before {
+  content: "\e652";
+}
+
+.emicon-calendar:before {
+  content: "\e69f";
+}
+
+.emicon-Icon_download:before {
+  content: "\e699";
+}
+
+.emicon-kong:before {
+  content: "\e697";
+}
+
+.emicon-beifenguanli:before {
+  content: "\e696";
+}
+
+.emicon-xunjianbaogao:before {
+  content: "\e691";
+}
+
+.emicon-poweroff:before {
+  content: "\e72a";
+}
+
+.emicon-wyy:before {
+  content: "\e728";
+}
+
+.emicon-icon_upload:before {
+  content: "\e71c";
+}
+
+.emicon-jiqunguanli:before {
+  content: "\e6e4";
+}
+
+.emicon-yingyongguanli:before {
+  content: "\e6e5";
+}
+
+.emicon-yunhangbushuxiangdao:before {
+  content: "\e6e6";
+}
+
+.emicon-jiankongguanli:before {
+  content: "\e6e3";
+}
+
+.emicon-gerenxinxi:before {
+  content: "\e6d9";
+}
+
+.emicon-jiaoseguanli:before {
+  content: "\e6da";
+}
+
+.emicon-shenji:before {
+  content: "\e6d8";
+}
+
+.emicon-env:before {
+  content: "\e605";
+}
+
+.emicon-chengyuanguanli:before {
+  content: "\e6ce";
+}
+
+.emicon-jiankonggaojing1:before {
+  content: "\e6cc";
+}
+
+.emicon-jiankonggaojing:before {
+  content: "\e6c4";
+}
+
+.emicon-peizhibiangeng:before {
+  content: "\e6c8";
+}
+
+.emicon-dashboard1:before {
+  content: "\e6c9";
+}
+
+.emicon-shijianzhenduan:before {
+  content: "\e6ca";
+}
+
+.emicon-rizhichakan:before {
+  content: "\e6cb";
+}
+
+.emicon-delete:before {
+  content: "\e6c0";
+}
+
+.emicon-add:before {
+  content: "\e6be";
+}
+
+.emicon-enter:before {
+  content: "\e6bb";
+}
+
+.emicon-folder-anticon:before {
+  content: "\e604";
+}
+
+.emicon-health_service:before {
+  content: "\e603";
+}
+
+.emicon-revise:before {
+  content: "\e602";
+}
+
+.emicon-new:before {
+  content: "\e601";
+}
+
+.emicon-loading:before {
+  content: "\e651";
+}
+
+.emicon-undo:before {
+  content: "\e787";
+}
+
+.emicon-heatmap-:before {
+  content: "\e650";
+}
+
+.emicon-graph-:before {
+  content: "\e648";
+}
+
+.emicon-barchart-:before {
+  content: "\e649";
+}
+
+.emicon-row-:before {
+  content: "\e64a";
+}
+
+.emicon-piugin-:before {
+  content: "\e64b";
+}
+
+.emicon-text-:before {
+  content: "\e64c";
+}
+
+.emicon-orderedlist-:before {
+  content: "\e64d";
+}
+
+.emicon-table-:before {
+  content: "\e64e";
+}
+
+.emicon-singlestat-:before {
+  content: "\e64f";
+}
+
+.emicon-plus:before {
+  content: "\e853";
+}
+
+.emicon--:before {
+  content: "\e647";
+}
+
+.emicon-warning-circle-fill:before {
+  content: "\e646";
+}
+
+.emicon-folder-open:before {
+  content: "\e63c";
+}
+
+.emicon-alert-fill:before {
+  content: "\e63d";
+}
+
+.emicon-dashboard:before {
+  content: "\e63e";
+}
+
+.emicon-heart-fill:before {
+  content: "\e63f";
+}
+
+.emicon-frown-fill:before {
+  content: "\e640";
+}
+
+.emicon-pausecopy:before {
+  content: "\e641";
+}
+
+.emicon-poweroff-circle-fill:before {
+  content: "\e642";
+}
+
+.emicon-folder:before {
+  content: "\e643";
+}
+
+.emicon-question-circle-fill:before {
+  content: "\e644";
+}
+
+.emicon-setting-fill:before {
+  content: "\e645";
+}
+

@@ -1,0 +1,15 @@
+# Hadoop
+    hadoop制品产品包示例：
+    https://dtstack-opensource.oss-cn-hangzhou.aliyuncs.com/chengying/Hadoop_2.8.5_centos7_x86_64.tar
+
+#  hadoop schema说明
+    hadoop目录下包含一个以具体版本号命名的文件夹。
+    文件夹下固定包含四个模块：
+        1、config文件夹
+        2、components文件
+        3、schema配置文件
+        4、README
+##### config
+    
+        
+

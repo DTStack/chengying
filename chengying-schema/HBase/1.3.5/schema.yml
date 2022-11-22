@@ -1,0 +1,108 @@
+parent_product_name: DTHadoop
+product_name: HBase
+product_version: 1.3.5
+
+service:
+
+  mysql_metastore@Mysql.mysql:
+    config:
+      user: dtstack
+      password: DT@Stack#123
+      port: 3306
+      db: metastore
+
+  zookeeper@Zookeeper.zookeeper:
+
+  phoenix_queryserver@Phoenix.phoenix_queryserver@optional:
+    config:
+      http_port: 10101
+
+
+  hbase_pkg:
+    version: 1.3.5
+    instance:
+      pseudo: true
+      cmd: ./waiting.sh
+      config_paths:
+      - conf/hbase-site.xml
+      - conf/hbase-env.sh
+      - conf/log4j.properties
+      - conf/regionservers
+      logs:
+      - logs/*
+      post_deploy: ./post_deploy.sh
+    group: hbase
+    config:
+      mysql_ip: ${@mysql_metastore}
+      mysql_user: ${mysql_metastore.user}
+      mysql_password: ${mysql_metastore.password}
+      mysql_port: ${mysql_metastore.port}
+      mysql_db: ${mysql_metastore.db}
+      zk_iplist: ${@zookeeper}
+      zk_port: ${zookeeper.zk_port}
+      rpc_timeout: 300000
+      nameservices: ns1
+      regionservers_iplist: ${@hbase_regionserver}
+      phoenix_queryserver_http_port: ${phoenix_queryserver.http_port}
+      master_logcleaner_ttl: 600000
+      regionserver_handler_count: 25
+      regionserver_optionalcacheflushinterval: 3600000
+      client_write_buffer: 2097152
+      client_pause: 100
+      client_retries_number: 20
+      client_keyvalue_maxsize: 10485760
+      server_keyvalue_maxsize: 10485760
+      hfile_format_version: 3
+      hbase_master_balancer_maxRitPercent: 1.0
+      hbase_hregion_memstore_flush_size: 134217728
+      hbase_regionserver_offheap_global_memstore_size: 0
+      hbase_hregion_max_filesize: 10737418240
+      hbase_hstore_compactionThreshold: 3
+      hbase_hstore_compaction_kv_max: 10
+      hfile_block_cache_size: 0.4
+      io_storefile_bloom_block_size: 131072
+      hbase_rpc_timeout: 60000
+      hbase_client_operation_timeout: 120000
+      hbase_table_max_rowsize: 1073741824
+      hbase_home: /opt/dtstack/HBase
+      hbase_cluster_distributed: "true"
+      hbase_unsafe_stream_capability_enforce: "false"
+      hbase_master_info_port: 16010
+      hbase_master_maxclockskew: 150000
+      hbase_client_perserver_requests_threshold: 2147483647
+      zookeeper_znode_parent: "/hbase"
+
+
+  hbase_master:
+    version: 1.3.5
+    instance:
+      cmd: bin/start_master.sh
+      healthcheck:
+        shell: bin/healthcheck_port.sh ${@hbase_master} ${hbase_master_info_port}
+        period: 20s
+        retries: 3
+      logs:
+      - logs/*
+      prometheus_port: 9530
+    group: hbase
+    depends_on:
+    - hbase_pkg
+    config:
+      hbase_master_info_port: 16010
+
+  hbase_regionserver:
+    version: 1.3.5
+    instance:
+      cmd: bin/start_regionserver.sh
+      healthcheck:
+        shell: bin/healthcheck_port.sh ${@hbase_regionserver} ${hbase_regionserver_info_port}
+        period: 20s
+        retries: 3
+      logs:
+      - logs/*
+      prometheus_port: 9531
+    group: hbase
+    depends_on:
+    - hbase_pkg
+    config:
+      hbase_regionserver_info_port: 16030

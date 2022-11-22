@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dt-prometheus
+  name: dt-prometheus
+  namespace: {{.NameSpace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dt-prometheus
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dt-prometheus
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      containers:
+      - image: {{.Registory}}/{{.EmPrometheusImage}}
+        imagePullPolicy: Always
+        name: dt-prometheus
+        ports:
+        - containerPort: 9090
+          name: server
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: localtime
+          readOnly: true
+        - mountPath: /etc/prometheus/prometheus.yml
+          subPath: prometheus.yml 
+          name: conf
+        - mountPath: /prometheus
+          name: prometheus-target
+          subPath: prometheus-target
+      serviceAccount: em-prometheus-sa
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      volumes:
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+      - name: conf
+        configMap:
+         name: prometheusconf
+      - name: prometheus-target
+        persistentVolumeClaim:
+          claimName: empvc-emdb

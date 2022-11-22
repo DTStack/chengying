@@ -1,0 +1,19 @@
+# logger
+log.dir: /var/log/easyfiler
+log.max-logger-size: 100
+log.max-logger-backups: 3
+log.days-to-keep: 7
+
+# databases
+mysql.host: 7.7.8.8
+mysql.port: 3306
+mysql.user: root
+mysql.password: root
+mysql.dbname: vigny
+
+# server
+server.root: /var/log/
+server.port: 7788
+server.withdb: false
+server.rate: 128 #KB/s
+server.isziped: false

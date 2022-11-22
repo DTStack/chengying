@@ -1,0 +1,86 @@
+.deploy-page{
+  margin:15px;
+  .option-bar{
+      width:90%;
+      margin:20px auto;
+      text-align: right;
+  }
+  .config-list-wrapper{
+      padding: 15px;
+      background: #fff;
+      .deploy-btn-box{
+          margin:25px 0;
+          text-align: right;
+      }
+      .edit-panel{
+          margin:10px 0;
+          padding-bottom: 5px;
+          border-bottom:1px dashed #d8d8d8;
+          .mod-title{
+              font-size:14px;
+              color:#333;
+              font-weight: 500;
+          }
+          .config-tree{
+              margin:5px 0;
+              .node-item{
+                  width: 100%;
+                  display: inline-block;
+                  margin: 2px 0;
+                  .node-item-title{
+                      line-height: 30px;
+                      display: inline-block;
+                      min-width: 130px;
+                      text-align: left;
+                  }
+                  .ant-input-group-addon{
+                      cursor: pointer;
+                  }
+              }
+              .top-floor{
+                  margin: 5px 0;
+                  padding: 5px;
+                  border: 1px dashed #d8d8d8;
+              }
+          }
+          .ip-item-box{
+              padding:5px 20px 5px 5px;
+              position: relative;
+              color: rgba(0, 0, 0, 0.65);
+              background-color: #fff;
+              border:1px solid #d9d9d9;
+              margin: 0 8px 8px 0;
+              border-radius: 4px;
+              .dele-btn{
+                  position: absolute;
+                  top:9px;
+                  right:5px;
+              }
+          }
+      }
+      .config-box{
+          width:45%;
+          margin-right:5%;
+          float:left;
+          border-bottom:0;
+      }
+      .ant-progress-outer{
+          width:95%;
+      }
+      .ant-progress-text{
+          width:auto;
+      }
+      .ant-collapse-content > .ant-collapse-content-box{
+          padding-top:0;
+      }
+  }
+  
+}
+.container{
+  // background:#ffffff!important;
+}
+.ip-transfer-modal{
+  .ant-modal-content{
+      padding:20px 20px 0 20px;
+  }
+}

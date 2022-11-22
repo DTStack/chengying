@@ -1,0 +1,153 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: (devel)
+  creationTimestamp: null
+  name: workloadprocess.dtstack.com
+spec:
+  group: dtstack.com
+  names:
+    kind: WorkloadProcess
+    listKind: WorkloadProcessList
+    plural: workloadprocess
+    singular: workloadprocess
+  scope: Namespaced
+  versions:
+    - name: v1beta1
+      schema:
+        openAPIV3Schema:
+          properties:
+            apiVersion:
+              type: string
+            kind:
+              type: string
+            metadata:
+              type: object
+            spec:
+              properties:
+                cluster_id:
+                  type: integer
+                deploy_id:
+                  type: string
+                last_deploy_id:
+                  type: string
+                parent_product_name:
+                  type: string
+                product_id:
+                  type: integer
+                product_name:
+                  type: string
+                product_version:
+                  type: string
+                work_loads:
+                  additionalProperties:
+                    properties:
+                      group:
+                        type: string
+                      version:
+                        type: string
+                      workload:
+                        properties:
+                          apiVersion:
+                            type: string
+                          kind:
+                            type: string
+                          metadata:
+                            x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                          spec:
+                            properties:
+                              workloadpatrs:
+                                items:
+                                  properties:
+                                    baseworkload:
+                                      properties:
+                                        name:
+                                          type: string
+                                        parameters:
+                                          x-kubernetes-preserve-unknown-fields: true
+                                          type: object
+                                        type:
+                                          type: string
+                                      required:
+                                        - name
+                                        - type
+                                      type: object
+                                    steps:
+                                      items:
+                                        properties:
+                                          action:
+                                            type: string
+                                          name:
+                                            type: string
+                                          object:
+                                            x-kubernetes-preserve-unknown-fields: true
+                                            type: object
+                                          type:
+                                            type: string
+                                        required:
+                                          - action
+                                          - name
+                                          - object
+                                          - type
+                                        type: object
+                                      type: array
+                                  required:
+                                    - baseworkload
+                                  type: object
+                                type: array
+                            type: object
+                          status:
+                            properties:
+                              part_status:
+                                additionalProperties:
+                                  properties:
+                                    message:
+                                      type: string
+                                    status:
+                                      type: string
+                                  required:
+                                    - message
+                                    - status
+                                  type: object
+                                type: object
+                              phase:
+                                type: string
+                            required:
+                              - phase
+                            type: object
+                        type: object
+                    required:
+                      - group
+                      - version
+                      - workload
+                    type: object
+                  type: object
+              required:
+                - cluster_id
+                - deploy_id
+                - last_deploy_id
+                - product_id
+                - product_name
+              type: object
+            status:
+              properties:
+                phase:
+                  type: string
+              type: object
+          required:
+            - spec
+          type: object
+      served: true
+      storage: true
+      subresources:
+        status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

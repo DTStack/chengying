@@ -1,0 +1,100 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: (devel)
+  creationTimestamp: null
+  name: workloads.dtstack.com
+spec:
+  group: dtstack.com
+  names:
+    kind: WorkLoad
+    listKind: WorkLoadList
+    plural: workloads
+    singular: workload
+  scope: Namespaced
+  versions:
+    - name: v1beta1
+      schema:
+        openAPIV3Schema:
+          properties:
+            apiVersion:
+              type: string
+            kind:
+              type: string
+            metadata:
+              type: object
+            spec:
+              properties:
+                workloadpatrs:
+                  items:
+                    properties:
+                      baseworkload:
+                        properties:
+                          name:
+                            type: string
+                          parameters:
+                            x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                          type:
+                            type: string
+                        required:
+                          - name
+                          - type
+                        type: object
+                      steps:
+                        items:
+                          properties:
+                            action:
+                              type: string
+                            name:
+                              type: string
+                            object:
+                              x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            type:
+                              type: string
+                          required:
+                            - action
+                            - name
+                            - object
+                            - type
+                          type: object
+                        type: array
+                    required:
+                      - baseworkload
+                    type: object
+                  type: array
+              type: object
+            status:
+              properties:
+                part_status:
+                  additionalProperties:
+                    properties:
+                      message:
+                        type: string
+                      status:
+                        type: string
+                    required:
+                      - message
+                      - status
+                    type: object
+                  type: object
+                phase:
+                  type: string
+              required:
+                - phase
+              type: object
+          type: object
+      served: true
+      storage: true
+      subresources:
+        status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

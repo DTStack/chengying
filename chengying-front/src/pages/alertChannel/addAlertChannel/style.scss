@@ -1,0 +1,20 @@
+.add-alert-channel {
+    margin: 20px;
+    .box-shadow-style {
+        background-color: #fff;
+        margin-top: 12px;
+        padding-top: 20px;
+        &.overflow-scroll {
+            max-height: calc(100vh - 130px);
+            overflow-y: auto;
+        }
+    }
+    .add-alert-channel-bottom{
+        text-align: center;
+        padding: 18px;
+        border-top: 1px solid #e8e8e8;
+        .ant-btn{
+            width: 106px;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "3000"
+  name: grafana
+  namespace: {{.NameSpace}}
+  labels:
+    app: dt-grafana
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000
+    name: tcp
+  selector:
+    app: dt-grafana

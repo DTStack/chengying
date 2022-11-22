@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dtmysql
+  name: dtmysql
+  namespace: {{.NameSpace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dtmysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: dtmysql
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      containers:
+      - image: {{.Registory}}/{{.EmMysqlImage}}
+        imagePullPolicy: Always
+        name: dtmysql
+        ports:
+        - containerPort: 3306
+          name: mysqlport
+          protocol: TCP
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: dtstack
+        livenessProbe:
+          failureThreshold: 5
+          exec:
+            command:
+            - sh
+            - -c
+            - mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 20
+        readinessProbe:
+          failureThreshold: 3
+          exec:
+            command:
+            - sh
+            - -c
+            - mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 5
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: data
+          subPath: mysqldata
+        - mountPath: /etc/localtime
+          name: localtime
+          readOnly: true
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+         claimName: empvc-emdb
+      - name: localtime
+        hostPath:
+          path: /etc/localtime

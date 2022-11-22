@@ -1,0 +1,165 @@
+parent_product_name: DTHadoop
+product_name: Spark
+product_version: 2.1.3-6
+
+service:
+  yarn_resourcemanager@Hadoop.yarn_resourcemanager@optional:
+    config:
+      ha_rm_id1: rm1
+      ha_rm_id2: rm2
+
+  hdfs_namenode@Hadoop.hdfs_namenode@optional:
+    config:
+      rpc_address_port: 9000
+      nameservices: ns1
+      ha_namenode_id1: nn1
+      ha_namenode_id2: nn2
+
+  hivemetastore@Hive.hivemetastore@optional:
+
+  spark_pkg:
+    version: 2.1.3-5
+    instance:
+      pseudo: true
+      cmd: ./waiting.sh
+      config_paths:
+        - conf/hive-site.xml
+        - conf/spark-defaults.conf
+        - conf/spark-env.sh
+        - conf/log4j.properties
+      post_deploy: ./post_deploy.sh
+      logs:
+        - logs/*
+      prometheus_port: 9507
+    group: spark
+    depends_on:
+      - hivemetastore
+    config:
+      hive_ip: ${@hivemetastore}
+      spark_ip: ${@thriftserver}
+      thriftserver_ip: ${@thriftserver}
+      historyserver_ip: ${@spark_historyserver}
+      namenode_ip: ${@hdfs_namenode}
+      resourcemanager_ip: ${@yarn_resourcemanager}
+      rpc_address_port: ${hdfs_namenode.rpc_address_port}
+      nameservices: ${hdfs_namenode.nameservices}
+      ha_namenode_id1: ${hdfs_namenode.ha_namenode_id1}
+      ha_namenode_id2: ${hdfs_namenode.ha_namenode_id2}
+      ha_rm_id1: ${yarn_resourcemanager.ha_rm_id1}
+      ha_rm_id2: ${yarn_resourcemanager.ha_rm_id2}
+      warehouse_dir: "/dtInsight/hive/warehouse"
+      scratchdir: "/dtInsight/hive/warehouse"
+      hive_server2_support_dynamic_service_discovery: "true"
+      datanucleus_schema_autoCreateAll: "true"
+      hive_server2_thrift_min_worker_threads: 300
+      hive_server2_thrift_port: 10000
+      hive_server2_async_exec_threads: 200
+      hive_server2_idle_session_timeout: 60000
+      hive_server2_session_check_interval: 30000
+      hive_server2_enable_doAs: "false"
+      hive_metastore_schema_verification: "false"
+      hive_exec_dynamic_partition: "true"
+      hive_exec_dynamic_partition_mode: "nonstrict"
+      spark_executor_cores: "4"
+      spark_executor_memory: "456340275B"
+      spark_driver_memory: "966367641B"
+      spark_yarn_driver_memoryOverhead: "102000000"
+      spark_yarn_executor_memoryOverhead: "76000000"
+      hive_merge_sparkfiles: "false"
+      spark_history_opts: "-Xms1024m"
+      timezone: CTT
+      sparklogdirectory: hdfs://${nameservices}/tmp/spark-yarn-logs
+      retainedapplications: 30
+      uiport: 18080
+      spark_history_cleaner: 7d
+      spark_history_ui_maxapplication: 500
+      history_cleaner_maxAge: "7d"
+      history_cleaner_interval: "1d"
+      kerberos_on: "false"
+      hive_server2_authentication: "KERBEROS"
+      hive_metastore_kerberos_keytab_file: "/data/kerberos/hive.keytab"
+      hive_metastore_kerberos_principal: "hive/_HOST@DTSTACK.COM"
+      hive_server2_authentication_kerberos_principal: "hive/_HOST@DTSTACK.COM"
+      hive_server2_authentication_kerberos_keytab: "/data/kerberos/hive.keytab"
+      spark_log: "/opt/dtstack/Spark/thriftserver/logs"
+      hive_port: 9083
+
+
+
+
+
+  thriftserver:
+    version: 2.1.3-5
+    instance:
+      cmd: ./start_spark.sh ${spark_driver_mem} ${executor_mem} ${executor_num}
+      config_paths:
+        - thriftserver_init
+        - post_deploy.sh
+        - start_spark.sh
+      healthcheck:
+        shell: bin/healthcheckSpark.sh ${@thriftserver} 10000
+        period: 30s
+        retries: 3
+      post_deploy: ./post_deploy.sh
+      logs:
+        - logs/*
+      prometheus_port: 9508
+    group: spark
+    depends_on:
+      - hivemetastore
+      - spark_pkg
+    config:
+      spark_driver_mem: 2G
+      executor_mem: 1G
+      executor_num: 2
+      thriftserver_ip: ${@thriftserver}
+      spark_thriftserver_logs_path: "/opt/dtstack/Spark/thriftserver/logs"
+      keytab: ${spark_pkg.hive_server2_authentication_kerberos_keytab}
+      principal: ${spark_pkg.hive_server2_authentication_kerberos_principal}
+      is_kerberos: ${spark_pkg.kerberos_on}
+      is_others: "no"
+
+
+  spark_historyserver:
+    version: 2.1.3-5
+    instance:
+      cmd: ./bin/start_historyserver.sh
+      config_paths:
+        - bin/start_historyserver.sh
+      healthcheck:
+        shell: bin/healthcheck.sh ${@spark_historyserver} 18080
+        period: 20s
+        retries: 3
+      post_deploy: ./post_deploy.sh
+      logs:
+        - logs/*
+      prometheus_port: 9534
+    group: spark
+    depends_on:
+      - spark_pkg
+      - hivemetastore
+    config:
+      spark_history_log: "/opt/dtstack/Spark/spark_historyserver/logs"
+
+
+
+  haproxy:
+    version: 1.9.9_4
+    instance:
+      cmd: ./start_haproxy.sh
+      post_deploy: ./post_deploy.sh
+      config_paths:
+        - conf/haproxy.cfg
+      healthcheck:
+        shell: bin/healthcheck.sh ${@haproxy} ${haproxy_port}
+        period: 20s
+        retries: 3
+      logs:
+        - logs/*
+      prometheus_port: 9533
+    group: haproxy
+    depends_on:
+      - thriftserver
+    config:
+      thriftserver_host: ${@thriftserver}
+      haproxy_port: 8191

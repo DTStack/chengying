@@ -1,0 +1,26 @@
+.c-card__container {
+  padding: 41px 24px;
+  display: flex;
+  align-items: center;
+  outline: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+  .card-info {
+    margin: 0 32px;
+    flex: 1;
+    .text-content {
+      color: #666;
+      font-size: 12px;
+      line-height: 17px;
+    }
+  }
+  .emicon-enter {
+    color: #3f87ff;
+    font-size: 28px;
+  }
+  &:hover,
+  &:focus,
+  .c-card__container--focus {
+    border: 1px solid #3f87ff;
+  }
+}

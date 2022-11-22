@@ -1,0 +1,153 @@
+.COMP_CONFIG_SERVICE {
+  .errRight{
+    font-size: 12px;
+    color: #FF5F5C;
+    display: inline-block;
+    margin-top: 5px;
+  }
+  .errLeft{
+    font-size: 12px;
+    color: #FF5F5C;
+    display: inline-block;
+    padding-left: 51%;
+    margin-top: 5px;
+  }
+  .footer {
+    padding: 0 13px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .ant-checkbox,
+    .ant-pagination-item,
+    .ant-select-selection-selected-value,
+    .ant-pagination-options-quick-jumper {
+      font-size: 12px;
+    }
+
+    .paramConfigItem {
+      display: flex;
+      width: 85%;
+      margin: 0 auto;
+    }
+  }
+
+  .splice-row{
+    z-index: -1;
+    margin-bottom: 7px
+  }
+  .resource-config-btn-box_COMP {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
+  .ant-collapse {
+    border-right: 0;
+    border-left: 0;
+    &,
+    & > .ant-collapse-item:last-child {
+      border-radius: 0;
+    }
+  }
+
+  .config-param_COMP {
+    position: relative;
+    .handle-btn {
+      position: absolute;
+      right: -2px;
+      top: 0;
+      z-index: 1000;
+    }
+    .ant-col-6 {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .param-input-label {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      line-height: 32px;
+      .emicon-env {
+        font-size: 44px;
+        color: #00a755;
+      }
+    }
+  }
+
+  .ant-switch {
+    height: 18px;
+    min-width: 38px;
+
+    &::after {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .ant-checkbox-wrapper {
+    font-size: 12px;
+  }
+
+  .afteron {
+    padding: 0 11px;
+    font-size: 14px;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.65);
+    text-align: center;
+    background-color: #fafafa;
+    border: 1px solid #d9d9d9;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 37px;
+    height: 31.5px;
+    display: inline-block;
+    line-height: 31.5px;
+    border-radius: 0px 5px 5px 0px;
+    border-left: 0;
+    cursor: pointer;
+  }
+
+  .param-input-textarea {
+    width: 313px;
+    border-radius: 5px 0px 0px 5px;
+    resize: none;
+  }
+}
+
+.extra-sider {
+  
+  h2 {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .ant-select {
+    width: 115px;
+  }
+
+  .extra-ul {
+    max-height: 472px;
+    overflow-y: auto;
+    li {
+      display: block;
+      width: 100%;
+      padding: 8px 10px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      cursor: pointer;
+      &.extra-selected {
+        color: #3f87ff;
+        &::before {
+          content: ' ';
+          margin-left: -10px;
+          margin-right: 8px;
+          border: 1px solid #3f87ff;
+        }
+      }
+    }
+  }
+}

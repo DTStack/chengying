@@ -1,0 +1,11 @@
+# 0 2 * * * /opt/dtstack/DTBase/mysql_slave/backup_mysql.sh "{{.mysql_host}}" {{.mysql_user}} {{.mysql_password}} "{{.node_list}}" >/dev/null 2>&1
+
+* */6 * * * sh /opt/dtstack/Spark/thriftserver/delete_file.sh
+
+
+
+
+
+
+
+

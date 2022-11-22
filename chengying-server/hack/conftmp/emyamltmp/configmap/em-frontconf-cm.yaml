@@ -1,0 +1,8 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontconf
+  namespace: {{.NameSpace}}
+data:
+ config.js: "window.APPCONFIG = {\n    footer: '杭州玳数科技有限公司 浙ICP备15044486号-1 ©Copyright 2016-2017',\n    // version: '2.6.2',\n    userCenter: true, // true为打开登录校验与用户中心，false为不打开\n    company: '袋鼠云', // 机构名称\n    ALARM_HEALTH: 40, // 集群总览 - 环图 - 使用量正常范围数值\n    ALARM_WARN: 60, // 告警范围数值\n    GRAFANA_PORT: 32766, // grafana端口\n    loadingText: 'dtstack.com' // loading加载的文案\n}\n"

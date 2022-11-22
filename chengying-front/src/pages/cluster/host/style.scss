@@ -1,0 +1,26 @@
+
+.link-btn {
+  color: #108EE9;
+  cursor: pointer;
+}
+.role-hosts-modal{
+  .ant-modal-body{
+    padding: 24px 20px 8px 20px !important;
+    .ant-form {
+      .ant-form-item:first-child {
+        .ant-form-item-label {
+          line-height: 20px !important;
+        }
+      }
+    }
+    .ant-form-item{
+      .ant-form-item-control:first-child{
+        line-height: 20px !important;
+      }
+    }
+  }
+  .hosts-role-form{
+    padding-left: 56px;
+    padding-right: 24px;
+  }
+}

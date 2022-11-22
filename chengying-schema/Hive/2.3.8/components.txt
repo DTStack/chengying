@@ -1,0 +1,3 @@
+hive_pkg=2.3.8
+hivemetastore=2.3.8
+hiveserver2=2.3.8

@@ -1,0 +1,31 @@
+.cluster-namespace-page {
+    position: relative;
+    .c-namespace-info_ant-drawer {
+        position: absolute;
+        .ant-drawer-header {
+            padding: 12px 20px;
+            .ant-drawer-title {
+                line-height: 20px;
+            }
+            .ant-drawer-close {
+                width: 44px;
+                height: 44px;
+                line-height: 44px;
+            }
+        }
+        .ant-drawer-body {
+            padding: 0;
+            .ant-tabs {
+                .ant-tabs-bar {
+                    margin-bottom: 0;
+                    background-color: #fafafa;
+                }
+                .ant-tabs-content {
+                    .ant-tabs-tabpane {
+                        padding: 12px 20px 20px;
+                    }
+                }
+            }
+        }
+    }
+}

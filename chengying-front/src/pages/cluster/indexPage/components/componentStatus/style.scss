@@ -1,0 +1,38 @@
+.component-status-item {
+  position: relative;
+  display: flex;
+  height: 36px;
+  line-height: 36px;
+  margin-bottom: 12px;
+  .item-icon {
+    width: 36px;
+    text-align: center;
+  }
+  .item-content {
+    flex: 1;
+    padding-left: 12px;
+  }
+  &.item-success {
+    .item-icon {
+      background-color: #12BC6A;
+    }
+    .item-content {
+      border: 1px solid #12BC6A;
+    }
+  }
+  &.item-error {
+    .item-icon {
+      background-color: #ff5f5c;
+    }
+    .item-content {
+      border: 1px solid #ff5f5c;
+    }
+    .tooltip-error {
+      position: absolute;
+      top: 50%;
+      right: -22px;
+      margin-top: -7px;
+      color: #999;
+    }
+  }
+}

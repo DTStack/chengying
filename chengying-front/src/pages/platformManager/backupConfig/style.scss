@@ -1,0 +1,31 @@
+.backupConfig {
+  margin: 20px;
+  vertical-align: middle;
+  height: calc(100vh - 88px);
+  background: #fff;
+  text-align: center;
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+
+  .handle-error__view {
+    position: absolute;
+    width: 100px;
+    line-height: 1;
+    left: 260px;
+    top: 27px;
+  }
+}
+
+.error-list {
+  .ant-list-split .ant-list-header {
+    border-bottom: none !important;
+  }
+  .ant-list-split .ant-list-item {
+    border-bottom: none !important;
+   }
+  .ant-list-items {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+}

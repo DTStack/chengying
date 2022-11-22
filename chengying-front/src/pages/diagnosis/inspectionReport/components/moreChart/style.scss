@@ -1,0 +1,60 @@
+.more-chart {
+  width: 100%;
+  min-height: 337px;
+  height:auto;
+  background: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  position: relative;
+  padding-bottom: 12px;
+  box-sizing: border-box;
+  margin-top: 12px;
+  &-mask {
+    position: absolute;
+    width: 100%;
+    height: 337px;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255,255,255,.6);
+    z-index: 999;
+  }
+  &-item {
+    width: 100%;
+    height: 337px;
+  }
+  .legend-item-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .legend-icon {
+    width: 20px;
+    height: 2px;
+    margin-right: 8px;
+  }
+  &-legend {
+    width: 100%;
+    height: auto;
+    // position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 0 20px;
+    overflow-x: hidden;
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+      & span {
+        font-size: 12px;
+        font-weight: 400;
+        color: #333333;
+        line-height: 20px;
+      }
+    }
+    &-item:hover {
+      background: #FAFAFA;
+    }
+  }
+}

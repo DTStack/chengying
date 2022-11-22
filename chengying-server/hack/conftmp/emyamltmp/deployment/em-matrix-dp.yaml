@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: matrix
+  name: matrix
+  namespace: {{.NameSpace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: matrix
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: matrix
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      initContainers:
+      - command: ["/bin/sh","-c","cp -rf /data/easymanager/* /tomatrix/&&sleep 3 &&/tomatrix/Dashboard/upload_dashboard.sh"]
+        image: {{.Registory}}/{{.EmDataImage}}
+        imagePullPolicy: IfNotPresent
+        name: emdata
+        volumeMounts:
+        - mountPath: /tomatrix
+          subPath: matrixdata
+          name: matrixdata
+      containers:
+      - image: {{.Registory}}/{{.MatrixImage}}
+        imagePullPolicy: Always
+        lifecycle:
+          postStart:
+           exec:
+             command: ["/bin/sh", "-c", "ln -s /matrix/easyagent/environment_init.sh /matrix/environment_init.sh"]
+        name: matrix
+        env:
+        - name: LOG_SWITCH
+          value: "{{.LogSwitch}}"
+        - name: AGENT_HOST
+          value: "{{.MatrixIP}}:{{.AgentServerPort}}"
+        - name: STATIC_URL
+          value: "http://{{.MatrixIP}}:{{.MatrixPort}}"
+        - name: OPERATOR_NAME
+          value: mole-operator
+        - name: LOG_IMAGE
+          value: {{.LokiPromtailImage}}
+        - name: LOG_TYPE
+          value: {{.LogType}}
+        - name: LOG_SERVER_ADDRESS
+          value: loki.{{.NameSpace}}:3100
+        ports:
+        - containerPort: 8864
+          name: api
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /matrix/easyagent
+          name: matrixdata
+          subPath: matrixdata
+        - mountPath: /etc/localtime
+          name: localtime
+          readOnly: true
+        - mountPath: /var/run/docker.sock
+          name: matrixdockersock
+        - mountPath: /usr/bin/docker
+          name: matrixdocker
+        - mountPath: /prometheus
+          name: matrixdata
+          subPath: prometheus-target
+      volumes:
+      - name: matrixdata
+        persistentVolumeClaim:
+         claimName: empvc-emdb
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+      - name: matrixdockersock
+        hostPath:
+          path: {{.DockerSock}}
+      - name: matrixdocker
+        hostPath:
+          path: {{.DockerBin}}

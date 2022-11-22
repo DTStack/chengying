@@ -1,0 +1,20 @@
+@import "../style.scss";
+
+.page-imagestore-header {
+  text-align: right;
+}
+
+.set-default-box {
+  .ant-tag {
+    color: #3f87ff;
+    border: 0;
+    text-align: center;
+  }
+  .ant-tag,
+  .ant-btn {
+    padding: 0;
+    width: 88px;
+    height: 28px;
+    line-height: 28px;
+  }
+}

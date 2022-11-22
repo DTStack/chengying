@@ -1,0 +1,7 @@
+[mysqld]
+server_id=1
+log-bin=/var/lib/mysql/bin-log
+binlog_cache_size=16K
+max_binlog_size=200M
+binlog-format=ROW
+expire_logs_days=30

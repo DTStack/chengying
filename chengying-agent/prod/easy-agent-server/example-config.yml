@@ -1,0 +1,60 @@
+# logger
+log.dir: /tmp/em2.0
+log.max-logger-size: 100
+log.max-logger-backups: 3
+log.days-to-keep: 1
+
+#publish:
+#  elasticsearch:
+#    hosts: ["http://localhost:9200"]
+#    username: ""
+#    password: ""
+#  influxdb:
+#    hosts: ["http://localhost:8086"]
+#    username: "admin"
+#    password: "admin"
+#  transfer:
+#    server: localhost
+#    port: 8790
+#    concurrency: 4    # optional, default 1
+#    timeout: 3s       # optional, default 3s
+#    cert:             # optional
+#    tls:              # optional
+#    tls-skip-verify:  # optional
+#  kafka:
+#    hosts: ["121.43.166.210:9092"]
+#    username: ""
+#    password: ""
+#    timeout: 3s
+#  http:
+#    host: "127.0.0.1:8864"
+#    uri: /api/v2/instance/%s/%s #first %s means agent_id, second %s means type
+#    timeout: 30s
+
+publish.http.host: 127.0.0.1:8864
+publish.http.uri: /api/v2/instance/%s/%s
+publish.http.timeout: 30s
+
+# databases
+mysqldb.host: 172.16.10.74
+mysqldb.port: 3306
+mysqldb.user: easyagent
+mysqldb.password: dtstack
+mysqldb.dbname: dtagent
+
+#uicdb.host: 127.0.0.1
+#uicdb.port: 3306
+#uicdb.user: easyagent
+#uicdb.password: dtstack
+#uicdb.dbname: dtuic
+
+# api
+api.port: 8889
+api.host:
+
+# rpc
+rpc.port: 8890
+rpc.cert:
+rpc.key:
+
+

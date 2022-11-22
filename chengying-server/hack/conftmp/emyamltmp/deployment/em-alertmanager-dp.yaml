@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dt-alertmanager
+  name: dt-alertmanager
+  namespace: {{.NameSpace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dt-alertmanager
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dt-alertmanager
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      containers:
+      - image: {{.Registory}}/{{.EmAlertmanagerImage}}
+        imagePullPolicy: IfNotPresent
+        name: dt-alertmanager
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: localtime
+          readOnly: true
+        - mountPath: /etc/alertmanager/config.yml
+          subPath: config.yml
+          name: conf
+      volumes:
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+      - name: conf
+        configMap:
+         name: alertmanagerconf

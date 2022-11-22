@@ -1,0 +1,104 @@
+parent_product_name: parent dtstack easy-stack
+product_name: dtstack easy-stack
+product_version: 2.1-xinwang
+
+service:
+  dtlog:
+    version: 1.8.1
+    instance:
+      #install path /opt/dtstack/dtstack easy-stack/dtlog
+      cmd: bin/dtlog --port ${SLB.dtlog_front_port} --config ${config_path} --ca ${es.ca_file} --uic ${dtuic.jjww} #服务tar包内路径
+      config_paths:
+        - ${config_path}
+      environment:
+        MYSQL_ADDRESS: ${mysql.esip}:${es.bizdb}
+        ES_ADDR: ${@es} #es service first ip
+      healthcheck:
+        shell: curl http://${dtlog_ip_port}/xxx/healthcheck
+        #period: 30s #default 60s
+        start_period: 10s #default 10s
+        timeout: 10s #default 10s
+        retries: 1 #default 1
+      max_replica: 3
+      start_after_install: false
+      post_deploy: chown 0644 dtlog && zkcreate node xxx --ip ${@es}
+      post_undeploy: rm -rf /var/data/dtlog
+      logs:
+      - log/abc.log
+      - /var/log/dtlog/*.log
+    group: default
+
+    depends_on:
+    - es
+    - dtuic
+
+    config:
+      log_port: 8888
+      config_path: dtlog.ini
+      dtlog_ip_port: ${@dtlog}:8080 #self service's node ip
+      es_ips: ${@es} #es service ip lists
+      self_ip: ${@dtlog}
+
+  es:
+    version: 1.2
+    instance:
+      use_cloud: true  # same as instance == null
+      cmd: start.sh
+
+    config:
+      ca_file:
+        type: filepath
+        desc: CA-File for EasyLog
+        default: etc/es.ca.key
+      bizdb: guyan${mysql.dsn}
+
+  mysql:
+    version: 5.7
+    instance:
+      cmd: start.sh
+      max_replica: 1
+      prometheus_port: ${prometheus_port}
+      update_recreate: true
+
+    config:
+      username:
+        type: string
+        desc: Database Username for EasyLog
+        default: root
+      password:
+        type: string
+        desc: Database Password for EasyLog
+        default: dtstack
+      dsn: /dbname?encode=utf8
+      prometheus_port: 9104
+      esip: ${@es}
+
+  SLB:
+    version: 8.7
+    #no instance, usually for cloud or other service/product
+
+    config:
+      dtlog_front_port:
+        type: port
+        desc: Uic port for EasyLog
+        default: ${dtlog.log_port}
+      dtlog_back_port: 8879
+
+  dtuic@other_product.uic:
+    #other-product uic's instance field not inherit
+    version: 1.0
+    #no instance, usually for cloud or other service/product
+
+    depends_on:
+    - es
+    - SLB
+
+    config:
+      username:
+        type: string
+        desc: Username for UIC
+        default: root
+      password:
+        type: string
+        desc: Password for UIC
+        default: dtstack

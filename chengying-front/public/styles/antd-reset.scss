@@ -1,0 +1,109 @@
+// divider - 分割线
+.ant-divider {
+    background-color: unset;
+}
+
+// card - 卡片
+.ant-card {
+    .ant-card-head {
+        padding: 0 15px;
+        height: 50px;
+        line-height: 50px;
+        .ant-card-head-wrapper {
+            .ant-card-head-title {
+                font-size: 18px;
+            }
+            .ant-card-head-title,
+            .ant-card-extra {
+                padding: 0;
+            }
+        }
+    }
+    &.ant-card-small > .ant-card-head {
+        height: 44px;
+        line-height: 44px;
+        .ant-card-head-wrapper {
+            .ant-card-head-title {
+                font-size: 14px;
+            }
+        }
+    }
+}
+
+// collapse - 折叠面板
+.ant-collapse {
+    .ant-collapse-item > .ant-collapse-header {
+        padding: 0;
+        padding-left: 46px;
+        height: 44px;
+        line-height: 44px;
+        font-size: 14px;
+        .ant-collapse-arrow {
+            left: 20px;
+        }
+    }
+}
+
+// menu - 菜单
+.ant-menu-vertical .ant-menu-item,
+.ant-menu-vertical-left .ant-menu-item,
+.ant-menu-vertical-right .ant-menu-item,
+.ant-menu-inline .ant-menu-item,
+.ant-menu-vertical .ant-menu-submenu-title,
+.ant-menu-vertical-left .ant-menu-submenu-title,
+.ant-menu-vertical-right .ant-menu-submenu-title,
+.ant-menu-inline .ant-menu-submenu-title {
+    padding: 0 24px;
+    font-size: 14px;
+}
+
+.ant-menu,
+.ant-menu-item .anticon,
+.ant-menu-submenu-title .anticon {
+    font-size: 14px;
+}
+
+// tabs - 标签页
+.ant-tabs-nav-container,
+.ant-tabs .ant-tabs-small-bar .ant-tabs-nav-container {
+    font-size: 14px;
+}
+
+// modal - 对话框
+.ant-modal-body {
+    padding: 20px;
+}
+
+.ant-input,
+.ant-select-selection {
+    border-radius: 2px;
+    vertical-align: baseline;
+}
+
+// badge - 徽标
+.ant-badge-status-dot {
+    width: 8px;
+    height: 8px;
+}
+
+// empty - 缺省
+.ant-empty {
+    color: #666666;
+    &.ant-empty-small {
+        color: #bfbfbf;
+    }
+}
+
+
+.ant-calendar-range {
+    .ant-calendar-input-wrap {
+        padding: 5px 10px;
+    }
+    .ant-calendar-range-right .ant-calendar-date-input-wrap {
+        margin-left: 0;
+    }
+
+    .ant-calendar-range-middle {
+        transform: none;
+    }  
+}

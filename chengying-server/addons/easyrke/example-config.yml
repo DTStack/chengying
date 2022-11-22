@@ -1,0 +1,5 @@
+# logger
+log.dir: /tmp/easymonitor
+log.max-logger-size: 100
+log.max-logger-backups: 3
+log.days-to-keep: 1

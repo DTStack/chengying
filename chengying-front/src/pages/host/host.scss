@@ -1,0 +1,130 @@
+.host-page-container {
+    padding: 20px 24px;
+
+    .nav-link {
+        &:hover {
+            color: #3f87ff;
+        }
+
+        color: black;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+}
+.host-page {
+    .ant-collapse {
+        &.host-collapse {
+            max-height: calc(100vh - 280px);
+            overflow-y: auto;
+        }
+        .ant-collapse-item {
+            .ant-collapse-header {
+                padding: 6px 0 6px 40px;
+            }
+            .ant-collapse-content > .ant-collapse-content-box {
+                padding: 0;
+            }
+        }
+    }
+    .dt-pagination-lower {
+        .ant-table-content {
+            min-height: unset;
+        }
+        .ant-table-footer {
+            position: static;
+            padding: 15px 20px;
+            line-height: unset;
+            height: unset;
+            border-top: 0;
+            margin-top: 0;
+            .ant-btn {
+                padding: 5px 12px;
+                height: 28px;
+            }
+        }
+        .ant-table-thead > tr > th,
+        .ant-table-tbody > tr > td {
+            vertical-align: middle;
+        }
+        .ant-table-pagination.ant-pagination {
+            position: static;
+        }
+        &.has-footer {
+            .ant-table-pagination.ant-pagination {
+                position: absolute;
+                line-height: 58px;
+                height: 58px;
+                bottom: 0;
+                right: 0;
+                width: unset;
+                border-top: 0;
+            }
+        }
+    }
+
+    .status-box {
+        display: flex;
+        align-items: center;
+
+        .dot {
+            margin-right: 5px;
+            width: 8px;
+            height: 8px;
+            display: flex;
+            border-radius: 8px;
+
+            &.green-dot {
+                background-color: #12BC6A;
+            }
+
+            &.red-dot {
+                background-color: #ff5f5c;
+            }
+        }
+    }
+    .status-progress {
+        .ant-progress-text {
+            display: block;
+            color: #666;
+            margin: 2px 0 0 0;
+        }
+    }
+}
+
+.host-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+}
+
+.host-container {
+    display: flex;
+    width: 100%;
+
+    .detail-container {
+        width: 100%;
+    }
+}
+
+.panel-table {
+    width: 450px;
+    background: #fafafa;
+
+    .ant-table-wrapper,
+    .ant-table-wrapper:hover {
+        background: #fafafa;
+    }
+
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+        font-size: 14px;
+        padding: 0 10px 0 0 !important;
+        border: none;
+    }
+
+    .ant-table {
+        /* border: 1px solid #DDDDDD; */
+        border: none;
+    }
+}
