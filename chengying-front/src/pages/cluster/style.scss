@@ -1,0 +1,15 @@
+.cluster-page-body {
+  // padding: 20px;
+  
+  .ant-alert,
+  .ant-badge-status-text,
+  .ant-checkbox-wrapper {
+    font-size: 12px;
+  }
+  .ant-table {
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      vertical-align: middle;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.container{ 
+    margin: 20px;
+    .container-header {
+        margin-bottom: 10px;
+    }
+    .bread, .ant-dropdown-link {
+        display: inline-block;
+        width: 145px;
+    }
+    .bread:after {
+        content: ' ';
+        margin-left: 15px;
+        border-right: 1px solid #999;
+    }
+    .ant-dropdown-link {
+        margin-left: 15px;
+        font-size: 12px;
+        color: #333;
+        .title {
+            display: inline-block;
+            width: 125px;
+            height: 21px;
+            line-height: 21px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: -6px;
+        }
+    }
+}

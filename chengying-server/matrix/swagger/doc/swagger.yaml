@@ -1,0 +1,1190 @@
+basePath: /api/v2
+definitions:
+  cache.InspectConfig:
+    properties:
+      dir_size:
+        type: integer
+      fullGC_frequency:
+        type: integer
+      fullGC_time:
+        type: integer
+      node_cpu_usage:
+        type: integer
+      node_disk_usage:
+        type: integer
+      node_inode_usage:
+        type: integer
+      node_mem_usage:
+        type: integer
+    type: object
+  impl.FromStruct:
+    properties:
+      form_head:
+        items:
+          type: string
+        type: array
+      form_value:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+    type: object
+  impl.NodeInfo:
+    properties:
+      agent_error_num:
+        type: integer
+      alerting_num:
+        type: integer
+      total:
+        type: integer
+    type: object
+  impl.Response:
+    properties:
+      data_node_dead_nums:
+        type: integer
+      data_node_live_nums:
+        type: integer
+      data_node_mem:
+        type: string
+      hdfs_file_num:
+        type: integer
+      name_node_mem:
+        type: string
+    type: object
+  impl.Result:
+    properties:
+      have_name_node:
+        type: integer
+      mysql_slave_status:
+        type: integer
+      node_status:
+        $ref: '#/definitions/impl.NodeInfo'
+      service_status:
+        $ref: '#/definitions/impl.ServiceInfo'
+    type: object
+  impl.ServiceInfo:
+    properties:
+      alerting_num:
+        type: integer
+      healthy_check_error_num:
+        type: integer
+      host_down_num:
+        type: integer
+      running_fail_num:
+        type: integer
+    type: object
+  impl.hostDeleteParam:
+    properties:
+      aid:
+        items:
+          type: integer
+        type: array
+      type:
+        type: string
+    type: object
+  impl.hostGroupRenameParam:
+    properties:
+      new:
+        type: string
+      old:
+        type: string
+    type: object
+  impl.hostMoveParam:
+    properties:
+      aid:
+        items:
+          type: integer
+        type: array
+      to_group:
+        type: string
+    type: object
+  impl.uploadAsyncParam:
+    properties:
+      name:
+        items:
+          type: string
+        type: array
+    type: object
+  model.BaseTemplateConfig:
+    properties:
+      decimal:
+        type: integer
+      metric:
+        type: string
+      module:
+        type: string
+      targets:
+        type: string
+      type:
+        type: integer
+      unit:
+        type: string
+    type: object
+  util.ApiShipperCheck:
+    properties:
+      aid:
+        type: integer
+    type: object
+  util.PkConnectParams:
+    properties:
+      cluster_id:
+        type: integer
+      cluster_type:
+        type: string
+      group:
+        type: string
+      host:
+        type: string
+      pk:
+        type: string
+      port:
+        type: string
+      role:
+        type: string
+      user:
+        type: string
+    type: object
+  util.PkInstallParams:
+    properties:
+      cluster_id:
+        type: integer
+      cluster_type:
+        type: string
+      cmd:
+        type: string
+      group:
+        type: string
+      host:
+        type: string
+      pk:
+        type: string
+      port:
+        type: string
+      role:
+        type: string
+      user:
+        type: string
+    type: object
+  util.PwdConnectParams:
+    properties:
+      cluster_id:
+        type: integer
+      cluster_type:
+        type: string
+      group:
+        type: string
+      host:
+        type: string
+      password:
+        type: string
+      port:
+        type: string
+      role:
+        type: string
+      user:
+        type: string
+    type: object
+  util.PwdInstallParams:
+    properties:
+      cluster_id:
+        type: integer
+      cluster_type:
+        type: string
+      cmd:
+        type: string
+      group:
+        type: string
+      host:
+        type: string
+      password:
+        type: string
+      port:
+        type: string
+      role:
+        type: string
+      user:
+        type: string
+    type: object
+host: localhost:8864
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: matrtix swagger api doc
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: maxtrix
+  version: "2.0"
+paths:
+  /agent/install/hostdelete:
+    post:
+      consumes:
+      - application/json
+      description: delete agent
+      parameters:
+      - description: 主机信息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/impl.hostDeleteParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 删除agent
+      tags:
+      - agent
+  /api/v2/agent/install/checkinstall:
+    post:
+      consumes:
+      - application/json
+      description: check status by aid
+      parameters:
+      - description: agent id
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/util.ApiShipperCheck'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"aid":"","ip":"","status_msg":"","status":""}}'
+          schema:
+            type: string
+      summary: 检查agent
+      tags:
+      - agent
+  /api/v2/agent/install/checkinstallall:
+    get:
+      consumes:
+      - application/json
+      description: check status all
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"list":"","total":""}}'
+          schema:
+            type: string
+      summary: 检查agent
+      tags:
+      - agent
+  /api/v2/agent/install/checkinstallbyip:
+    post:
+      consumes:
+      - application/json
+      description: check status by ip
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"ip":"","status":"","status_msg":""}}'
+          schema:
+            type: string
+      summary: 检查agent
+      tags:
+      - agent
+  /api/v2/agent/install/checkinstallbysid:
+    get:
+      consumes:
+      - application/json
+      description: check status by ip
+      parameters:
+      - description: 7bfad86f-576b-474a-8697-f66b9fcbac9d
+        in: query
+        name: sid
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"aid":"","ip":"","status":"","status_msg":""}}'
+          schema:
+            type: string
+      summary: 检查agent
+      tags:
+      - agent
+  /api/v2/agent/install/hostService:
+    get:
+      consumes:
+      - application/json
+      description: list service by pid
+      parameters:
+      - description: '['
+        in: query
+        name: pid_list
+        type: string
+      - description: 主机ip
+        in: query
+        name: ip
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":[{"product_name":"","product_name_display":"","group":"","service_name_list":"","service_name_display_list":"service_name_display_list"}]}'
+          schema:
+            type: string
+      summary: 查看主机服务
+      tags:
+      - agent
+  /api/v2/agent/install/hostgroup_rename:
+    post:
+      consumes:
+      - application/json
+      description: rename group name
+      parameters:
+      - description: 命名参数
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/impl.hostGroupRenameParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 重命名组
+      tags:
+      - agent
+  /api/v2/agent/install/hostgroups:
+    post:
+      consumes:
+      - application/json
+      description: 通过密码安装agent
+      parameters:
+      - description: host ip
+        in: query
+        name: host_or_ip
+        required: true
+        type: string
+      - description: product name
+        in: query
+        name: product_name
+        required: true
+        type: string
+      - description: parent product name
+        in: query
+        name: parent_product_name
+        required: true
+        type: string
+      - description: agent group
+        in: query
+        name: group
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":["default"]}'
+          schema:
+            type: string
+      summary: 安装agent
+      tags:
+      - agent
+  /api/v2/agent/install/hostmove:
+    post:
+      consumes:
+      - application/json
+      description: move host group
+      parameters:
+      - description: 主机密码信息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/impl.hostMoveParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 改变主机组名
+      tags:
+      - agent
+  /api/v2/agent/install/installCmd:
+    post:
+      consumes:
+      - application/json
+      description: install agent by cmd
+      parameters:
+      - default: host
+        description: 集群类型
+        in: query
+        name: type
+        required: true
+        type: string
+      - default: "1"
+        description: 集群id
+        in: query
+        name: clusterId
+        required: true
+        type: string
+      - default: Etcd,Control,Worker
+        description: 集群角色
+        in: query
+        name: role
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: curl -s 'http://172.16.82.176:8889/api/v1/deploy/sidecar/install/shell?TargetPath=/opt/dtstack/easymanager/easyagent&CallBack=aHR0cDovLzE3Mi4xNi44Mi4xNzY6ODg2NC9hcGkvdjIvYWdlbnQvaW5zdGFsbC9jYWxsYmFjaz9haWQ9LTE=&Type=hosts&ClusterId=1&Roles=Etcd,Control,Worker'
+            | sh
+          schema:
+            type: string
+      summary: 安装agent
+      tags:
+      - agent
+  /api/v2/agent/install/pkconnect:
+    post:
+      consumes:
+      - application/json
+      description: 通过秘钥检查ssh连通性检查
+      parameters:
+      - description: 主机秘钥信息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/util.PkConnectParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 秘钥连通性测试
+      tags:
+      - agent
+  /api/v2/agent/install/pkinstall:
+    post:
+      consumes:
+      - application/json
+      description: install agent by pk
+      parameters:
+      - description: 秘钥信息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/util.PkInstallParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 安装agent
+      tags:
+      - agent
+  /api/v2/agent/install/pwdconnect:
+    post:
+      consumes:
+      - application/json
+      description: 通过password密码检查ssh连通性检查
+      parameters:
+      - description: 主机密码信息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/util.PwdConnectParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 密码连通性测试
+      tags:
+      - agent
+  /api/v2/agent/install/pwdinstall:
+    get:
+      consumes:
+      - application/json
+      description: list agent
+      parameters:
+      - description: 主机密码信息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/util.PwdInstallParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"hosts":"","count":""}}'
+          schema:
+            type: string
+      summary: 查询所有agent
+      tags:
+      - agent
+  /api/v2/common/deployInfo/download:
+    get:
+      description: 部署信息文档下载
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{}}'
+          schema:
+            type: string
+      summary: 部署信息文档下载
+      tags:
+      - common
+  /api/v2/common/deployInfo/generate:
+    post:
+      description: 生成部署信息文档
+      parameters:
+      - description: EM 版本号
+        in: query
+        name: em_version
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{}}'
+          schema:
+            type: string
+      summary: 生成部署信息文档
+      tags:
+      - common
+  /api/v2/platform/inspect/baseInfo/name_node:
+    get:
+      description: 大数据运行服务基础信息
+      parameters:
+      - description: Cluster ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/impl.Response'
+      summary: 大数据运行服务基础信息
+      tags:
+      - Inspect
+  /api/v2/platform/inspect/baseInfo/status:
+    get:
+      description: 获取巡检报告基本信息
+      parameters:
+      - description: Cluster ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/impl.Result'
+      summary: 获取巡检报告基本信息
+      tags:
+      - Inspect
+  /api/v2/platform/inspect/form/data:
+    get:
+      description: 获取巡检报告表格信息
+      parameters:
+      - description: Cluster ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      - description: form_title
+        in: query
+        name: form_title
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/impl.FromStruct'
+      summary: 获取巡检报告表格信息
+      tags:
+      - Inspect
+  /api/v2/platform/inspect/graph/config:
+    get:
+      description: 获取图表配置列表
+      parameters:
+      - description: Cluster ID
+        in: query
+        name: cluster_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.BaseTemplateConfig'
+            type: array
+      summary: 获取图表配置列表
+      tags:
+      - Inspect
+  /api/v2/platform/inspect/graph/config/update:
+    post:
+      description: 修改巡检报告统计配置
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{}}'
+          schema:
+            type: string
+      summary: 修改巡检报告统计配置
+      tags:
+      - Inspect
+  /api/v2/platform/inspect/statisticsConfig:
+    get:
+      description: 获取巡检报告统计配置
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/cache.InspectConfig'
+      summary: 获取巡检报告统计配置
+      tags:
+      - Inspect
+  /api/v2/product/{pid}/start:
+    get:
+      consumes:
+      - application/json
+      description: Start Product
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 启动组件
+      tags:
+      - product
+  /api/v2/product/{pid}/stop:
+    get:
+      consumes:
+      - application/json
+      description: Stop Product
+      parameters:
+      - description: 停止类型
+        in: query
+        name: type
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 停止组件
+      tags:
+      - product
+  /api/v2/product/{pid}/unchecked_services:
+    get:
+      consumes:
+      - application/json
+      description: Get Unchecked Services
+      parameters:
+      - description: 命名空间
+        in: query
+        name: namespace
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":[""]}'
+          schema:
+            type: string
+      summary: 查看未部署组件
+      tags:
+      - product
+  /api/v2/product/{product_name}/service/{service_name}/get_ip:
+    get:
+      consumes:
+      - application/json
+      description: Get Service Host
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"ip":[],"count":""}}'
+          schema:
+            type: string
+      summary: 查看服务的主机
+      tags:
+      - product
+  /api/v2/product/{product_name}/service/{service_name}/modify_schema_field:
+    post:
+      consumes:
+      - application/json
+      description: Modify Schema Field
+      parameters:
+      - description: field key
+        in: formData
+        name: field_path
+        required: true
+        type: string
+      - description: field value
+        in: formData
+        name: field
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 修改schema字段
+      tags:
+      - product
+  /api/v2/product/{product_name}/service/{service_name}/modify_schema_field_batch:
+    post:
+      consumes:
+      - application/json
+      description: Modify Schema Field
+      parameters:
+      - description: '[{'
+        in: body
+        name: message
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 修改scheme多个字段
+      tags:
+      - product
+  /api/v2/product/{product_name}/service/{service_name}/reset_schema_field:
+    post:
+      consumes:
+      - application/json
+      description: Reset Schema Field
+      parameters:
+      - description: field key
+        in: formData
+        name: field_path
+        required: true
+        type: string
+      - description: 版本号
+        in: formData
+        name: product_version
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 重置schema字段
+      tags:
+      - product
+  /api/v2/product/{product_name}/service/{service_name}/set_ip:
+    post:
+      consumes:
+      - application/json
+      description: Set Service Host
+      parameters:
+      - description: 命名空间
+        in: query
+        name: namespace
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 查看服务的主机
+      tags:
+      - product
+  /api/v2/product/{product_name}/version/{product_version}:
+    get:
+      consumes:
+      - application/json
+      - application/json
+      description: GET Product Info
+      parameters:
+      - description: 部署状态
+        in: query
+        name: deploy_status
+        type: string
+      - description: 父级产品包名称
+        in: query
+        name: parentProductName
+        type: string
+      - description: 产品名称
+        in: query
+        name: productName
+        type: string
+      - description: 集群ID
+        in: query
+        name: clusterId
+        type: string
+      - description: 产品类型
+        in: query
+        name: product_type
+        type: string
+      - description: 模式
+        in: query
+        name: mode
+        type: string
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"list":"","count":""}}'
+          schema:
+            type: string
+      summary: 获取产品信息
+      tags:
+      - product
+  /api/v2/product/backup:
+    get:
+      consumes:
+      - application/json
+      description: Get Cluster Service Backup
+      parameters:
+      - description: 集群ID
+        in: query
+        name: clusterId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              properties:
+                product:
+                  type: string
+                service:
+                  items:
+                    properties:
+                      host_info:
+                        items:
+                          properties:
+                            ip:
+                              type: string
+                            sid:
+                              type: string
+                          type: object
+                        type: array
+                      name:
+                        type: string
+                    type: object
+                  type: array
+                version:
+                  type: string
+              type: object
+            type: array
+      summary: 获取集群服务备份目录
+      tags:
+      - product
+  /api/v2/product/backup/getconfig:
+    post:
+      consumes:
+      - application/json
+      description: get cluster backup path
+      parameters:
+      - description: '[{'
+        in: body
+        name: message
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"count":4,"data":{"clusterId":"","clusterName":"","path":""}}}'
+          schema:
+            type: string
+      summary: 查看备份路径
+      tags:
+      - product
+  /api/v2/product/backup/setconfig:
+    post:
+      consumes:
+      - application/json
+      description: set cluster backup path
+      parameters:
+      - description: '[{'
+        in: body
+        name: message
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 设置备份路径
+      tags:
+      - product
+  /api/v2/product/cancel_upload:
+    post:
+      consumes:
+      - application/json
+      description: Cancel Upload
+      parameters:
+      - description: 上传ID
+        in: formData
+        name: record_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 取消上传包
+      tags:
+      - product
+  /api/v2/product/check_param:
+    post:
+      consumes:
+      - application/json
+      description: 异步上传预检查
+      parameters:
+      - description: 主机密码信息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/impl.uploadAsyncParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: upload async check
+      tags:
+      - product
+  /api/v2/product/clean:
+    post:
+      consumes:
+      - application/json
+      description: Clean Cluster Backup
+      parameters:
+      - description: 备份信息
+        in: body
+        name: message
+        required: true
+        schema:
+          items:
+            properties:
+              product:
+                type: string
+              service:
+                items:
+                  properties:
+                    host_info:
+                      items:
+                        properties:
+                          ip:
+                            type: string
+                          sid:
+                            type: string
+                        type: object
+                      type: array
+                    name:
+                      type: string
+                  type: object
+                type: array
+              version:
+                type: string
+            type: object
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 清理备份文件夹
+      tags:
+      - product
+  /api/v2/product/in_progress:
+    get:
+      consumes:
+      - application/json
+      description: Get Uploading Products
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"total":"","data":""}}'
+          schema:
+            type: string
+      summary: 查询包上传状态
+      tags:
+      - product
+  /api/v2/product/productList:
+    get:
+      consumes:
+      - application/json
+      - application/json
+      description: GET Product List
+      parameters:
+      - description: 产品名称
+        in: query
+        name: product_name
+        type: string
+      - description: 产品类型
+        in: query
+        name: product_type
+        type: string
+      - description: 部署状态
+        in: query
+        name: deploy_status
+        type: string
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":{"list":"","count":""}}'
+          schema:
+            type: string
+      summary: 获取产品包列表
+      tags:
+      - product
+  /api/v2/product/upload:
+    post:
+      consumes:
+      - application/json
+      description: upload package
+      parameters:
+      - description: -F 'package=@Trino_0.359-tdh_centos7_x86_64.tar'
+        in: body
+        name: package
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 上传产品包
+      tags:
+      - product
+  /api/v2/product/uploadAsync:
+    post:
+      consumes:
+      - application/json
+      description: upload package async
+      parameters:
+      - description: 主机密码信息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/impl.uploadAsyncParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 异步上传包
+      tags:
+      - product
+  /api/v2/product/workloadinit:
+    get:
+      consumes:
+      - application/json
+      description: workload加载接口
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: workload加载接口
+      tags:
+      - product
+  /apv/v2/agent/install/pwdinstall:
+    post:
+      consumes:
+      - application/json
+      description: install agent by pwd
+      parameters:
+      - description: 主机密码信息
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/util.PwdInstallParams'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"msg":"ok","code":0,"data":null}'
+          schema:
+            type: string
+      summary: 安装agent
+      tags:
+      - agent
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"

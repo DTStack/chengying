@@ -1,0 +1,5 @@
+startDelaySeconds: 0
+hostPort: localhost:9601
+ssl: false
+lowercaseOutputName: false
+lowercaseOutputLabelNames: false

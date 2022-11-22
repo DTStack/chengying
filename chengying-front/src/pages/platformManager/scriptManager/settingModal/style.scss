@@ -1,0 +1,87 @@
+.settingNavTop{
+    height: 20px;
+    line-height: 20px;
+    display: flex;
+    .navTopLine{
+        width: 4px;
+        height: 12px;
+        background: #3F87FF;
+        margin-right: 8px;
+        margin-top: 4px;
+    }
+    .navTopTxt{
+        color: #333;
+        font-weight: bold;
+        line-height: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
+}
+.cronBox{
+    margin-top: 12px;
+}
+.hostSelectContent{
+    margin-top: 12px;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    .hostSelectContent-cluster{
+        width: 141px;
+        height: 300px;
+        background: #FFFFFF;
+        border-radius: 2px;
+        border: 1px solid #D7D7D7;
+        overflow-y: auto;
+        .hostSelectContent-cluster-title{
+            padding: 12px 0 9px 12px;
+            color: #333;
+            font-size: 12px;
+        }
+        .hostSelectContent-cluster-content{
+            padding: 0px 0 7px 12px;
+            color: #333;
+            font-size: 12px;
+            height: 32px;
+            line-height: 32px;
+            &:hover{
+                background: #F0F8FF;
+                border-right: 3px solid #3F87FF;
+                cursor: pointer;
+            }
+        }
+        .active{
+            background: #F0F8FF;
+            border-right: 3px solid #3F87FF;
+        }
+    }
+    .hostSelectContent-host{
+        width: 554px;
+        height: 300px;
+        background: #FFFFFF;
+        border-radius: 2px;
+    }
+}
+.labelTxt{
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+.error{
+    font-size: 12px;
+    color: #EF5350;
+    margin-left: 100px;
+}
+.cronBtn{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+.errorHost{
+    font-size: 12px;
+    color: #EF5350;
+}
+.runBox{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 20px;
+}

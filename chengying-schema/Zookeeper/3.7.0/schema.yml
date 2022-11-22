@@ -1,0 +1,70 @@
+parent_product_name: DTHadoop
+product_name: Zookeeper
+product_version: 3.7.0
+service:
+  kerberos_pkg@kerberos.kerberos_pkg@optional:
+    config:
+      default_realm: 'DTSTACK.COM'
+  kdcserver@kerberos.kdcserver@optional:
+  zookeeper:
+    version: 3.7.0
+    orchestration:
+      affinity:
+        - master
+      anti_affinity:
+    instance:
+      cmd: ./bin/zkServer.sh
+      config_paths:
+        - conf/zoo.cfg
+        - bin/zkEnv.sh
+        - conf/java.env
+        - conf/jaas.conf
+        - bin/on.sh
+        - bin/off.sh
+      healthcheck:
+        shell: bin/healthcheck.sh ${@zookeeper} 2181
+        period: 20s
+        retries: 3
+      logs:
+        - logs/zookeeper.out
+      max_replica: 3
+      post_deploy: bin/post_deploy.sh ${@zookeeper}
+      prometheus_port: 9505
+      ha_role_cmd: bin/show_zookeeper_role.sh 2>/dev/null
+      switch:
+        Kerberos:
+          config: kerberos_on
+          desc: Kerberos switch
+          is_on: false
+          on_script: bin/on.sh
+          off_script: bin/off.sh
+          post_on_script:
+            type: restart
+            value: zookeeper
+          post_off_script:
+            type: restart
+            value: zookeeper
+          extention:
+            type: download
+            value: /data/kerberos/zookeeper.keytab
+    group: zookeeper
+    config:
+      zk_ip: ${@zookeeper}
+      zk_port: 2181
+      dt_zk_log: "/opt/dtstack/Zookeeper/zookeeper/logs/"
+      clientPort: 2181
+      dataDir: "/data/zookeeper"
+      tickTime: 30000
+      initLimit: 10
+      syncLimit: 5
+      forceSync: "yes"
+      maxClientCnxns: 200
+      autopurge_snapRetainCount: 6
+      autopurge_purgeInterval: 48
+      realms: ${kerberos_pkg.default_realm}
+      kerberos_on: 0
+      kdcserver_ip: ${@kdcserver}
+      zookeeper_keytab: "/data/kerberos/zookeeper.keytab"
+      zkcli_keytab: "/data/kerberos/zkcli.keytab"
+      krb5_conf: "/opt/dtstack/kerberos/kerberos_pkg/conf/krb5.conf"
+      admin_serverPort: "8887"

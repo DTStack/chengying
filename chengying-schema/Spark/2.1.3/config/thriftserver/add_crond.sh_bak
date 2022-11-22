@@ -1,0 +1,10 @@
+#! /bin/bash
+add_crond(){
+
+    while read line || [[ -n ${line} ]]
+    do
+        (crontab -l;echo "$line") | crontab
+    done < crond
+
+}
+

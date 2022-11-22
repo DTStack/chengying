@@ -1,0 +1,55 @@
+.statisticalSetting {
+    .ant-form-item {
+        margin-bottom: 12px !important;
+    }
+    .settingNavTop{
+        height: 20px;
+        line-height: 20px;
+        display: flex;
+        .navTopLine{
+            width: 4px;
+            height: 12px;
+            background: #3F87FF;
+            margin-right: 8px;
+            margin-top: 4px;
+        }
+        .navTopTxt{
+            color: #333;
+            font-weight: bold;
+            line-height: 20px;
+            height: 20px;
+            font-size: 12px;
+        }
+    }
+    .labelLeft{
+        display: inline-block;
+        margin: 0 4px 0 12px;
+    }
+
+    .ant-input-number-input-wrap {
+        width: 80px;
+        height: 32px;
+    }
+
+        // 弹窗设置
+        .formItemTitleSetting {
+            height: 15px;
+            border-left: 4px solid #3F87FF;
+            padding-left: 8px;
+        }
+
+
+    .ant-col.ant-form-item-label {
+        font-weight: bold;
+    }
+
+    .ant-form-item-required::before {
+        display: inline-block;
+        margin-right: 4px;
+        color: #FF5F5C;
+        font-size: 12px;
+        font-family: SimSun, sans-serif;
+        line-height: 1;
+        content: '';
+    }
+}

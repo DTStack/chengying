@@ -1,0 +1,46 @@
+.create-host-container {
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .error-host-box{
+    p{
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  .step-account {
+    .error-desc {
+      min-height: 30px;
+      max-height: 100px;
+      background: #f4f4f4;
+      padding: 10px;
+      border: 1px dashed #ccc;
+      border-radius: 2px;
+      p {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+.host-test-modal{
+  .ant-modal-header{
+    padding: 8px 15px;
+  }
+  .ant-modal-close-x{
+    height: 39px;
+    line-height: 39px;
+  }
+  .btn-box{
+    margin-top: 21px;
+    .btn{
+      width: 86px;
+      height: 30px;
+      margin-left: 10px;
+    }
+  }
+  .ant-modal-body{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

@@ -1,0 +1,10 @@
+.c-dragger_ant-upload {
+  &.ant-upload.ant-upload-drag {
+    .ant-upload {
+      padding: 0;
+    }
+    .ant-upload-drag-container {
+      padding: 25px 0;
+    }
+  }
+}

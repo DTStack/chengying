@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dt-grafana
+  name: dt-grafana
+  namespace: {{.NameSpace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dt-grafana
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dt-grafana
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      containers:
+      - image: {{.Registory}}/{{.EmGrafanaImage}}
+        imagePullPolicy: IfNotPresent
+        name: dtstark-grafana
+        env:
+        - name: GF_AUTH_ANONYMOUS_ENABLED
+          value: "true"
+        - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+          value: Editor
+        - name: GF_SERVER_DOMAIN
+          value: "grafana"
+        - name: GF_EXTERNAL_IMAGE_STORAGE_PROVIDER
+          value: local
+        ports:
+        - containerPort: 3000
+          name: server
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: localtime
+          readOnly: true
+        - mountPath: /etc/grafana/provisioning/datasources/datasource.yml
+          subPath: datasource.yml
+          name: datasource
+        - mountPath: /var/lib/grafana
+          name: emgrafdata
+          subPath: emgrafanadata
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+      volumes:
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+      - name: datasource
+        configMap:
+         name: grafanaconf
+      - name: emgrafdata
+        persistentVolumeClaim:
+          claimName: empvc-emdb

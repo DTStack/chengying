@@ -1,0 +1,147 @@
+.cluster-container {
+  margin: 20px;
+  .nav-link {
+    display: inline-block;
+    &:hover {
+      color: #3f87ff;
+    }
+  }
+  .edit-cluster-container {
+    padding: 20px;
+    background-color: #fff;
+  }
+}
+
+.cluster-manager-page {
+  height: calc(100vh - 88px);
+  overflow-y: auto;
+  .ant-spin-nested-loading > div > .ant-spin {
+    max-height: unset;
+  }
+}
+.cluster-empty {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -198px;
+  margin-top: -133px;
+}
+
+// 卡片阴影
+.cluster-box-style {
+  background: #fff;
+  box-shadow: 0px 2px 8px 0px rgba(6, 14, 26, 0.08);
+  border: 1px solid #fff;
+  border-radius: 2px;
+  min-height: 168px;
+}
+
+// 全局概览页
+.cluster-list-page {
+  position: relative;
+  // height: calc(100vh - 40px - 40px);
+  .ant-card {
+    cursor: pointer;
+    border: 0;
+    .ant-card-head {
+      background: linear-gradient(90deg, #3f87ff 0%, #73bcff 100%);
+      border-bottom: 0; 
+      .ant-card-head-wrapper {
+        .ant-card-head-title {
+          color: #fff;
+        }
+        .ant-card-extra {
+          display: flex;
+          align-items: center;
+          .card-extra-status {
+            width: 56px;
+            height: 20px;
+            line-height: 20px;
+            font-weight: 600;
+            text-align: center;
+            background: #fff;
+            border-radius: 0 10px 0 10px;
+            &.status-running {
+              color: #12BC6A;
+            }
+            &.status-error {
+              color: #ff5f5c;
+            }
+            &.status-waiting {
+              color: #9eabb2;
+            }
+          }
+        }
+      }
+    }
+    .ant-card-body {
+      padding: 12px 20px;
+      line-height: 24px;
+      .data-view-item {
+        display: flex;
+        align-items: center;
+        & > img,
+        & > span {
+          margin-right: 8px;
+        }
+        & > span {
+          display: inline-block;
+          font-weight: 600;
+          width: 34px;
+        }
+        .progress-bar {
+          width: 90px;
+          & > p {
+            margin-left: -15px;
+            width: 120px;
+          }
+        }
+      }
+    }
+    &:hover {
+      box-shadow: 0px 2px 28px 0px rgba(6, 14, 26, 0.2);
+    }
+  }
+  .cluster-bottom {
+    position: fixed;
+    width: calc(100vw - 200px);
+    bottom: 20px;
+    left: 200px;
+    right: 0;
+    text-align: center;
+    .btn-box-shadow {
+      display: inline-block;
+      border-radius: 50%;
+      height: 45px;
+      width: 45px;
+      background: #fff;
+      box-shadow: 0px 2px 8px 0px #3f87ff;
+    }
+    .emicon-add {
+      color: #3f87ff;
+      font-size: 46px;
+      cursor: pointer;
+    }
+  }
+}
+
+.c-extra-more__dropdown {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  .ant-dropdown-menu-item {
+    font-size: 12px;
+  }
+}
+
+.c-extra-more__menuitem {
+  width: 160px;
+  &:hover .ant-dropdown-menu-item-active {
+    color: #3f87ff;
+  }
+}
+
+// 创建的card
+.cluster-type {
+  margin-bottom: 32px;
+}

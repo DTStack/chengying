@@ -1,0 +1,54 @@
+{
+    "compilerOptions": {
+        "outDir": "dist", //重定向输出目录。
+        "module": "commonjs", //指定生成哪个模块系统代码·
+        "target": "es5", //指定ECMAScript目标版本
+        "lib": [
+            "es2015",
+            "es6",
+            "es2016",
+            "es2017",
+            "dom"
+        ], //编译过程中需要引入的库文件的列表。
+        "sourceMap": true, //生成相应的 .map文件。
+        "allowJs": true, //允许编译javascript文件。
+        "jsx": "react", //在 .tsx文件里支持JSX
+        "moduleResolution": "node", //决定如何处理模块
+        "experimentalDecorators": true, //启用实验性的ES装饰器。
+        // "rootDir": "src", //仅用来控制输出的目录结构
+        "forceConsistentCasingInFileNames": false, //禁止对同一个文件的不一致的引用。
+        "noImplicitReturns": true, //不是函数的所有返回路径都有返回值时报错。
+        "esModuleInterop": false,
+        "noImplicitThis": true, //当 this表达式的值为 any类型的时候，生成一个错误。
+        "noImplicitAny": false, //在表达式和声明上有隐含的 any类型时报错。
+        "strictNullChecks": false, //在严格的 null检查模式下， null和 undefined值不包含在任何类型里，只允许用它们自己和 any来赋值
+        "allowSyntheticDefaultImports": true, //允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。
+        "suppressImplicitAnyIndexErrors": true, //阻止 --noImplicitAny对缺少索引签名的索引对象报错
+        "noUnusedLocals": true, //若有未使用的局部变量则抛错。
+        // import的相对起始路径 // 解析非相对模块名的基准目录
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+            "public/*": [
+                "./public/*"
+            ]
+        },
+        "typeRoots": [
+            "node",
+            "node_modules/@types",
+            "./src/typings"
+        ]
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "scripts",
+        "public",
+        "tsconfig.json",
+    ]
+}

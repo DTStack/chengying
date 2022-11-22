@@ -1,0 +1,17 @@
+# Zookeeper
+    zookeeper制品产品包示例：
+    https://dtstack-opensource.oss-cn-hangzhou.aliyuncs.com/chengying/Zookeeper_3.7.0_centos7_x86_64.tar
+### zookeeper schema简要介绍
+    Zookeeper目下包含一个以zookeeper版本号3.7.0命名的文件夹。
+    文件夹下固定包含四个模块：
+        1、config文件夹
+        2、components文件
+        3、schema配置文件
+        4、README
+    
+##### config
+    config目录下主要为Zookeeper包中包含的服务角色，zookeeper角色下主要有
+        1、bin目录：主要是zookeeper服务启动脚本
+        2、config目录：主要是zookeeper配置文件支持chengying界面可配置
+        3、dtstack目录：主要为zookeeper jvm监控配置文件
+    

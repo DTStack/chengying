@@ -1,0 +1,9 @@
+build/*
+
+.*.swp
+.DS_*
+.idea
+logs/
+conf
+alert.ddl.sql
+

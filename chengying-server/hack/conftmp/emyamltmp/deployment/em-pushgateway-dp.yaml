@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dt-pushgateway
+  name: dt-pushgateway
+  namespace: {{.NameSpace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dt-pushgateway
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dt-pushgateway
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      containers:
+      - image: {{.Registory}}/{{.EmPushgatewayImage}}
+        imagePullPolicy: IfNotPresent
+        name: dt-pushgateway
+        ports:
+        - containerPort: 9091
+          name: server
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: localtime
+          readOnly: true
+      volumes:
+      - name: localtime
+        hostPath:
+          path: /etc/localtime

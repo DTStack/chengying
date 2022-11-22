@@ -1,0 +1,1 @@
+{{if eq (.NodeID "namenode_ip") 1}}yes{{end}}

@@ -1,0 +1,22 @@
+.special_pagination {
+    width: 34px;
+    position: absolute;
+    right: 0;
+    top: 1px;
+    bottom: 26px;
+    height: auto;
+    button {
+        width: 34px;
+        height: 34px;
+        font-size: 12px;
+        margin-top: -1px;
+        color: #666666;
+        background: #FAFAFA;
+        border: 1px solid #DDDDDD;
+        outline: none;
+        cursor: pointer;
+    }
+    button:hover {
+        color: #3f87ff;
+    }
+}

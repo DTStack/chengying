@@ -1,0 +1,8 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lokiconf
+  namespace: {{.NameSpace}}
+data:
+ loki-config.yaml: "auth_enabled: false\nserver:\n  http_listen_port: 3100\ningester:\n  lifecycler:\n    address: 127.0.0.1\n    ring:\n      kvstore:\n        store: inmemory\n      replication_factor: 1\n    final_sleep: 0s\n  chunk_idle_period: 1h\n  max_chunk_age: 1h\n  chunk_target_size: 1048576\n  chunk_retain_period: 30s\n  max_transfer_retries: 0\nschema_config:\n  configs:\n    - from: 2020-10-24\n      store: boltdb-shipper\n      object_store: filesystem\n      schema: v11\n      index:\n        prefix: index_\n        period: 24h\nstorage_config:\n  boltdb_shipper:\n    active_index_directory: /loki/boltdb-shipper-active\n    cache_location: /loki/boltdb-shipper-cache\n    cache_ttl: 24h\n    shared_store: filesystem\n  filesystem:\n    directory: /loki/chunks\ncompactor:\n  working_directory: /loki/boltdb-shipper-compactor\n  shared_store: filesystem\nlimits_config:\n  ingestion_rate_mb: 8\n  ingestion_burst_size_mb: 16\nchunk_store_config:\n  max_look_back_period: 0s\ntable_manager:\n  retention_deletes_enabled: true\n  retention_period: 336h\nruler:\n  storage:\n    type: local\n    local:\n      directory: /loki/rules\n  rule_path: /loki/rules-temp\n  alertmanager_url: http://localhost:9093\n  ring:\n    kvstore:\n      store: inmemory\n  enable_api: true\n"

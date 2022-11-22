@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9090"
+  name: prometheus
+  namespace: {{.NameSpace}}
+  labels:
+    app: dt-prometheus
+spec:
+  ports:
+  - port: 9090
+    targetPort: 9090
+    name: tcp
+  selector:
+    app: dt-prometheus

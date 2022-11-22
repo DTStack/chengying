@@ -1,0 +1,136 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: (devel)
+  creationTimestamp: null
+  name: workloadlists.dtstack.com
+spec:
+  group: dtstack.com
+  names:
+    kind: WorkLoadList
+    listKind: WorkLoadListList
+    plural: workloadlists
+    singular: workloadlist
+  scope: Namespaced
+  versions:
+  - name: v1beta1
+    schema:
+      openAPIV3Schema:
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          items:
+            items:
+              description: workload is a namespaced resource, that consists of a series
+                of k8s object, it is used to expand a series of functions of native
+                workload
+              properties:
+                apiVersion:
+                  description: 'APIVersion defines the versioned schema of this representation
+                    of an object. Servers should convert recognized schemas to the
+                    latest internal value, and may reject unrecognized values. More
+                    info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+                  type: string
+                kind:
+                  description: 'Kind is a string value representing the REST resource
+                    this object represents. Servers may infer this from the endpoint
+                    the client submits requests to. Cannot be updated. In CamelCase.
+                    More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+                  type: string
+                metadata:
+                  type: object
+                spec:
+                  properties:
+                    workloadpatrs:
+                      items:
+                        properties:
+                          baseworkload:
+                            properties:
+                              name:
+                                type: string
+                              parameters:
+                                type: object
+                              type:
+                                type: string
+                            required:
+                            - name
+                            - type
+                            type: object
+                          steps:
+                            items:
+                              properties:
+                                action:
+                                  type: string
+                                name:
+                                  type: string
+                                object:
+                                  type: object
+                                type:
+                                  type: string
+                              required:
+                              - action
+                              - name
+                              - object
+                              - type
+                              type: object
+                            type: array
+                        required:
+                        - baseworkload
+                        type: object
+                      type: array
+                  type: object
+                status:
+                  properties:
+                    part_status:
+                      items:
+                        properties:
+                          status:
+                            type: string
+                          stepStatus:
+                            items:
+                              properties:
+                                message:
+                                  type: string
+                                status:
+                                  type: string
+                              required:
+                              - message
+                              - status
+                              type: object
+                            type: array
+                        required:
+                        - status
+                        - stepStatus
+                        type: object
+                      type: array
+                    phase:
+                      type: string
+                  required:
+                  - phase
+                  type: object
+              type: object
+            type: array
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+        required:
+        - items
+        type: object
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

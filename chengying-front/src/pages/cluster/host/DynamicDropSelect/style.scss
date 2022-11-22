@@ -1,0 +1,80 @@
+
+.dynamic-drop-select {
+  // padding: 0 10px;
+  // .dynamic-select-content{
+
+  // }
+  .edit-role-item{
+    background-color: #F2F9FF;
+    .rolenameinput{
+      // margin-left: 10px;
+      width: 276px;
+      height: 24px;
+    }
+  }
+  .drop-render {
+    display: inline-block;
+    width: auto;
+    margin-left: 10px;
+    &:hover {
+      .circle-plus {
+        border-color: #69a5ff;
+        .emicon {
+          color: #69a5ff;
+        }
+      }
+    }
+    .circle-plus {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #3F87FF;
+      box-sizing: border-box;
+      line-height: 14px;
+      .emicon {
+        color: #3F87FF;
+        font-size: 14px;
+      }
+    }
+  }
+}
+.rolenamenull{
+  border-color: #FF5F5C!important;
+  box-shadow: 0 0 3px #ff5f5c!important;
+}
+.ant-select-dropdown-menu-item-selected.ds-option{
+  .ant-select-selected-icon {
+    // visibility: hidden;
+    color: #12BC6A !important;
+  }
+}
+.ant-select-dropdown-menu-item-active.ds-option{
+  .ant-select-selected-icon {
+    // visibility: hidden;
+    color: #12BC6A !important;
+  }
+}
+.ds-option {
+  // padding-right: 0!important;
+  // padding-left: 0!important;
+  // height: 24px;
+  // line-height: 24px;
+  
+  .emicon {
+    visibility: hidden!important;
+  }
+  &:hover {
+    .emicon {
+      visibility: visible!important;
+    }
+  }
+}
+
+.ml-5 {
+  margin-left: 5px;
+}
+
+.fr {
+  float: right;
+}

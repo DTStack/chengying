@@ -1,0 +1,12 @@
+lowercaseOutputName: true
+attrNameSnakeCase: true
+rules:
+- pattern: metrics<name=(\S+)\.driver\.(\S+)\.StreamingMetrics\.streaming\.(\S+)><>Value
+  name: spark_streaming_$3
+  labels:
+    app_id: "$1"
+    app_name: "$2"
+- pattern: metrics<name=(\S+)\.driver\.(BlockManager|DAGScheduler)\.(\S+)><>Value
+  name: spark_$2_$3
+  labels:
+    app_id: "$1"

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+    <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://{{.Joinx "hive_ip" ",thrift://" ":" $.hive_port}}</value>
+        <description>Thrift URI for the remote metastore. Used by metastore client to connect to remote metastore.</description>
+    </property>
+
+    <property>
+        <name>hive.cluster.delegation.token.store.class</name>
+        <value>org.apache.hadoop.hive.thrift.MemoryTokenStore</value>
+        <description>Hive defaults to MemoryTokenStore, or ZooKeeperTokenStore</description>
+    </property>
+
+    <property>
+        <name>hive.server2.support.dynamic.service.discovery</name>
+        <value>{{.hive_server2_support_dynamic_service_discovery}}</value>
+    </property>
+
+    <property>
+        <name>hive.metastore.warehouse.dir</name>
+        <value>{{.warehouse_dir}}</value>
+    </property>
+
+    <property>
+        <name>hive.exec.scratchdir</name>
+        <value>{{.scratchdir}}</value>
+    </property>
+
+    <property>
+        <name>datanucleus.schema.autoCreateAll</name>
+        <value>{{.datanucleus_schema_autoCreateAll}}</value>
+        <description>creates necessary schema on a startup if one doesn't exist. set this to false, after creating it once</description>
+    </property>
+
+    <property>
+        <name>hive.server2.thrift.min.worker.threads</name>
+        <value>{{.hive_server2_thrift_min_worker_threads}}</value>
+    </property>
+
+    <property>
+        <name>hive.server2.thrift.port</name>
+        <value>{{.hive_server2_thrift_port}}</value>
+    </property>
+
+    <property>
+        <name>hive.server2.async.exec.threads</name>
+        <value>{{.hive_server2_async_exec_threads}}</value>
+    </property>
+
+    <property>
+        <name>hive.server2.idle.session.timeout</name>
+        <value>{{.hive_server2_idle_session_timeout}}</value>
+    </property>
+
+    <property>
+        <name>hive.server2.session.check.interval</name>
+        <value>{{.hive_server2_session_check_interval}}</value>
+    </property>
+
+    <property>
+        <name>hive.server2.enable.doAs</name>
+        <value>{{.hive_server2_enable_doAs}}</value>
+    </property>
+
+    <property>
+        <name>hive.metastore.schema.verification</name>
+        <value>{{.hive_metastore_schema_verification}}</value>
+    </property>
+
+    <property>
+        <name>hive.exec.dynamic.partition</name>
+        <value>{{.hive_exec_dynamic_partition}}</value>
+    </property>
+
+    <property>
+        <name>hive.exec.dynamic.partition.mode</name>
+        <value>{{.hive_exec_dynamic_partition_mode}}</value>
+    </property>
+
+
+
+
+
+    <property>
+        <name>spark.executor.cores</name>
+        <value>{{.spark_executor_cores}}</value>
+    </property>
+
+    <property>
+        <name>spark.executor.memory</name>
+        <value>{{.spark_executor_memory}}</value>
+    </property>
+
+    <property>
+        <name>spark.driver.memory</name>
+        <value>{{.spark_driver_memory}}</value>
+    </property>
+
+    <property>
+        <name>spark.yarn.driver.memoryOverhead</name>
+        <value>{{.spark_yarn_driver_memoryOverhead}}</value>
+    </property>
+
+    <property>
+        <name>hive.merge.sparkfiles</name>
+        <value>{{.hive_merge_sparkfiles}}</value>
+    </property>
+
+
+    <property>
+        <name>hive.server2.map.fair.scheduler.queue</name>
+        <value>false</value>
+    </property>
+
+
+
+    <!-- hive开启kerberos -->
+
+    {{if eq (print .kerberos_on) "true"}}
+
+    <!-- hivemetastore conf -->
+    <property>
+        <name>hive.metastore.sasl.enabled</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hive.metastore.kerberos.keytab.file</name>
+        <value>{{.hive_metastore_kerberos_keytab_file}}</value>
+    </property>
+    <property>
+        <name>hive.metastore.kerberos.principal</name>
+        <value>{{.hive_metastore_kerberos_principal}}</value>
+    </property>
+
+    <!-- hiveserver2 conf -->
+    <property>
+        <name>hive.server2.authentication</name>
+        <value>{{.hive_server2_authentication}}</value>
+    </property>
+    <property>
+        <name>hive.server2.authentication.kerberos.principal</name>
+        <value>{{.hive_server2_authentication_kerberos_principal}}</value>
+    </property>
+    <property>
+        <name>hive.server2.authentication.kerberos.keytab</name>
+        <value>{{.hive_server2_authentication_kerberos_keytab}}</value>
+    </property>
+
+    {{end}}
+
+</configuration>

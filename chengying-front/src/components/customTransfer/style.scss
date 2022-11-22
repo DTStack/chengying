@@ -1,0 +1,38 @@
+.transfer-table {
+  .ant-transfer-list-body-customize-wrapper {
+    padding: 0;
+  }
+  .ant-table-row {
+    .ant-table-selection-column {
+      padding-right: 0!important;
+    }
+    & > td {
+      height: 22px!important;
+      line-height: 22px!important;
+      border-bottom: 0;
+      padding: 4.5px 13px!important;
+    }
+  }
+  .ant-table-wrapper {
+    box-shadow: none;
+    .ant-table-footer {
+      padding: 0;
+      height: 51px;
+    }
+    .ant-table-pagination.ant-pagination {
+      position: absolute;
+      margin: 5px 0;
+      padding: 0 12px;
+      bottom: -55px;
+      height: 51px;
+      line-height: 51px;
+      .ant-pagination-total-text {
+        float: left;
+        margin-top: 12px;
+      }
+      .ant-pagination-options-quick-jumper {
+        vertical-align: unset;
+      }
+    }
+  }
+}

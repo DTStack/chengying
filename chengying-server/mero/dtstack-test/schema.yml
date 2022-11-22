@@ -1,0 +1,61 @@
+parent_product_name: toutian-dev
+product_name: dtstack-test
+product_version: test-dev-2.5
+
+service:
+  SLB:
+    version: slb-1.1
+    config:
+      ip: 127.0.0.2
+  dtlog_new:
+    version: dtlog-new-2.3
+    instance:
+      pseudo: true
+      ha_role_cmd: echo master
+      cmd: ./dtlog.sh ${config_path} ${log} ${dtuic_ip}
+      config_paths:
+      - ${config_path}
+      - conf/config-sp.ini
+      healthcheck:
+        shell: echo test health
+        period: 5s
+      post_deploy: echo dtlog deploy success >> dtlog_post_deploy.log && echo risk.sql
+      post_undeploy: echo dtlog undeploy success >> /tmp/dtlog_post_undeploy.log && echo risk.sh
+      logs:
+      - '*.log'
+      - /tmp/dtlog_post_undeploy.log
+    depends_on:
+    - dtuic
+    - test3
+    config:
+      config_path: conf/config.ini
+      log: dtlog.log
+      dtuic_ip: ${@dtuic}
+      self_ip: ${@dtlog_new}
+  dtuic:
+    version: dtuic-1.0
+    instance:
+      cmd: ./dtuic.sh
+      max_replica: 3
+      start_after_install: true
+      healthcheck:
+        shell: sleep 2
+        period: 3s
+    group: dtuic-group
+    depends_on:
+    - test1
+  test1:
+    version: test1-1.0
+    instance:
+      cmd: ./test1.sh
+      healthcheck:
+        shell: sleep 2
+        period: 3s
+  test3:
+    version: test3-1.0
+    instance:
+      use_cloud: true
+      cmd: ./test3.sh
+      healthcheck:
+        shell: sleep 2
+        period: 3s

@@ -1,0 +1,67 @@
+---
+apiVersion: v1
+data:
+  .dockerconfigjson: {{.IMAGE_SECRET}}
+kind: Secret
+metadata:
+  name: dtstack
+  namespace: {{.NAME_SPACE}}
+type: kubernetes.io/dockerconfigjson
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: easyagent
+  namespace: {{.NAME_SPACE}}
+  labels:
+    k8s-app: easyagent
+    kubernetes.io/cluster-service: "true"
+spec:
+  selector:
+    matchLabels:
+      app: easyagent
+  template:
+    metadata:
+      labels:
+        app: easyagent
+    spec:
+      imagePullSecrets:
+        - name: dtstack
+      containers:
+        - name: easyagent
+          image: {{.REGISTRY}}easykubeagent:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8899
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 500m
+          env:
+            - name: OPERATOR_NAMESPACE
+              value: {{.NAME_SPACE}}
+            - name: OPERATOR_REGISTRY
+              value: {{.REGISTRY}}
+            - name: OPERATOR_SECRET
+              value: dtstack
+            - name: WATCH_NAMESPACE
+              value: {{.NAME_SPACE}}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: easyagent
+  namespace: {{.NAME_SPACE}}
+  labels:
+    app: easyagent
+spec:
+  selector:
+    app: easyagent
+  ports:
+    - name: http
+      port: 8899
+      protocol: TCP

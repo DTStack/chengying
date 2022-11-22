@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+   <property>
+       <name>javax.jdo.option.ConnectionURL</name>
+       <value>jdbc:mysql://{{.mysql_ip}}:{{.mysql_port}}/{{.mysql_db}}?createDatabaseIfNotExist=true&amp;useSSL=false&amp;autoReconnect=true</value>
+   </property>
+
+   <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://{{.JoinxHost "hive_ip" ",thrift://" ":9083"}}</value>
+        <description>A comma separated list of metastore uris on which metastore service is running</description>
+   </property>
+   <property>
+         <name>hive.cluster.delegation.token.store.class</name>
+         <value>{{.hive_cluster_delegation_token_store_class}}</value>
+         <description>Hive defaults to MemoryTokenStore, or ZooKeeperTokenStore</description>
+   </property>
+
+   <property>
+       <name>javax.jdo.option.ConnectionDriverName</name>
+       <value>{{.javax_jdo_option_ConnectionDriverName}}</value>
+   </property>
+
+   <property>
+       <name>javax.jdo.option.ConnectionUserName</name>
+       <value>{{.mysql_user}}</value>
+   </property>
+
+   <property>
+       <name>javax.jdo.option.ConnectionPassword</name>
+       <value>{{.mysql_password}}</value>
+   </property>
+
+   <property>
+       <name>hive.metastore.warehouse.dir</name>
+       <value>{{.warehouse_dir}}</value>
+   </property>
+
+   <property>
+       <name>hive.exec.scratchdir</name>
+       <value>{{.scratchdir}}</value>
+   </property>
+
+    <property>
+       <name>hive.reloadable.aux.jars.path</name>
+       <value>{{.jars_path}}</value>
+    </property>
+
+   <property>
+       <name>datanucleus.schema.autoCreateAll</name>
+       <value>{{.datanucleus_schema_autoCreateAll}}</value>
+       <description>creates necessary schema on a startup if one doesn't exist. set this to false, after creating it once</description>
+   </property>
+
+   <property>  
+       <name>hive.metastore.schema.verification</name>  
+       <value>{{.hive_metastore_schema_verification}}</value>
+   </property> 
+
+   <property>
+       <name>hive.exec.dynamic.partition</name>
+       <value>{{.hive_exec_dynamic_partition}}</value>
+   </property>
+   
+   <property>
+       <name>hive.exec.dynamic.partition.mode</name>
+       <value>{{.hive_exec_dynamic_partition_mode}}</value>
+   </property>
+    <property>
+         <name>hive.server2.thrift.port</name>
+         <value>{{.hive_server2_thrift_port}}</value>
+    </property>
+
+    <property>
+        <name>hive.server2.webui.host</name>
+        <value>{{.hive_server2_webui_host}}</value>
+    </property>
+
+    <property>
+        <name>hive.server2.webui.port</name>
+        <value>{{.hive_server2_webui_port}}</value>
+    </property>
+
+  <property>
+     <name>hive.server2.support.dynamic.service.discovery</name>
+     <value>{{.hive_server2_support_dynamic_service_discovery}}</value>
+  </property>
+
+   <property>
+     <name>hive.server2.zookeeper.namespace</name>
+     <value>{{.hive_server2_zookeeper_namespace}}</value>
+  </property>
+
+  <property>
+     <name>hive.zookeeper.quorum</name>
+     <value>{{.Joinx "zk_ip" "," ":" $.zk_port}}</value>
+  </property>
+
+   <property>
+       <name>hive.server2.thrift.min.worker.threads</name>
+       <value>{{.hive_server2_thrift_min_worker_threads}}</value>
+   </property>
+
+   <property>
+       <name>hive.server2.async.exec.threads</name>
+       <value>{{.hive_server2_async_exec_threads}}</value>
+   </property>
+
+   <property>
+       <name>hive.server2.idle.session.timeout</name>
+       <value>{{.hive_server2_idle_session_timeout}}</value>
+   </property>
+
+   <property>
+       <name>hive.server2.session.check.interval</name>
+       <value>{{.hive_server2_session_check_interval}}</value>
+   </property>
+
+   <property>
+       <name>hive.server2.enable.doAs</name>
+       <value>{{.hive_server2_enable_doAs}}</value>
+   </property>
+
+
+
+
+
+
+
+
+
+    <property>
+        <name>hive.merge.mapfile</name>
+        <value>{{.hive_merge_mapfile}}</value>
+    </property>
+
+
+    <property>
+        <name>hive.merge.size.per.task</name>
+        <value>{{.hive_merge_size_per_task}}</value>
+    </property>
+
+    <property>
+        <name>hive.mapjoin.localtask.max.memory.usage</name>
+        <value>{{.hive_mapjoin_localtask_max_memory_usage}}</value>
+    </property>
+    <property>
+        <name>hive.mapjoin.smalltable.filesize</name>
+        <value>{{.hive_mapjoin_smalltable_filesize}}</value>
+    </property>
+    <property>
+        <name>hive.mapjoin.followby.gby.localtask.max.memory.usage</name>
+        <value>{{.hive_mapjoin_followby_gby_localtask_max_memory_usage}}</value>
+    </property>
+    <property>
+        <name>hive.merge.mapredfiles</name>
+        <value>{{.hive_merge_mapredfiles}}</value>
+    </property>
+    <property>
+        <name>hive.exec.max.dynamic.partitions.pernode</name>
+        <value>{{.hive_exec_max_dynamic_partitions_pernode}}</value>
+    </property>
+    <property>
+        <name>hive.exec.max.dynamic.partitions</name>
+        <value>{{.hive_exec_max_dynamic_partitions}}</value>
+    </property>
+    <property>
+        <name>hive.metastore.server.max.threads</name>
+        <value>{{.hive_metastore_server_max_threads}}</value>
+    </property>
+    <property>
+        <name>hive.metastore.server.min.threads</name>
+        <value>{{.hive_metastore_server_min_threads}}</value>
+    </property>
+    <property>
+        <name>mapred.reduce.tasks</name>
+        <value>{{.mapred_reduce_tasks}}</value>
+    </property>
+    <property>
+        <name>hive.exec.reducers.bytes.per.reducer</name>
+        <value>{{.hive_exec_reducers_bytes_per_reducer}}</value>
+    </property>
+    <property>
+        <name>hive.exec.reducers.max</name>
+        <value>{{.hive_exec_reducers_max}}</value>
+    </property>
+    <property>
+        <name>hive.auto.convert.join.noconditionaltask.size</name>
+        <value>{{.hive_auto_convert_join_noconditionaltask_size}}</value>
+    </property>
+
+    <property>
+        <name>spark.executor.cores</name>
+        <value>{{.spark_executor_cores}}</value>
+    </property>
+
+    <property>
+        <name>spark.executor.memory</name>
+        <value>{{.spark_executor_memory}}</value>
+    </property>
+
+    <property>
+        <name>spark.driver.memory</name>
+        <value>{{.spark_driver_memory}}</value>
+    </property>
+
+    <property>
+        <name>spark.yarn.driver.memoryOverhead</name>
+        <value>{{.spark_yarn_driver_memoryOverhead}}</value>
+    </property>
+
+    <property>
+        <name>spark.yarn.executor.memoryOverhead</name>
+        <value>{{.spark_yarn_executor_memoryOverhead}}</value>
+    </property>
+    <property>
+        <name>hive.map.aggr</name>
+        <value>{{.hive_map_aggr}}</value>
+    </property>
+    <property>
+        <name>hive.map.aggr.hash.percentmemory</name>
+        <value>{{.hive_map_aggr_hash_percentmemory}}</value>
+    </property>
+
+    <property>
+        <name>hive.merge.sparkfiles</name>
+        <value>{{.hive_merge_sparkfiles}}</value>
+    </property>
+    <property>
+        <name>hive.merge.smallfiles.avgsize</name>
+        <value>{{.hive_merge_smallfiles_avgsize}}</value>
+    </property>
+    <property>
+        <name>hive.fetch.task.conversion</name>
+        <value>{{.hive_fetch_task_conversion}}</value>
+    </property>
+
+    <property>
+        <name>hive.fetch.task.conversion.threshold</name>
+        <value>{{.hive_fetch_task_conversion_threshold}}</value>
+    </property>
+
+    <property>
+        <name>hive.metastore.client.socket.timeout</name>
+        <value>{{.hive_metastore_client_socket_timeout}}</value>
+    </property>
+
+    <property>
+        <name>hive.server2.idle.operation.timeout</name>
+        <value>{{.hive_server2_idle_operation_timeout}}</value>
+    </property>
+
+    <property>
+        <name>hive.server2.idle.session.timeout</name>
+        <value>{{.hive_server2_idle_session_timeout}}</value>
+    </property>
+    <property>
+        <name>hive.server2.idle.session.check.operation</name>
+        <value>{{.hive_server2_idle_session_check_operation}}</value>
+    </property>
+    <property>
+        <name>hive.server2.webui.max.threads</name>
+        <value>{{.hive_server2_webui_max_threads}}</value>
+    </property>
+    <property>
+        <name>hive.metastore.connect.retries</name>
+        <value>{{.hive_metastore_connect_retries}}</value>
+    </property>
+
+
+
+
+
+
+
+
+
+</configuration>

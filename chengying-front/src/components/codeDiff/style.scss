@@ -1,0 +1,48 @@
+.code-diff__wrapper {
+
+  .ant-modal-body {
+    padding-bottom: 0;
+    .ant-layout-content {
+      height: 538px;
+      overflow-y: hidden;
+    }
+  }
+  
+  .ace-title {
+    display: flex;
+    .title {
+      flex: 1;
+      background: #fff;
+      padding: 10px;
+      border: 1px solid #f0f0f0;
+      border-right: 0;
+      &:first-child {
+        margin-right: -31px;
+      }
+    }
+  }
+  
+
+  #UNIQUE_ID_OF_DIV {
+    .ace-github {
+      .ace_gutter {
+        background: #fafafa;
+        color: rgba(0,0,0,0.3);
+        border: 1px solid #f0f0f0;
+        border-top: 0;
+      }
+      
+      .codeMarker {
+        background: #fbe9eb;
+        position: absolute;
+        z-index: 20;
+      }
+      
+      &:last-child {
+        .codeMarker {
+          background: #ecfdf0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: easy-agent-server
+  name: easy-agent-server
+  namespace: {{.NameSpace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: easy-agent-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: easy-agent-server
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      initContainers:
+      - command: ["/bin/sh","-c","until curl -m5 -s matrix:8864;do echo waiting for matrix start;sleep 5;done;"]
+        image: {{.Registory}}/initcontainer:v1
+        imagePullPolicy: IfNotPresent
+        name: initcontainer
+      containers:
+      - image: {{.Registory}}/{{.EmAgentServerImage}}
+        imagePullPolicy: Always
+        name: easy-agent-server
+        env:
+        - name: MATRIX_HOST
+          value: {{.MatrixIP}}:{{.MatrixPort}}
+        - name: RPC_PORT
+          value: "{{.AgentServerRPCPort}}"
+        ports:
+        - containerPort: 8889
+          name: api
+          protocol: TCP
+        - containerPort: 8890
+          name: rcp
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /easy-agent-server/easyagent
+          name: data
+          subPath: matrixdata
+        - mountPath: /etc/localtime
+          name: localtime
+          readOnly: true
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+         claimName: empvc-emdb
+      - name: localtime
+        hostPath:
+          path: /etc/localtime

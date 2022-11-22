@@ -1,0 +1,54 @@
+.backup-page {
+  padding: 20px;
+  .top-navbar {
+      .tag-filter {
+          float: left;
+          min-width: 365px;
+          .filter-title {
+              float: left;
+              width: 64px;
+              height: 32px;
+              font-size: 14px;
+              color: #8c8c8c;
+              line-height: 28px;
+              text-align: center;
+              background: #fafafa;
+              border-right: 1px solid #e8e8e8;
+              border-radius: 4px 0px 0px 4px;
+          }
+          .ant-select-selection {
+              border-top-left-radius: 0;
+              border-bottom-left-radius: 0;
+          }
+      }
+      .ant-form-item-label,
+      .ant-form-item-control {
+          line-height: 32px;
+      }
+  }
+  .log_table {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    bottom: 20px;
+    right: 20px;
+    .ant-spin-nested-loading {
+        background-color: #fff;
+    }
+    .batch-delete{
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      cursor: pointer;
+      z-index: 100;
+      width: 150px;
+    }
+    .ant-table-thead>tr>th, .ant-table-tbody>tr>td{
+      padding-left: 20px;
+    }
+    .ant-table-wrapper .ant-spin-container > .ant-table-pagination{
+      height: 55px;
+      line-height: 55px;
+    }
+  }
+}

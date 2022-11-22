@@ -1,0 +1,3 @@
+hbase_pkg=1.3.5
+hbase_master=1.3.5
+hbase_regionserver=1.3.5

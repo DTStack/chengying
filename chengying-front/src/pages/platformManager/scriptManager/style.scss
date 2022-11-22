@@ -1,0 +1,90 @@
+.scriptManager{
+    height: calc(100vh - 88px);
+    overflow: hidden;
+    margin: 27px 20px 0 20px;
+    .ant-table-placeholder{
+      border-bottom: none !important;
+    }
+    .card-box{
+      height: 100%;
+      padding: 0 !important;
+    }
+    .scriptManager-nav{
+        display: flex;
+        height: 45px;
+        justify-content: space-between;
+        padding-bottom: 20px;
+    }
+    .btnList{
+      display: flex;
+      .ant-btn {
+        padding: 7px 10px !important;
+      }
+      .ant-btn:first-child {
+        padding-left: 0 !important;
+      }
+    }
+    .scriptManage-uploadBox{
+      display: flex;
+    }
+    .tableLine{
+        width: 1px;
+        height: 32px;
+        span{
+            width: 1px;
+            display: inline-block;
+            background: #3F87FF;
+            height: 12px;
+            margin-top: 10px;
+        }
+    }
+    .tabFooter{
+        display: flex;
+        height: 55px;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-top: 1px solid #e8e8e8;
+    }
+}
+.ace-code-portal {
+    width: 458px;
+    max-height: calc(100vh - 300px);
+    margin: 0 auto;
+    background-color: transparent;
+    border-radius: 2px;
+    border: 1px solid #DDDDDD;
+    .ace-kuroir .ace_print-margin {
+      width: 0;
+    }
+    .ace-kuroir .ace_gutter,
+    .ace-kuroir {
+      background-color: #f5f5f5;
+    }
+    .ace-kuroir .ace_gutter-active-line,
+    .ace-kuroir .ace_marker-layer .ace_active-line {
+      background-color: #f5f5f5;
+      border-bottom: 1px solid #ececec;
+      border-top: 1px solid #ececec;
+    }
+    .ace-kuroir .ace_marker-layer .ace_selection {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+    // 只读
+    .ace_scroller {
+        cursor: not-allowed;
+    }
+    .ace_content{
+      padding: 10px;
+    }
+  }
+  .desBox{
+    display: flex;
+    margin-bottom: 20px;
+    .desBox-title{
+      flex: 0 0 60px;
+    }
+    .desBox-content{
+      flex: 1;
+      word-break: break-all;
+    }
+  }

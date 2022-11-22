@@ -1,0 +1,8 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: emlocal-storage
+  namespace: {{.NameSpace}}
+provisioner: {{.StorageProvide}}
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain

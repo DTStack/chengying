@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8889"
+  name: easy-agent-server
+  namespace: {{.NameSpace}}
+  labels:
+    app: easy-agent-server
+spec:
+  type: NodePort
+  ports:
+  - port: 8889
+    targetPort: 8889
+    nodePort: {{.AgentServerPort}}
+    name: tcp
+  - port: 8890
+    targetPort: 8890
+    nodePort: {{.AgentServerRPCPort}}
+    name: rpc
+  selector:
+    app: easy-agent-server

@@ -1,0 +1,197 @@
+@import "../../../public/styles/const.scss";
+
+.root-layout {
+  .root-nav {
+    position: fixed;
+    z-index: 101;
+    width: 100%;
+    background-color: #161926 !important;
+    height: $first_nav_height;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    
+    .dt-header-log-wrapper {
+      width: 175px;
+      height: inherit;
+      & > img {
+        height: 28px;
+      }
+      .dt-header-logo-name {
+        color: #ffffff;
+        padding-left: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: HelveticaNeue-Bold, HelveticaNeue;
+        line-height: 48px;
+      }
+    }
+
+    .ant-dropdown-trigger {
+      color: white;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      flex: 1;
+
+      .header-ops-namespace {
+        display: inline-block;
+        width: 180px;
+        height: 48px;
+        line-height: 48px;
+        padding: 0 20px;
+        color: #fff;
+        .anticon-down {
+          font-size: 12px;
+          vertical-align: 17px;
+        }
+      }
+
+      .ant-menu {
+        height: $first_nav_height;
+        flex: 1;
+        .anticon,
+        .emicon {
+          margin-right: 3px;
+        }
+        .emicon {
+          font-size: 18px;
+          vertical-align: -1px;
+        }
+        &.ant-menu-horizontal {
+          line-height: $first_nav_height;
+        }
+
+        .ant-menu-item,
+        .ant-menu-submenu-title {
+          height: $first_nav_height;
+          padding: 0 20px;
+          background-color: #161926;
+          color: #fff;
+          a {
+            height: $first_nav_height;
+            line-height: $first_nav_height;
+            color: white;
+          }
+        }
+        .ant-menu-item.ant-menu-item-active,
+        .ant-menu-submenu-active > .ant-menu-submenu-title {
+          border-bottom: 3px solid #3f87ff;
+        }
+        .ant-menu-item.ant-menu-item-selected,
+        .ant-menu-submenu-selected > .ant-menu-submenu-title {
+          // background-color: #3f87ff;
+          border-bottom: 3px solid #3f87ff;
+        }
+
+        .custem-badge {
+          .ant-badge-count {
+            // min-width: 15px;
+            max-width: 15px;
+            height: 15px;
+            line-height: 15px;
+            padding: 0;
+            // box-shadow: none;
+            transform: translate(8%, -35%) scale(.83);
+          }
+        }
+      }
+    }
+
+    .nav-setting {
+      height: 48px;
+      line-height: 48px;
+    }
+
+    .dropdown {
+      height: 48px;
+      line-height: 48px;
+      padding: 0 0 0 20px;
+      border-left: 1px solid #161719;
+      &.menu-dropdown {
+        border: 0;
+      }
+    }
+
+    .em-guide {
+      color: #fff;
+    }
+  }
+  .root-attention{
+    position: fixed;
+    top: 48px;
+    left: 200px;
+    z-index: 1000;
+    .service-attention{
+      margin: 0 20px;
+      vertical-align: middle;
+      height: 44px;
+      width: calc(100vw - 240px);
+      background: #FFFBE6;
+      .attention-content{
+        padding-top: 12px;
+      }
+      .attention-title{
+        font-size: 12px;
+        height: 20px;
+        vertical-align: middle;
+      }
+      .red-attention{
+        color: #ff5f5c;
+      }
+      .attention-more{
+        display: inline-block;
+        width: calc(100vw - 281px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    .service-content{
+      padding: 20px 0 0 20px;
+    }
+  }
+  .root-content {
+    // margin-top: $first_nav_height;
+    position: relative;
+    &.has-alert__gobal {
+      margin-top: 30px;
+    }
+  }
+}
+.root-drop {
+  li {
+    font-size: 14px !important;
+    padding-left: 20px;
+    a {
+      font-size: 14px;
+    }
+  }
+}
+
+.ant-menu-submenu-popup.submenu-child-style {
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #3f87ff;
+  }
+  .ant-menu-vertical {
+    .ant-menu-item {
+      height: 32px;
+      line-height: 32px;
+      padding: 0 16px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      & > a {
+        color: #fff;
+      }
+      &:not(:last-child) {
+        margin-bottom: 0;
+      }
+      &:hover {
+        background-color: #3f87ff;
+      }
+    }
+  }
+}

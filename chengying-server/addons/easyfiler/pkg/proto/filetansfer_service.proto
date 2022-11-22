@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package proto;
+
+service TransferService {
+    rpc Download (DownloadRequest) returns (stream DownloadResponse) {};
+    rpc Preview (PreviewRequest) returns (stream PreviewResponse) {};
+    rpc Upload (stream UploadRequest) returns (UploadResponse) {};
+    rpc List (ListRequest) returns (stream ListResponse) {};
+}
+
+message DownloadRequest {
+    string path = 1;
+}
+
+message DownloadResponse {
+    bytes data = 1;
+}
+
+message PreviewRequest {
+    string path = 1;
+    string action = 2;
+}
+
+message PreviewResponse {
+    string logRow = 1;
+    string validity = 2;
+}
+
+message UploadRequest {
+    string fileName = 1;
+    bytes data = 2;
+}
+
+message UploadResponse {
+    bool finished = 1;
+    string fileHash = 2;
+}
+
+message ListRequest {
+    string suffix = 1;
+}
+
+message ListResponse {
+    string name = 1;
+    int64 size = 2;
+    uint32 mode = 3;
+    string validity = 4;
+}

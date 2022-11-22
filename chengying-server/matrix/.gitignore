@@ -1,0 +1,14 @@
+build/*
+matrix
+matrix.exe
+.*.swp
+.DS_*
+.idea
+environment_init.sh
+easyagent/
+mero/*.tar
+logs/
+delve
+172.16.20.2-config.yml
+build.sh
+dev-config.yml

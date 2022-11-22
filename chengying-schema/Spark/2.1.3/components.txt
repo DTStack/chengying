@@ -1,0 +1,5 @@
+spark_pkg=2.1.3
+thriftserver=2.1.3
+spark_historyserver=2.1.3
+haproxy=1.9.9
+

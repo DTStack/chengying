@@ -1,0 +1,53 @@
+{
+  "name": "jsencrypt",
+  "version": "3.1.5",
+  "description": "A Javascript library to perform OpenSSL RSA Encryption, Decryption, and Key Generation.",
+  "main": "bin/jsencrypt.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.2.3",
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "scripts": {
+    "build:dev": "tsc && tsc --project tsconfig-def.json && webpack",
+    "build:prod": "tsc && tsc --project tsconfig-def.json && webpack --config webpack.prod.js",
+    "build": "npm run build:dev && npm run build:prod",
+    "serve": "bundle exec jekyll server --config _config.build.yml",
+    "publish": "npm publish"
+  },
+  "author": "Travis Tidwell <travis@form.io>",
+  "publishConfig": {
+    "registry": "http://registry.npm.dtstack.com"
+  },
+  "contributors": [
+    {
+      "name": "Travis Tidwell",
+      "email": "travis@form.io",
+      "url": "http://github.com/travist"
+    },
+    {
+      "name": "Antonio",
+      "url": "https://github.com/zoloft"
+    },
+    {
+      "name": "Julio",
+      "url": "https://github.com/jmgaya"
+    }
+  ],
+  "homepage": "http://registry.npm.dtstack.com/-/web/detail/jsencrypt",
+  "repository": {
+    "type": "git",
+    "url": "git://gitlab.prod.dtstack.cn/ko/jsencrypt.git"
+  },
+  "bugs": {
+    "url": "http://gitlab.prod.dtstack.cn/ko/jsencrypt/issues"
+  },
+  "license": "MIT"
+}

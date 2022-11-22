@@ -1,0 +1,464 @@
+<?xml version="1.0"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+<configuration>
+
+    <property>
+        <name>yarn.resourcemanager.cluster-id</name>
+        <value>{{.yarn_resourcemanager_cluster_id}}</value>
+    </property>
+
+    <property> 
+   	<name>yarn.resourcemanager.ha.enabled</name> 
+   	<value>{{.yarn_resourcemanager_ha_enabled}}</value>
+    </property>
+    <property>
+    	<name>yarn.resourcemanager.ha.rm-ids</name>
+	<value>{{.ha_rm_id1}},{{.ha_rm_id2}}</value>
+    </property>
+
+    <property>
+        <name>ha.zookeeper.quorum</name>
+	<value>{{.Joinx "zk_ip" "," ":" $.zk_port}}</value>
+    </property>
+
+    <!--开启自动恢复功能-->
+    <property>
+        <name>yarn.resourcemanager.recovery.enabled</name>
+        <value>{{.yarn_resourcemanager_recovery_enabled}}</value>
+    </property> 
+
+    <!--配置与zookeeper的连接地址-->
+    <property>
+        <name>yarn.resourcemanager.zk-state-store.address</name>
+        <value>{{.Joinx "zk_ip" "," ":" $.zk_port}}</value>
+    </property>
+	
+    <property>
+        <name>yarn.resourcemanager.store.class</name>
+        <value>{{.yarn_resourcemanager_store_class}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.aux-services.mapreduce_shuffle.class</name>
+        <value>{{.yarn_nodemanager_aux_services_mapreduce_shuffle_class}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>{{.yarn_nodemanager_aux_services}}</value>
+    </property>
+
+    <property>
+	<name>yarn.resourcemanager.ha.automatic-failover.enabled</name>
+	<value>{{.yarn_resourcemanager_ha_automatic_failover_enabled}}</value>
+	<description>Enable automatic failover; By default, it is enabled only when HA is enabled.</description>
+    </property>
+
+
+    <property>
+	<name>yarn.resourcemanager.zk-address</name>
+        <value>{{.Joinx "zk_ip" "," ":" $.zk_port}}</value>
+        <description>For multiple zk services, separate them with comma</description>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.minimum-allocation-mb</name>
+        <value>{{.yarn_minmb}}</value>
+    </property>
+
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>{{.yarn_maxmb}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>{{.yarn_nodemanager_vmem_check_enabled}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.vmem-pmem-ratio</name>
+        <value>{{.yarn_nodemanager_vmem_pmem_ratio}}</value>
+        <description>Ratio between virtual memory to physical memory when
+            setting memory limits for containers. Container allocations are
+            expressed in terms of physical memory, and virtual memory usage
+            is allowed to exceed this allocation by this ratio.
+        </description>
+    </property>
+
+    <property>
+	   <name>yarn.nodemanager.pmem-check-enabled</name>
+	   <value>{{.yarn_nodemanager_pmem_check_enabled}}</value>
+    </property>
+    <property>
+	<name>yarn.nodemanager.webapp.address</name>
+      <value>0.0.0.0:{{.yarn_nodemanager_webapp_address}}</value>
+
+    </property>
+
+{{range $i, $ip := .IPList "resourcemanager_ip"}}
+    <property>
+        <name>yarn.resourcemanager.address.{{if eq $i 0}}{{$.ha_rm_id1}}{{else}}{{$.ha_rm_id2}}{{end}}</name>
+        <value>{{$ip}}:{{$.yarn_resourcemanager_address}}</value>
+    </property>
+{{end}}
+
+{{range $i, $ip := .IPList "resourcemanager_ip"}}
+    <property>
+        <name>yarn.resourcemanager.scheduler.address.{{if eq $i 0}}{{$.ha_rm_id1}}{{else}}{{$.ha_rm_id2}}{{end}}</name>
+        <value>{{$ip}}:{{$.yarn_resourcemanager_scheduler_address}}</value>
+    </property>
+{{end}}
+
+{{range $i, $ip := .IPList "resourcemanager_ip"}}
+    <property>
+        <name>yarn.resourcemanager.resource-tracker.address.{{if eq $i 0}}{{$.ha_rm_id1}}{{else}}{{$.ha_rm_id2}}{{end}}</name>
+        <value>{{$ip}}:{{$.yarn_resourcemanager_resource_tracker_address}}</value>
+    </property>
+{{end}}
+
+{{range $i, $ip := .IPList "resourcemanager_ip"}}
+    <property>
+        <name>yarn.resourcemanager.admin.address.{{if eq $i 0}}{{$.ha_rm_id1}}{{else}}{{$.ha_rm_id2}}{{end}}</name>
+        <value>{{$ip}}:{{$.yarn_resourcemanager_admin_address}}</value>
+    </property>
+{{end}}
+
+{{range $i, $ip := .IPList "resourcemanager_ip"}}
+    <property>
+        <name>yarn.resourcemanager.webapp.address.{{if eq $i 0}}{{$.ha_rm_id1}}{{else}}{{$.ha_rm_id2}}{{end}}</name>
+        <value>{{$ip}}:{{$.yarn_resourcemanager_webapp_address}}</value>
+    </property>
+{{end}}
+
+    <property>  
+        <name>yarn.nodemanager.resource.cpu-vcores</name>  
+        <value>{{.cpu_vcores}}</value>  
+    </property>  
+
+    <property>  
+        <name>yarn.nodemanager.resource.memory-mb</name>  
+        <value>{{.memory_mb}}</value>  
+    </property>  
+
+    <property>
+        <name>yarn.client.failover-proxy-provider</name>
+        <value>{{.yarn_client_failover_proxy_provider}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.ha.automatic-failover.zk-base-path</name>
+        <value>{{.yarn_resourcemanager_ha_automatic_failover_zk_base_path}}</value>
+        <description>Optionalsetting.Thedefaultvalueis/yarn-leader-election</description>
+    </property>
+
+    <!---日志相关配置-->
+    <property>
+	  <name>yarn.log-aggregation.retain-check-interval-seconds</name>
+	  <value>{{.yarn_log_aggregation_retain_check_interval_seconds}}</value>
+    </property>
+
+    <property>
+        <name>yarn.log-aggregation-enable</name>
+        <value>{{.yarn_log_aggregation_enable}}</value>
+        <description>default is false</description>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.remote-app-log-dir</name>
+        <value>{{.yarn_nodemanager_remote_app_log_dir}}</value>
+        <description>default is /tmp/logs</description>
+    </property>
+
+    <property>
+        <name>yarn.log-aggregation.retain-seconds</name>
+        <value>{{.yarn_log_aggregation_retain_seconds}}</value>
+        <description>远程日志保存时间单位s</description>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.delete.debug-delay-sec</name>
+        <value>{{.yarn_nodemanager_delete_debug_delay_sec}}</value>
+        <description>application 执行结束后延迟删除本地文件及日志</description>
+    </property>
+    
+    <property>
+        <name>yarn.log.server.url</name>
+       <value>http://{{.jobhistory_ip}}:{{.yarn_log_server_url_port}}/jobhistory/logs/</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.disk-health-checker.enable</name>
+       <value>{{.yarn_nodemanager_disk_health_checker_enable}}</value>
+   </property>
+
+    <property>
+        <name>yarn.nodemanager.disk-health-checker.interval-ms</name>
+       <value>{{.yarn_nodemanager_disk_health_checker_interval_ms}}</value>
+   </property>
+
+  <property>
+     <name>yarn.nodemanager.disk-health-checker.min-healthy-disks</name>
+     <value>{{.disk_min_health_checker}}</value>
+  </property>
+  <property>
+     <name>yarn.nodemanager.disk-health-checker.max-disk-utilization-per-disk-percentage</name>
+     <value>{{.disk_max_per_disk_percentage}}</value>
+  </property>
+
+    <property>
+        <name>yarn.nodemanager.disk-health-checker.min-free-space-per-disk-mb</name>
+        <value>{{.min_free_space_per_disk_mb}}</value>
+    </property>
+
+  <property>
+     <name>yarn.webapp.api-service.enable</name>
+     <value>{{.yarn_webapp_api_service_enable}}</value>
+  </property>
+
+    <property>
+        <name>yarn.nodemanager.localizer.cache.target-size-mb</name>
+        <value>{{.yarn_cache_mb}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.localizer.cache.cleanup.interval-ms</name>
+        <value>{{.yarn_cache_ms}}</value>
+    </property>
+
+    <property>
+        <name>yarn.admin.acl</name>
+        <value>{{.yarn_admin_acl}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.am.max-retries</name>
+        <value>{{.yarn_resourcemanager_am_max_retries}}</value>
+    </property>
+
+    <property>
+        <description>The minimum allocation for every container request at the RM,
+            in terms of virtual CPU cores. Requests lower than this will throw a
+            InvalidResourceRequestException.</description>
+        <name>yarn.scheduler.minimum-allocation-vcores</name>
+        <value>{{.yarn_scheduler_minimum_allocation_vcores}}</value>
+    </property>
+
+    <property>
+        <description>The maximum allocation for every container request at the RM,
+            in terms of virtual CPU cores. Requests higher than this will throw a
+            InvalidResourceRequestException.</description>
+        <name>yarn.scheduler.maximum-allocation-vcores</name>
+        <value>{{.yarn_scheduler_maximum_allocation_vcores}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>{{.yarn_resourcemanager_scheduler_class}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.max-completed-applications</name>
+        <value>{{.yarn_resourcemanager_max_completed_applications}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>{{.yarn_nodemanager_env_whitelist}}</value>
+    </property>
+
+
+    <property>
+        <name>yarn.nodemanager.log.retain-seconds</name>
+        <value>{{.yarn_nodemanager_log_retain_seconds}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.remote-app-log-dir-suffix</name>
+        <value>{{.yarn_nodemanager_remote_app_log_dir_suffix}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.log-aggregation.compression-type</name>
+        <value>{{.yarn_nodemanager_log_aggregation_compression_type}}</value>
+    </property>
+
+    <property>
+        <name>mapreduce.job.hdfs-servers</name>
+        <value>${fs.defaultFS}</value>
+    </property>
+
+    <property>
+        <name>yarn.app.mapreduce.am.job.task.listener.thread-count</name>
+        <value>{{.yarn_app_mapreduce_am_job_task_listener_thread_count}}</value>
+    </property>
+
+    <property>
+        <name>yarn.app.mapreduce.am.job.client.port-range</name>
+        <value>{{.yarn_app_mapreduce_am_job_client_port_range}}</value>
+    </property>
+
+    <property>
+        <name>yarn.app.mapreduce.am.job.committer.cancel-timeout</name>
+        <value>{{.yarn_app_mapreduce_am_job_committer_cancel_timeout}}</value>
+    </property>
+
+    <property>
+        <name>yarn.app.mapreduce.am.scheduler.heartbeat.interval-ms</name>
+        <value>{{.yarn_app_mapreduce_am_scheduler_heartbeat_interval_ms}}</value>
+    </property>
+
+    <property>
+        <name>yarn.app.mapreduce.client-am.ipc.max-retries</name>
+        <value>{{.yarn_app_mapreduce_client_am_ipc_max_retries}}</value>
+    </property>
+
+    <property>
+        <name>yarn.app.mapreduce.client.max-retries</name>
+        <value>{{.yarn_app_mapreduce_client_max_retries}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.client.thread-count</name>
+        <value>{{.yarn_resourcemanager_client_thread_count}}</value>
+    </property>
+
+    <property>
+        <name>yarn.am.liveness-monitor.expiry-interval-ms</name>
+        <value>{{.yarn_am_liveness_monitor_expiry_interval_ms}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.scheduler.client.thread-count</name>
+        <value>{{.yarn_resourcemanager_scheduler_client_thread_count}}</value>
+    </property>
+
+    <property>
+        <name>yarn.acl.enable</name>
+        <value>{{.yarn_acl_enable}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.admin.client.thread-count</name>
+        <value>{{.yarn_resourcemanager_admin_client_thread_count}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.amliveliness-monitor.interval-ms</name>
+        <value>{{.yarn_resourcemanager_amliveliness_monitor_interval_ms}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.container.liveness-monitor.interval-ms</name>
+        <value>{{.yarn_resourcemanager_container_liveness_monitor_interval_ms}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nm.liveness-monitor.expiry-interval-ms</name>
+        <value>{{.yarn_nm_liveness_monitor_expiry_interval_ms}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.nm.liveness-monitor.interval-ms</name>
+        <value>{{.yarn_resourcemanager_nm_liveness_monitor_interval_ms}}</value>
+    </property>
+
+    <property>
+        <name>yarn.resourcemanager.resource-tracker.client.thread-count</name>
+        <value>{{.yarn_resourcemanager_resource_tracker_client_thread_count}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.container-manager.thread-count</name>
+        <value>{{.yarn_nodemanager_container_manager_thread_count}}</value>
+    </property>
+
+
+  <!-- cgroup -->
+    <property>
+        <name>yarn.nodemanager.container-executor.class</name>
+     {{if eq (print .isCgroup) "false" }}
+        <value>org.apache.hadoop.yarn.server.nodemanager.DefaultContainerExecutor</value>
+     {{else}}
+        <value>org.apache.hadoop.yarn.server.nodemanager.LinuxContainerExecutor</value>
+     {{end}}
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.delete.thread-count</name>
+        <value>{{.yarn_nodemanager_delete_thread_count}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.linux-container-executor.group</name>
+        <value>{{.yarn_nodemanager_linux_container_executor_group}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.linux-container-executor.resources-handler.class</name>
+    {{if eq (print .isCgroup) "false" }}
+        <value>org.apache.hadoop.yarn.server.nodemanager.util.DefaultLCEResourcesHandler</value>
+    {{else}}
+        <value>org.apache.hadoop.yarn.server.nodemanager.util.CgroupsLCEResourcesHandler</value>
+    {{end}}
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.linux-container-executor.cgroups.hierarchy</name>
+        <value>{{.yarn_nodemanager_linux_container_executor_cgroups_hierarchy}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.linux-container-executor.cgroups.mount</name>
+        <value>{{.yarn_nodemanager_linux_container_executor_cgroups_mount}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.linux-container-executor.cgroups.mount-path</name>
+        <value>{{.yarn_nodemanager_linux_container_executor_cgroups_mount_path}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.resource.percentage-physical-cpu-limit</name>
+        <value>{{.yarn_nodemanager_resource_percentage_physical_cpu_limit}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.linux-container-executor.cgroups.strict-resource-usage</name>
+        <value>{{.yarn_nodemanager_linux_container_executor_cgroups_strict_resource_usage}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.resource.count-logical-processors-as-cores</name>
+        <value>{{.yarn_nodemanager_resource_count_logical_processors_as_cores}}</value>
+    </property>
+
+    <property>
+        <description>The UNIX user that containers will run as when
+            Linux-container-executor is used in nonsecure mode (a use case for this
+            is using cgroups) if the
+            yarn.nodemanager.linux-container-executor.nonsecure-mode.limit-users is
+            set to true.</description>
+        <name>yarn.nodemanager.linux-container-executor.nonsecure-mode.local-user</name>
+        <value>{{.yarn_nodemanager_linux_container_executor_nonsecure_mode_local_use}}</value>
+    </property>
+
+    <property>
+        <name>yarn.nodemanager.linux-container-executor.nonsecure-mode.limit-users</name>
+        <value>{{.yarn_nodemanager_linux_container_executor_nonsecure_mode_limit_users}}</value>
+    </property>
+
+</configuration>
+

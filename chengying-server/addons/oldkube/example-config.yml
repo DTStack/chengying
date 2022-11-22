@@ -1,0 +1,9 @@
+# logger
+log.dir: /tmp/oldkube
+log.max-logger-size: 100
+log.max-logger-backups: 3
+log.days-to-keep: 1
+
+# api
+api.port: 8899
+api.host:

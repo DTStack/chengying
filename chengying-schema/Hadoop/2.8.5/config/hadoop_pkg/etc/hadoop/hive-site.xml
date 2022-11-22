@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+   <property>
+       <name>javax.jdo.option.ConnectionURL</name>
+       <value>jdbc:mysql://{{.mysql_ip}}:{{.mysql_port}}/{{.mysql_db}}?createDatabaseIfNotExist=true</value>
+   </property>
+
+   <property>
+        <name>hive.metastore.uris</name>
+        <value>thrift://{{.Joinx "hive_ip" ",thrift://" ":9083"}}</value>
+        <description>A comma separated list of metastore uris on which metastore service is running</description>
+   </property>
+   <property>
+         <name>hive.cluster.delegation.token.store.class</name>
+         <value>org.apache.hadoop.hive.thrift.MemoryTokenStore</value>
+         <description>Hive defaults to MemoryTokenStore, or ZooKeeperTokenStore</description>
+  </property>
+
+
+   <property>
+       <name>javax.jdo.option.ConnectionDriverName</name>
+       <value>com.mysql.jdbc.Driver</value>
+   </property>
+
+   <property>
+       <name>javax.jdo.option.ConnectionUserName</name>
+       <value>{{.mysql_user}}</value>
+   </property>
+
+   <property>
+       <name>javax.jdo.option.ConnectionPassword</name>
+       <value>{{.mysql_password}}</value>
+   </property>
+
+   <property>
+       <name>hive.metastore.warehouse.dir</name>
+       <value>{{.warehouse_dir}}</value>
+   </property>
+
+   <property>
+       <name>hive.exec.scratchdir</name>
+       <value>{{.scratchdir}}</value>
+   </property>
+
+   <property>
+       <name>datanucleus.schema.autoCreateAll</name>
+       <value>true</value>
+       <description>creates necessary schema on a startup if one doesn't exist. set this to false, after creating it once</description>
+   </property>
+
+   <property>  
+       <name>hive.metastore.schema.verification</name>  
+       <value>false</value>
+   </property> 
+
+   <property>
+       <name>hive.exec.dynamic.partition</name>
+       <value>true</value>
+   </property>
+   
+   <property>
+       <name>hive.exec.dynamic.partition.mode</name>
+       <value>nonstrict</value>
+   </property>
+    {{.yarn_edit_text}}
+</configuration>

@@ -1,0 +1,175 @@
+.cluster-header {
+    margin-left: 21px;
+    margin-top: 20px;
+    position: relative;
+    height: 32px;
+
+    .button-setting {
+        width: auto;
+        position: absolute;
+        right: 20px;
+        
+        button.ant-btn {
+            margin-left: 12px;
+        }
+    }
+
+    .ant-select-selection.ant-select-selection--single {
+        width: 340px;
+    }
+    .spanLeft{
+        margin-right: 6px;
+    }
+
+}
+
+.inspection-report-mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: auto;
+    outline: 0;
+    background-color: rgba(255,255,255,.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+.clusterContent {
+    margin-top: 35px;
+    margin-left: 20px;
+    margin-right: 20px;
+    overflow: auto;
+    height: calc(100vh - 160px);
+    background-color: #FAFAFA;
+
+    .serviceBox{
+        width: 260px;
+        height: 60px;
+        display: flex;
+        .iconLeft{
+            width: 60px;
+            height: 60px;
+            background: #E2EDFF;
+            border-radius: 0px 4px 4px 0px;
+            line-height: 60px;
+            text-align: center;
+            i{
+               font-size: 34px; 
+               color: #3F87FF;
+            }
+        }
+        .iconRight{
+            line-height: 60px;
+            height: 22px;
+            font-size: 16px;
+            font-weight: 400;
+            color: #333333;
+            padding-left: 12px;
+        }
+    }
+
+    .chartList{
+        background-color: #FAFAFA;
+        .chartList-title{
+            padding: 12px;
+            height: 17px;
+            font-size: 12px;
+            color: #333333;
+            font-weight: 500;
+        }
+        .chartList-sutitle{
+            font-size: 12px;
+            font-weight: 400;
+            color: #333333;
+            padding: 12px 12px 3px 12px;
+            margin-left: 20px;
+        }
+        .formItem-box{
+            padding: 12px;
+            display: flex;
+            width: 100%;
+            margin-top: 10px;
+            .formItem-box-item{
+                margin-right: 12px;
+                width: 20%;
+                .formItem-box-itemTop{
+                    padding-top: 3px;
+                    color: rgba(0,0,0,.65);
+                    font-size: 12px;
+                }
+                .formItem-box-itemBottom{
+                    margin-top: 12px;
+                    height: 50px;
+                    border: 1px solid #E8E8E8;
+                    font-size: 22px;
+                    text-align: center;
+                    line-height: 50px;
+                    border-radius: 4px;
+                    color: rgba(0,0,0,.65);
+                }
+            }
+        }
+    }
+
+    .ant-descriptions-item-content {
+        font-size: 16px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #333333;
+        line-height: 22px;
+
+        span {
+            display: block;
+        }
+    }
+
+    .formItem-title {
+        margin-top: 20px;
+        height: 15px;
+        border-left: 4px solid #3F87FF;
+        padding-left: 8px;
+    }
+
+    .IndicatorsSummary {
+        margin-top: 20px;
+        margin-left: 26px;
+
+        .ant-descriptions-item-content {
+            display: block;
+            width: 260px;
+            height: 60px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+            img {
+                height: 60px;
+                width: 60px;
+                float: left;
+            }
+
+            span {
+                display: block;
+                padding-top: 19px;
+                padding-left: 72px;
+            }
+        }
+    }
+
+    .tableTitleStyle {
+        margin-top: 20px;
+        margin-left: 12px;
+        margin-bottom: 12px;
+    }
+}
+.moreTable{
+    .moreTable-title{
+        margin-top: 12px;
+        margin-bottom: 12px;
+        font-size: 12px;
+        color:#333333;
+    }
+}

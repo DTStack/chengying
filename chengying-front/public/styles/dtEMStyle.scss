@@ -1,0 +1,75 @@
+//全局微调antd组件样式
+
+body {
+  // table新增
+  .dt-em-table {
+    table {
+      .ant-table-thead {
+        tr {
+          th {
+            padding: 10px 15px;
+          }
+        }
+      }
+
+      .ant-table-tbody {
+        tr {
+          td {
+            padding: 8px 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .dt-em-dropdown-black {
+    .ant-dropdown-menu-item:hover,
+    .ant-dropdown-menu-submenu-title:hover {
+      background-color: #3f87ff;
+    }
+    ul {
+      background-color: #070A1A;
+      min-width: 140px;
+      li {
+        color: white;
+        a {
+          color: white;
+        }
+      }
+    }
+    .ant-dropdown-menu-submenu-title {
+      color: white;
+      .ant-dropdown-menu-submenu-arrow-icon {
+        color: white;
+      }
+    }
+    &.pd-4 {
+      ul {
+        padding: 4px 0;
+      }
+    }
+  }
+
+  .dt-em-dropdown-light {
+    .ant-dropdown-menu-item {
+      font-size: 12px;
+      color: #333;
+    }
+    .ant-dropdown-menu-item:hover,
+    .ant-dropdown-menu-submenu-title:hover {
+      background-color: #f0f8ff;
+      color: #3f87ff;
+    }
+  }
+
+  .dt-em-menu-black {
+    background-color: #202124;
+    li {
+      color: white;
+      &:hover {
+        background-color: #3f87ff;
+        color: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+       Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+  
+    <property>
+    	<name>dfs.replication</name>
+        <value>{{.dfs_replication}}</value>
+    </property>
+
+    <property>
+      <name>dfs.namenode.name.dir</name>
+      <value>{{.name_dir}}</value>
+    </property>
+
+    <property>
+      <name>dfs.datanode.data.dir</name>
+      <value>{{.data_dir}}</value>
+    </property>
+
+    <property>
+	<name>dfs.ha.automatic-failover.enabled</name>
+	<value>{{.dfs_ha_automatic_failover_enabled}}</value>
+    </property>
+
+    <property>
+	<name>dfs.nameservices</name>
+        <value>{{.nameservices}}</value>
+    </property>
+
+    <property>
+        <name>dfs.ha.namenodes.{{.nameservices}}</name>
+        <value>{{.ha_namenode_id1}},{{.ha_namenode_id2}}</value>
+    </property>
+
+{{range $i, $ip := .IPList "namenode_ip"}}
+    <property>
+        <name>dfs.namenode.rpc-address.{{$.nameservices}}.{{if eq $i 0}}{{$.ha_namenode_id1}}{{else}}{{$.ha_namenode_id2}}{{end}}</name>
+        <value>{{$ip}}:{{$.rpc_address_port}}</value>
+    </property>
+{{end}}
+
+{{range $i, $ip := .IPList "namenode_ip"}}
+    <property>
+        <name>dfs.namenode.http-address.{{$.nameservices}}.{{if eq $i 0}}{{$.ha_namenode_id1}}{{else}}{{$.ha_namenode_id2}}{{end}}</name>
+        <value>{{$ip}}:{{$.namenode_http_address_port}}</value>
+    </property>
+{{end}}
+
+    <property>
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://{{.Joinx "journalnode_ip" ";" ":8485"}}/namenode-ha-data</value>
+    </property>
+
+
+    <property>
+        <name>dfs.client.failover.proxy.provider.{{.nameservices}}</name>
+        <value>{{.dfs_client_failover_proxy_provider_nameservices}}</value>
+        <description>指定客户端用于HA切换的代理类，不同的NS可以用不同的代理类
+            以上示例为Hadoop 2.0自带的缺省代理类</description>
+    </property>
+
+    <property>
+    	<name>dfs.journalnode.rpc-address</name>
+    	<value>0.0.0.0:{{.dfs_journalnode_rpc_address}}</value>
+    </property>
+
+    <property>
+    	<name>dfs.journalnode.http-address</name>
+    	<value>0.0.0.0:{{.dfs_journalnode_http_address}}</value>
+    </property>
+
+    <property>
+    	<name>dfs.datanode.http.address</name>
+    	<value>0.0.0.0:{{.dfs_datanode_http_address}}</value>
+    </property>
+
+    <property>
+    	<name>dfs.journalnode.edits.dir</name>
+    	<value>{{.dfs_journalnode_edits_dir}}</value>
+    </property>
+
+    <property>
+        <name>dfs.safemode.threshold.pct</name>
+        <value>{{.dfs_safemode_threshold_pct}}</value>
+    </property>
+
+    <property>
+        <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
+        <value>{{.dfs_namenode_datanode_registration_ip_hostname_check}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.handler.count</name>
+        <value>{{.dfs_namenode_handler_count}}</value>
+    </property>
+    <property>
+        <name>ipc.server.read.threadpool.size</name>
+        <value>{{.ipc_server_read_threadpool_size}}</value>
+    </property>
+
+    <property>
+        <name>dfs.datanode.failed.volumes.tolerated</name>
+        <value>{{.dfs_datanode_failed_volumes_tolerated}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.du.reserved</name>
+        <value>{{.dfs_datanode_du_reserved}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.address</name>
+        <value>0.0.0.0:{{.dfs_datanode_address}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.ipc.address</name>
+        <value>0.0.0.0:{{.dfs_datanode_ipc_address}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir.restore</name>
+        <value>{{.dfs_namenode_name_dir_restore}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.edits.journal-plugin.qjournal</name>
+        <value>{{.dfs_namenode_edits_journal_plugin_qjournal}}</value>
+    </property>
+    <property>
+        <name>dfs.permissions.enabled</name>
+        <value>{{.dfs_permissions_enabled}}</value>
+    </property>
+    <property>
+        <name>dfs.permissions.superusergroup</name>
+        <value>{{.dfs_permissions_superusergroup}}</value>
+    </property>
+    <property>
+        <name>dfs.replication.max</name>
+        <value>{{.dfs_replication_max}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.replication.min</name>
+        <value>{{.dfs_namenode_replication_min}}</value>
+    </property>
+    <property>
+        <name>dfs.blocksize</name>
+        <value>{{.dfs_blocksize}}</value>
+    </property>
+    <property>
+        <name>dfs.client.block.write.retries</name>
+        <value>{{.dfs_client_block_write_retries}}</value>
+    </property>
+    <property>
+        <name>dfs.client.block.write.replace-datanode-on-failure.enable</name>
+        <value>{{.dfs_client_block_write_replace_datanode_on_failure_enable}}</value>
+    </property>
+    <property>
+        <name>dfs.client.block.write.replace-datanode-on-failure.policy</name>
+        <value>{{.dfs_client_block_write_replace_datanode_on_failure_policy}}</value>
+    </property>
+    <property>
+        <name>dfs.heartbeat.interval</name>
+        <value>{{.dfs_heartbeat_interval}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.safemode.threshold-pct</name>
+        <value>{{.dfs_namenode_safemode_threshold_pct}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.safemode.extension</name>
+        <value>{{.dfs_namenode_safemode_extension}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.balance.bandwidthPerSec</name>
+        <value>{{.dfs_datanode_balance_bandwidthPerSec}}</value>
+    </property>
+    <property>
+        <name>dfs.hosts</name>
+        <value>{{.dfs_hosts}}</value>
+    </property>
+    <property>
+        <name>dfs.hosts.exclude</name>
+        <value>{{.dfs_hosts_exclude}}</value>
+    </property>
+    <property>
+        <name>dfs.stream-buffer-size</name>
+        <value>{{.dfs_stream_buffer_size}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.num.extra.edits.retained</name>
+        <value>{{.dfs_namenode_num_extra_edits_retained}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.handler.count</name>
+        <value>{{.dfs_datanode_handler_count}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.support.allow.format</name>
+        <value>{{.dfs_namenode_support_allow_format}}</value>
+    </property>
+    <property>
+        <name>dfs.client.failover.max.attempts</name>
+        <value>{{.dfs_client_failover_max_attempts}}</value>
+    </property>
+    <property>
+        <name>dfs.client.failover.connection.retries</name>
+        <value>{{.dfs_client_failover_connection_retries}}</value>
+    </property>
+    <property>
+        <name>dfs.client.failover.connection.retries.on.timeouts</name>
+        <value>{{.dfs_client_failover_connection_retries_on_timeouts}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.avoid.write.stale.datanode</name>
+        <value>{{.dfs_namenode_avoid_write_stale_datanode}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.write.stale.datanode.ratio</name>
+        <value>{{.dfs_namenode_write_stale_datanode_ratio}}</value>
+    </property>
+    <property>
+        <name>dfs.https.enable</name>
+        <value>{{.dfs_https_enable}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.dns.interface</name>
+        <value>{{.dfs_datanode_dns_interface}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.dns.nameserver</name>
+        <value>{{.dfs_datanode_dns_nameserver}}</value>
+    </property>
+    <property>
+        <name>dfs.default.chunk.view.size</name>
+        <value>{{.dfs_default_chunk_view_size}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.fs-limits.max-component-length</name>
+        <value>{{.dfs_namenode_fs_limits_max_component_length}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.fs-limits.max-directory-items</name>
+        <value>{{.dfs_namenode_fs_limits_max_directory_items}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.fs-limits.min-block-size</name>
+        <value>{{.dfs_namenode_fs_limits_min_block_size}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.fs-limits.max-blocks-per-file</name>
+        <value>{{.dfs_namenode_fs_limits_max_blocks_per_file}}</value>
+    </property>
+    <property>
+        <name>dfs.blockreport.intervalMsec</name>
+        <value>{{.dfs_blockreport_intervalMsec}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.directoryscan.interval</name>
+        <value>{{.dfs_datanode_directoryscan_interval}}</value>
+    </property>
+    <property>
+        <name>dfs.blockreport.initialDelay</name>
+        <value>{{.dfs_blockreport_initialDelay}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.directoryscan.threads</name>
+        <value>{{.dfs_datanode_directoryscan_threads}}</value>
+    </property>
+    <property>
+        <name>dfs.bytes-per-checksum</name>
+        <value>{{.dfs_bytes_per_checksum}}</value>
+    </property>
+    <property>
+        <name>dfs.client-write-packet-size</name>
+        <value>{{.dfs_client_write_packet_size}}</value>
+    </property>
+    <property>
+        <name>dfs.image.compress</name>
+        <value>{{.dfs_image_compress}}</value>
+    </property>
+    <property>
+        <name>dfs.image.compression.codec</name>
+        <value>{{.dfs_image_compression_codec}}</value>
+    </property>
+    <property>
+        <name>dfs.datanode.max.transfer.threads</name>
+        <value>{{.dfs_datanode_max_transfer_threads}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.avoid.read.stale.datanode</name>
+        <value>{{.dfs_namenode_avoid_read_stale_datanode}}</value>
+    </property>
+    <property>
+        <name>dfs.namenode.stale.datanode.interval</name>
+        <value>{{.dfs_namenode_stale_datanode_interval}}</value>
+    </property>
+    <property>
+        <name>dfs.webhdfs.enabled</name>
+        <value>{{.dfs_webhdfs_enabled}}</value>
+    </property>
+    <property>
+        <name>dfs.client.file-block-storage-locations.num-threads</name>
+        <value>{{.dfs_client_file_block_storage_locations_num_threads}}</value>
+    </property>
+
+    <property>
+        <name>dfs.datanode.fsdataset.volume.choosing.policy</name>
+        <value>{{.dfs_datanode_fsdataset_volume_choosing_policy}}</value>
+    </property>
+
+    <property>
+        <name>dfs.blockreport.split.threshold</name>
+        <value>{{.dfs_blockreport_split_threshold}}</value>
+        <description>If the number of blocks on the DataNode is below this
+            threshold then it will send block reports for all Storage Directories
+            in a single message.
+
+            If the number of blocks exceeds this threshold then the DataNode will
+            send block reports for each Storage Directory in separate messages.
+
+            Set to zero to always split.
+        </description>
+    </property>
+
+    {{.hdfs_edit_text}}
+</configuration>
+

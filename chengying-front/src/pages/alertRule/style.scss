@@ -1,0 +1,141 @@
+$ok_color: #12BC6A;
+$pending_color: #f9db13;
+$alerting_color: #ff5f5c;
+$no_data_color: #ffa941;
+$paused_color: #bfbfbf;
+
+.alert-rules-page {
+    font-size: 12px;
+    color: #333;
+    // .ant-table-tbody > tr {
+    //     height: 56px !important;
+    // }
+    .status-icon {
+        width:8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .top-navbar {
+        margin-bottom: 12px;
+        font-size: 12px;
+    }
+
+    .color-ok {
+        background-color: $ok_color;
+    }
+
+    .color-pending {
+        background-color: $pending_color;
+    }
+
+    .color-alerting {
+        background-color: $alerting_color;
+    }
+
+    .color-no-data {
+        background-color: $no_data_color;
+    }
+
+    .color-paused {
+        background-color: $paused_color;
+    }
+
+    // .rule-list {
+    //     .rule-item {
+    //         width: 100%;
+    //         background-color: white;
+    //         height: 60px;
+    //         display: flex;
+    //         justify-content: space-between;
+    //         border-bottom: 1px solid #dddddd;
+    //         &:last-child {
+    //             border-bottom: none;
+    //         }
+
+    //         &:before,
+    //         &:after {
+    //             display: none;
+    //         }
+
+    //         .item-info-box {
+    //             display: flex;
+    //             align-items: center;
+
+    //             .item-state {
+    //                 margin-left: 16px;
+    //                 margin-right: 12px;
+    //                 float: left;
+
+    //                 .emicon {
+    //                     font-size: 27px;
+    //                     line-height: 26px;
+    //                 }
+    //             }
+
+    //             .item-info {
+    //                 width: 400px;
+    //                 height: 100%;
+    //                 display: flex;
+    //                 align-items: flex-start;
+    //                 flex-direction: column;
+    //                 justify-items: center;
+    //                 justify-content: center;
+
+    //                 .item-title {
+    //                     margin-bottom: 5px;
+    //                     a {
+    //                         font-size: 14px;
+    //                         color: #333;
+    //                         letter-spacing: 0;
+    //                         &:hover {
+    //                             color: #2491f7;
+    //                         }
+    //                     }
+    //                 }
+
+    //                 .item-other {
+    //                     .info-state {
+    //                         font-size: 12px;
+    //                         letter-spacing: 0;
+    //                         line-height: 12px;
+    //                         padding-right: 8px;
+    //                     }
+
+    //                     .info-time {
+    //                         font-size: 12px;
+    //                         color: #8c8c8c;
+    //                         letter-spacing: 0;
+    //                         line-height: 12px;
+    //                     }
+    //                 }
+    //             }
+    //         }
+
+    //         .item-option {
+    //             width: 100px;
+    //             height: 27px;
+    //             margin: 18px 0;
+    //             float: right;
+    //             line-height: 30px;
+
+    //             a {
+    //                 display: inline-block;
+    //                 margin: 0 10px;
+    //                 color: #8c8c8c;
+
+    //                 .anticon {
+    //                     font-size: 20px;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+}

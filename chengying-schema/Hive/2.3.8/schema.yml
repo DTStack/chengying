@@ -1,0 +1,157 @@
+parent_product_name: DTHadoop
+product_name: Hive
+product_version: 2.3.8
+
+service:
+  mysql_metastore@Mysql.mysql@optional:
+    config:
+      user: dtstack
+      password: DT@Stack#123
+      port: 3306
+      db: metastore
+  zookeeper@Zookeeper.zookeeper@optional:
+    config:
+      port: 2181
+
+  hdfs_namenode@Hadoop.hdfs_namenode@optional:
+    config:
+      rpc_address_port: 9000
+      nameservices: ns1
+      ha_namenode_id1: nn1
+      ha_namenode_id2: nn2
+
+  hivesql:
+    version: 2.3.8
+    instance:
+      pseudo: true
+      cmd: ./waiting.sh
+      config_paths:
+        - post_deploy.sh
+      post_deploy: ./post_deploy.sh ${mysql_user} ${mysql_password} ${mysql_ip} ${mysql_db}
+    group: hive
+    config:
+      mysql_ip: ${@mysql_metastore}
+      mysql_user: ${mysql_metastore.user}
+      mysql_password: ${mysql_metastore.password}
+      mysql_port: ${mysql_metastore.port}
+      mysql_db: ${mysql_metastore.db}
+      mysql_path: "/opt/dtstack/DTBase/mysql/bin"
+
+  hive_pkg:
+    version: 2.3.8
+    instance:
+      pseudo: true
+      cmd: ./waiting.sh
+      config_paths:
+        - conf/hive-site.xml
+        - conf/hive-env.sh
+      post_deploy: ./post_deploy.sh
+    depends_on:
+    - hivesql
+    config:
+      hive_ip: ${@hivemetastore}
+      mysql_ip: ${@mysql_metastore}
+      mysql_user: ${mysql_metastore.user}
+      mysql_password: ${mysql_metastore.password}
+      mysql_port: ${mysql_metastore.port}
+      mysql_db: ${mysql_metastore.db}
+      zk_ip: ${@zookeeper}
+      zk_port: ${zookeeper.port}
+      rpc_address_port: ${hdfs_namenode.rpc_address_port}
+      nameservices: ${hdfs_namenode.nameservices}
+      ha_namenode_id1: ${hdfs_namenode.ha_namenode_id1}
+      ha_namenode_id2: ${hdfs_namenode.ha_namenode_id2}
+      warehouse_dir: "/dtInsight/hive/warehouse"
+      scratchdir: "/dtInsight/hive/warehouse"
+      jars_path: "/dtInsight/hive/udf"
+      hive_opts: "-Xms2048m -Xmx2048m"
+      hiveserver2_opts: "-Xmx2048m -Xms2048m"
+      hive_cluster_delegation_token_store_class: "org.apache.hadoop.hive.thrift.MemoryTokenStore"
+      datanucleus_schema_autoCreateAll: "true"
+      hive_metastore_schema_verification: "false"
+      hive_exec_dynamic_partition: "true"
+      hive_exec_dynamic_partition_mode: "nonstrict"
+      hive_server2_thrift_port: "10004"
+      hive_server2_webui_port: "10002"
+      hive_server2_webui_host: ${@hiveserver2}
+      hive_server2_support_dynamic_service_discovery: "true"
+      hive_server2_zookeeper_namespace: "hiveserver2"
+      hive_server2_thrift_min_worker_threads: "300"
+      hive_server2_async_exec_threads: "200"
+      hive_server2_idle_session_timeout: "3600000"
+      hive_server2_session_check_interval: "60000"
+      hive_server2_enable_doAs: "false"
+      hive_merge_mapfile: "true"
+      hive_merge_size_per_task: "256000000"
+      hive_mapjoin_localtask_max_memory_usage: "0.9"
+      hive_mapjoin_smalltable_filesize: "25000000L"
+      hive_mapjoin_followby_gby_localtask_max_memory_usage: "0.55"
+      hive_merge_mapredfiles: "false"
+      hive_exec_max_dynamic_partitions_pernode: "100"
+      hive_exec_max_dynamic_partitions: "1000"
+      hive_metastore_server_max_threads: "100000"
+      hive_metastore_server_min_threads: "200"
+      mapred_reduce_tasks: "-1"
+      hive_exec_reducers_bytes_per_reducer: "64000000"
+      hive_exec_reducers_max: "1099"
+      hive_auto_convert_join_noconditionaltask_size: "20000000"
+      spark_executor_cores: "4"
+      spark_executor_memory: "456340275B"
+      spark_driver_memory: "966367641B"
+      spark_yarn_driver_memoryOverhead: "102000000"
+      spark_yarn_executor_memoryOverhead: "76000000"
+      hive_map_aggr: "true"
+      hive_map_aggr_hash_percentmemory: "0.5"
+      hive_merge_sparkfiles: "false"
+      hive_merge_smallfiles_avgsize: "16000000"
+      hive_fetch_task_conversion: "minimal"
+      hive_fetch_task_conversion_threshold: "32000000"
+      hive_metastore_client_socket_timeout: "600s"
+      hive_server2_idle_operation_timeout: "6h"
+      hive_server2_idle_session_check_operation: "true"
+      hive_server2_webui_max_threads: "50"
+      hive_metastore_connect_retries: "10"
+      javax_jdo_option_ConnectionDriverName: "com.mysql.jdbc.Driver"
+      database: "metastore"
+      hive_pkg_ip: ${@hive_pkg}
+
+
+  hivemetastore:
+    version: 2.3.8
+    instance:
+      config_paths:
+      - start_hive.sh
+      cmd: ./start_hive.sh ${hive_opts}
+      healthcheck:
+        shell: bin/healthcheck.sh ${@hivemetastore} 9083
+        period: 20s
+        retries: 3
+      logs:
+        - logs/*
+      prometheus_port: 9506
+    group: hive
+    depends_on:
+    - hive_pkg
+    config:
+      hive_opts: "-Xms2048m -Xmx2048m"
+      hive_meta_logs: "/opt/dtstack/Hive/hivemetastore/logs"
+
+  hiveserver2:
+    version: 2.3.8
+    instance:
+      config_paths:
+      - bin/start_hiveserver2.sh
+      cmd: ./bin/start_hiveserver2.sh ${hiveserver2_opts}
+      healthcheck:
+        shell: bin/healthcheck.sh ${@hiveserver2} 10004
+        period: 20s
+        retries: 3
+      logs:
+        - logs/*
+      prometheus_port: 9611
+    group: hive
+    depends_on:
+    - hivemetastore
+    config:
+      hiveserver2_opts: "-Xmx2048m"
+      hive_logs: "/opt/dtstack/Hive/hiveserver2"

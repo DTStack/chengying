@@ -1,0 +1,7 @@
+#matrix
+matrix:
+  host: 172.16.10.37
+
+#kube
+kube:
+  namespace: "dtstack-system"

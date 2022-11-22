@@ -1,0 +1,77 @@
+parent_product_name: DTinsight
+product_name: DTBatch
+product_version: 4.0
+product_type: kubernetes
+
+service:
+  Console@DTConsole.Console@optional:
+  Engine@DTCommon.Engine@optional:
+  zookeeper@DTBase.zookeeper:
+  prometheus@DTBase.prometheus:
+  pushgateway@DTBase.pushgateway:
+
+  Batch:
+    version: 4.0.1_beta
+    instance:
+      is_deploy_ingress: false
+      deployment:
+        replicas: 2
+      ports:
+        - ${common_web_port}
+      image: easymanager/batch:4.0.1_beta
+      imagePullPolicy: IfNotPresent
+      config_paths:
+      - conf/application.properties
+      - batch/public/config/config.js
+      - batch/public/config/defaultApps.json
+      prometheus_port: 9513
+      environment:
+        BATCH_OPTS: ${batch_opts}
+        HO_HEAP_SIZE: 512m
+        HO_MIN_HEAP_SIZE: 512m
+      healthcheck:
+        shell: ./bin/health.sh ${@Batch} 9020
+        period: 20s
+        retries: 3
+      logs:
+      - logs/*.log
+    group: Batch
+    depends_on:
+    - BatchSql
+    config:
+      mysql_ip: ${@mysql}
+      mysql_user: ${mysql.user}
+      mysql_port: ${mysql.port}
+      mysql_password: ${mysql.password}
+      mysql_metastore_ip: ${@mysql}
+      mysql_metastore_user: ${mysql.user}
+      mysql_metastore_password: ${mysql.password}
+      mysql_metastore_port: ${mysql.port}
+      mysql_metastore_db: ${mysql.db}
+      prometheus_ip: ${@prometheus}
+      prometheus_port: 9090
+      redis_host: ${@redis}
+      redis_password: ${redis.password}
+      redis_db: ${redis.db}
+      tengine_host: ${@tengine}
+      common_web_port: ${tengine.common_web_port}
+      uic_web_port: ${tengine.uic_web_port}
+      internal_uic_web_port: ${tengine.internal_uic_web_port}
+      slb_uic_ip: ${tengine.slb_uic_ip}
+      engine_ip: ${@Engine}
+      ide_ip: ${@Batch}
+      em_ip: 127.0.0.1
+      alertport: 8600
+      batch_opts: "-Xms1024m -Xmx1024m"
+      mail_host: ${tengine.mail_host}
+      mail_port: ${tengine.mail_port}
+      mail_username: ${tengine.mail_username}
+      mail_password: ${tengine.mail_password}
+      mail_from: ${tengine.mail_from}
+      mail_subject: ${tengine.mail_subject}
+      rdos_console_ip: ${@Console}
+      console_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0ZW5hbnRfaWQiOiI3MjQ2IiwidXNlcl9pZCI6IjYzODAiLCJ1c2VyX25hbWUiOiJhZG1pbkBkdHN0YWNrLmNvbSJ9.-qIwwLvd0BOMNeePEwTNG59TmzgFxIRiaCL_VoD--J4"
+      slb_host: ""
+      slb_port: 8191
+      dataQ: "yes"
+      job_submit_threadpool: 10

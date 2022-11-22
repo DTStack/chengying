@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ntpd
+  name: ntpd
+  namespace: {{.NameSpace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ntpd
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: ntpd
+    spec:
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      containers:
+      - image: {{.Registory}}/{{.EmNtpdImage}}
+        imagePullPolicy: IfNotPresent
+        name: ntpd
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 123
+          name: api
+          protocol: UDP

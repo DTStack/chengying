@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: manage-front
+  name: manage-front
+  namespace: {{.NameSpace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: manage-front
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: manage-front
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: {{.Registory}}/{{.EmFrontImage}}
+        imagePullPolicy: Always
+        name: manage-front
+        ports:
+        - containerPort: 80
+          name: web
+          protocol: TCP
+        - containerPort: 8060
+          name: alertport
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: localtime
+          readOnly: true
+        - mountPath: /usr/share/nginx/html/easymanager/config.js
+          name: config-js
+          subPath: config.js
+      volumes:
+      - name: localtime
+        hostPath:
+          path: /etc/localtime
+      - configMap:
+          name: frontconf
+        name: config-js

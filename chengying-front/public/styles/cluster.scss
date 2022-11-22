@@ -1,0 +1,47 @@
+.c-cluster__description {
+  &.ant-descriptions-bordered .ant-descriptions-item-label,
+  &.ant-descriptions-bordered .ant-descriptions-item-content {
+    padding: 12px 20px;
+    word-break: break-all;
+    vertical-align: middle;
+  }
+}
+
+.c-cluster__table {
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding: 0 20px;
+    height: 56px;
+    line-height: 20px;
+    vertical-align: middle;
+  }
+  .ant-table-thead > tr > th {
+    height: 44px;
+  }
+  .ant-table-footer {
+    .ant-btn {
+      line-height: 0px;
+      .emicon-delete {
+        vertical-align: -1px;
+      }
+    }
+  }
+  .ant-table-pagination.ant-pagination {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: unset;
+    z-index: 100;
+    border-top: 0;
+  }
+}
+
+.c-cluster__tag {
+  padding: 0 14px;
+  font-size: 12px;
+  line-height: 22px;
+  background: #f3f5f7;
+  border: 0;
+  border-radius: 2px;
+  margin: 2px 8px 2px 0;
+}

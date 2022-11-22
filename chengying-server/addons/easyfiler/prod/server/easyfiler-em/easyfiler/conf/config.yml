@@ -1,0 +1,19 @@
+# logger
+log.dir: ./logs
+log.max-logger-size: 100
+log.max-logger-backups: 3
+log.days-to-keep: 7
+
+# databases
+mysqldb.host: {{.mysql_ip}}
+mysqldb.port: 3306
+mysqldb.user: {{.mysql_user}}
+mysqldb.password: {{.mysql_password}}
+mysqldb.dbname: vigny
+
+# server
+server.root: /
+server.port: {{.rpc_port}}
+server.withdb: {{.withdb}}
+server.rate: {{.rate}}
+server.isziped: {{.isziped}}

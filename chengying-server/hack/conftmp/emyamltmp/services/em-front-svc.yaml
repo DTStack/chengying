@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: manage-front
+  namespace: {{.NameSpace}}
+  labels:
+    app: manage-front
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: {{.FrontPort}}
+    name: tcp
+  selector:
+    app: manage-front

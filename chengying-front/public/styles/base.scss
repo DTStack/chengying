@@ -1,0 +1,374 @@
+@import "./reset.scss";
+
+@import "./const.scss";
+
+@import "./dtEMStyle.scss";
+
+@import "./cluster.scss";
+
+@import "./antd-reset.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    margin: 0;
+    font-family: Helvetica, "PingFang SC", sans-serif !important;
+    .ant-table {
+        font-family: Helvetica, "PingFang SC", sans-serif !important;
+    }
+}
+
+body {
+    background-color: #f2f7fa !important;
+    font-size: 14px;
+    // overflow: hidden;
+
+    .loading-box {
+        width: 100%;
+        padding-top: 100px;
+        text-align: center;
+    }
+
+    .ant-dropdown-menu-item,
+    .ant-dropdown-menu-submenu-title {
+        font-size: 14px;
+    }
+    .ant-tabs-nav-scroll {
+        box-shadow: 0 2px 4px 0;
+    }
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+        width: 0 !important;
+    }
+}
+
+/*状态圆点*/
+.state-circle {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 8px;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+/*侧边导航Link*/
+.ant-menu-item {
+    text-align: left;
+}
+
+/*侧边导航展开收起menu*/
+.side-nav:first-child {
+    text-align: center;
+    cursor: pointer;
+    .trigger,
+    .anticon {
+        height: 100%;
+        line-height: 42px;
+    }
+}
+
+/*实例宕机的样式*/
+.instance-error {
+    color: #f00;
+}
+
+/*状态的颜色定义*/
+.c-status-normal {
+    color: green;
+}
+.c-status-stop {
+    color: gray;
+}
+.c-status-error {
+    color: red;
+}
+
+/*服务状态，实例状态告警列表*/
+.c-alert-setting {
+    float: right;
+    margin-top: 2px;
+}
+.c-alert-describ {
+    word-break: break-all;
+}
+
+.style-iframe {
+    width: 100%;
+}
+
+.ant-layout {
+    background: #f2f7fa !important;
+}
+.ant-layout-sider {
+    background: #ffffff;
+    .ant-menu-inline {
+        background: #ffffff;
+        // box-shadow: 2px 0 4px 0 rgba(46,57,67,0.10);
+        &.ant-menu-sub {
+            background: #ffffff;
+        }
+    }
+}
+
+/* table组件全局样式 */
+
+//主机列表全局样式
+.host-status-wait-install {
+    color: black;
+}
+.host-status-control-failed {
+    color: #ff5f5c;
+}
+.host-status-control-successed {
+    color: #12BC6A;
+}
+.host-status-script-failed {
+    color: #ff5f5c;
+}
+.host-status-script-successed {
+    color: #12BC6A;
+}
+.host-status-init-failed {
+    color: #ff5f5c;
+}
+.host-status-init-successed {
+    color: #12BC6A;
+}
+
+.absolute-middle {
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.c-title__color {
+    background: rgba(245, 245, 245, 1);
+    position: relative;
+    font-size: 14px;
+    padding-left: 12px;
+    color: #000000;
+    line-height: 32px;
+    &:before {
+        position: absolute;
+        content: "";
+        left: 0px;
+        width: 4px;
+        height: 32px;
+        top: 0;
+        bottom: 0;
+        background: #3f87ff;
+    }
+}
+
+.ant-btn {
+    padding: 7px 22px;
+}
+.ant-btn-sm {
+    padding: 0 7px;
+    line-height: 24px;
+}
+
+.c-text-ellipsis {
+    display: inline-block;
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-cascader-title {
+    width: 125px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+.ml-10 {
+    margin-left: 10px;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}
+.mr-10 {
+    margin-right: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+.ml-20 {
+    margin-left: 20px;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.mr-20 {
+    margin-right: 20px;
+}
+
+.mb-12 {
+    margin-bottom: 12px;
+}
+.mr-8 {
+    margin-right: 8px;
+}
+
+.font-12 {
+    font-size: 12px;
+}
+
+.text-gray {
+    color: #aaa;
+}
+
+.fl-l {
+    float: left;
+}
+
+.fl-r {
+    float: right;
+}
+
+.clearfix {
+    zoom: 1;
+    &:after {
+        content: " ";
+        visibility: hidden;
+        display: block;
+        height: 0;
+        clear: both;
+    }
+}
+
+.text-title-bold {
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.box-shadow-style {
+    box-shadow: 0px 2px 8px 0px rgba(6, 14, 26, 0.08);
+    border-radius: 2px;
+}
+
+// 折叠面板不需要外边框的
+.ant-collapse-no-border {
+    &.ant-collapse {
+        border: 0;
+        .ant-collapse-item:last-child {
+            border-bottom: 0;
+        }
+    }
+}
+
+// 左边菜单用以二级导航的
+.c-sidenav__menu {
+    &.ant-menu {
+        .ant-menu-submenu {
+            .ant-menu-submenu-title {
+                background: #fafafa;
+                border-bottom: 1px solid #e8e8e8;
+                border-top: 1px solid #e8e8e8;
+                font-size: 14px;
+                padding: 0 20px !important;
+                .ant-menu-submenu-arrow {
+                    right: 20px;
+                }
+            }
+        }
+        &.ant-menu-inline,
+        &.ant-menu-vertical {
+            border-right: 0;
+        }
+        .ant-menu-item {
+            padding-left: 40px !important;
+            padding-right: 36px;
+            margin-bottom: 4px !important;
+        }
+    }
+}
+
+// 部分对tabs有要求的
+.c-tabs-padding {
+    .ant-tabs-bar {
+        margin-bottom: 12px;
+    }
+    .ant-tabs-nav .ant-tabs-tab {
+        padding-top: 0;
+    }
+}
+
+// 组合搜索框 select 加 searchBar
+.dt-select-search-bar {
+    .ant-input-group {
+        box-shadow: 0px 2px 8px 0px rgba(6, 14, 26, 0.08);
+    }
+    .ant-input {
+        border: 1px solid #ffffff !important;
+        box-shadow: 0 0 0 0 rgba(36, 145, 247, 0);
+    }
+    .ant-select-selection__rendered {
+        margin-left: 12px;
+    }
+    .ant-select-arrow:before {
+        content: "\E606";
+    }
+    .ant-select {
+        border-right: 1px solid #e8e8e8;
+        width: 112px;
+    }
+    .ant-input-group-addon {
+        padding: 0px;
+        background-color: #fff;
+        border: 0px solid #fff;
+        .ant-select {
+            margin: 0px;
+        }
+    }
+}
+
+// empty 水平垂直居中
+.c-ant_empty-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// 拖拽式上传文件
+.c-dragger_ant-upload {
+  &.ant-upload.ant-upload-drag {
+    p.ant-upload-drag-icon {
+      margin-bottom: 10px;
+      .anticon {
+        font-size: 36px;
+      }
+    }
+    p.ant-upload-text {
+      font-size: 12px;
+    }
+  }
+}
+
+.ant-layout.ant-layout-has-sider > .ant-layout {
+    overflow-y: hidden;
+}

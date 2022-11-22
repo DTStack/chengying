@@ -1,0 +1,81 @@
+@import "../../../public/styles/const.scss";
+
+.manage-header {
+  width: 100%;
+  position: fixed;
+  z-index: 101;
+  background: $head_bgColor;
+  .header-nav {
+    // margin-left:200px;
+    width: auto;
+    .header-nav-container {
+      display: flex;
+      box-shadow: 0px 2px 8px 0px rgba(6, 14, 26, 0.08);
+    }
+    .header-nav-menu {
+      flex: 1;
+      border-bottom: 1px solid $head_bgColor;
+      background: $head_bgColor;
+      color: $head_fontColor;
+      font-size: 14px;
+      .ant-menu-item-selected {
+        & > a {
+          color: #3f87ff !important;
+        }
+      }
+    }
+
+    .ant-menu {
+      .ant-menu-item {
+        height: $second_nav_height;
+        line-height: $second_nav_height;
+        .nav-a {
+          color: $head_fontColor;
+          line-height: $second_nav_height;
+          &:hover {
+            color: #3f87ff;
+          }
+          .redServer{
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: red;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+    .ant-menu-submenu {
+      height: $second_nav_height;
+    }
+    .ant-menu-submenu-title {
+      line-height: $second_nav_height;
+    }
+    .anticon-caret-down {
+      display: inline-block;
+      vertical-align: text-top;
+      margin-top: 2px;
+    }
+    .drop-box {
+      margin-left: 24px;
+      width: 176px;
+      height: $second_nav_height;
+      .ant-dropdown-link {
+        line-height: 50px;
+        color: #fff;
+      }
+    }
+  }
+}
+.header-dropdown {
+  ul {
+    margin-top: 2px;
+    max-height: 180px;
+    overflow: auto;
+    .ant-dropdown-menu-item {
+      font-size: 12px;
+    }
+  }
+}

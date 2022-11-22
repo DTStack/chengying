@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/ingress.allow-http: "false"
+    ingress.kubernetes.io/ssl-redirect: "false"
+  name: emfront-ingress
+  namespace: {{.NameSpace}}
+spec:
+  rules:
+  - http:
+     paths:
+     - path: /
+       backend:
+        serviceName: manage-front
+        servicePort: 80
+
+

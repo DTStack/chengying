@@ -1,0 +1,115 @@
+.index-page-container {
+    padding: 20px 20px 20px 0;
+    position: relative;
+    overflow-y: auto;
+    background-color: #f2f7fa;
+    .container_right {
+        position: absolute;
+        // float: left;
+        display: inline-block;
+        width: 66.9%;
+        // height: 100%;
+    }
+    .container_right_all {
+        position: relative;
+        display: inline-block;
+        width: 97.7%;
+    }
+    @media only screen and (min-width: 1024px) and (max-width: 1439px) {
+        .container_right {
+            position: absolute;
+            // float: left;
+            display: inline-block;
+            width: 67.5%;
+            // height: 100%;
+        }
+        .container_right_all {
+            position: relative;
+            display: inline-block;
+            width: 98%;
+        }
+    }
+    @media only screen and (min-width: 1440px) and (max-width: 2560px) {
+        .container_right {
+            position: absolute;
+            // float: left;
+            display: inline-block;
+            width: 68.5%;
+            // height: 100%;
+        }
+        .container_right_all {
+            position: relative;
+            display: inline-block;
+            width: 98.5%;
+        }
+    }
+    .container_right_content {
+        position: absolute;
+        display: inline-block;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .holder {
+        font-size: 14px;
+        color: #666666;
+        text-align: center;
+    }
+    #container_left {
+        // float: left;
+        display: inline-block;
+        width: 30%;
+        .ant-tabs-nav-scroll {
+            height: 40px;
+        }
+        .ant-tabs-tab {
+            margin-right: 17px;
+        }
+    }
+    #container_left .ant-list-item-meta-avatar {
+        line-height: 46px;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    .arrow_container {
+        padding: 0 10px 0 0;
+        width: 20px;
+        float: left;
+    }
+    .arrow_left {
+        position: fixed;
+        display: inline-block;
+        top: 0;
+        bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        line-height: 80px;
+        height: 80px;
+        cursor: pointer;
+        .arrow_img {
+            max-width: 12px;
+            max-height: 80px;
+        }
+    }
+    .c-indexpage__overview {
+        max-height: 440px;
+        overflow: auto;
+    }
+    .page_container_list {
+        background-color: #fff;
+        margin-top: 12px;
+        height: 322px;
+        border-radius: 2px;
+        overflow-y: auto;
+        .ant-list-item {
+            height: 60px;
+        }
+    }
+    .div_fullscreen {
+        display: inline-block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1;
+    }
+}
