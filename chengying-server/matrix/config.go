@@ -31,12 +31,9 @@ import (
 	"dtstack.com/dtstack/easymatrix/matrix/harole"
 	"dtstack.com/dtstack/easymatrix/matrix/health"
 	"dtstack.com/dtstack/easymatrix/matrix/host"
-	"dtstack.com/dtstack/easymatrix/matrix/k8s/monitor"
-	"dtstack.com/dtstack/easymatrix/matrix/k8s/resource"
 	"dtstack.com/dtstack/easymatrix/matrix/log"
 	"dtstack.com/dtstack/easymatrix/matrix/model"
-	modelkube "dtstack.com/dtstack/easymatrix/matrix/model/kube"
-	"dtstack.com/dtstack/easymatrix/matrix/model/kube/union"
+	"dtstack.com/dtstack/easymatrix/matrix/monitor"
 	"dtstack.com/dtstack/easymatrix/matrix/task"
 	"fmt"
 	"github.com/elastic/go-ucfg"
@@ -160,19 +157,9 @@ func ParseConfig(configFile string) error {
 	if err := model.ConfigureMysqlDatabase(db.Host, db.Port, db.User, db.Password, db.DbName); err != nil {
 		return err
 	}
-	if err := modelkube.Build(); err != nil {
-		return err
-	}
-	if err := union.Build(); err != nil {
-		return err
-	}
-	if err := resource.InitResource(); err != nil {
-		return err
-	}
 	if err := resetDeployStatus(); err != nil {
 		return err
 	}
-	impl.WorkloadDefinaInit(nil)
 
 	agentConfig := &config.Agent
 	apiconf := &config.Api

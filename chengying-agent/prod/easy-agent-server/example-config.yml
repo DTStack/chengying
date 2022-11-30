@@ -36,10 +36,10 @@ publish.http.uri: /api/v2/instance/%s/%s
 publish.http.timeout: 30s
 
 # databases
-mysqldb.host: 172.16.10.74
+mysqldb.host: 172.16.10.191
 mysqldb.port: 3306
-mysqldb.user: easyagent
-mysqldb.password: dtstack
+mysqldb.user: root
+mysqldb.password: DT#passw0rd2019
 mysqldb.dbname: dtagent
 
 #uicdb.host: 127.0.0.1

@@ -20,13 +20,9 @@ package impl
 import (
 	"database/sql"
 	"dtstack.com/dtstack/easymatrix/go-common/api-base"
-	"dtstack.com/dtstack/easymatrix/matrix/base"
 	"dtstack.com/dtstack/easymatrix/matrix/log"
 	"dtstack.com/dtstack/easymatrix/matrix/model"
-	modelkube "dtstack.com/dtstack/easymatrix/matrix/model/kube"
-	"encoding/json"
 	"fmt"
-	enhanceyaml "github.com/ghodss/yaml"
 	"github.com/kataras/iris/context"
 	"io/ioutil"
 	"strconv"
@@ -149,110 +145,4 @@ func GetSafetyAuditList(ctx context.Context) apibase.Result {
 
 func addSafetyAuditRecord(ctx context.Context, module, operation, content string) error {
 	return model.SafetyAuditList.InsertSafetyAuditRecord(ctx.GetCookie("em_username"), module, operation, ctx.RemoteAddr(), content)
-}
-
-// WorkloadDefinaInit
-// @Description  	workload加载接口
-// @Summary      	workload加载接口
-// @Tags         	product
-// @Accept          application/json
-// @Produce 		application/json
-// @Success         200 {object}  string "{"msg":"ok","code":0,"data":null}"
-// @Router          /api/v2/product/workloadinit [get]
-func WorkloadDefinaInit(ctx context.Context) (rlt apibase.Result) {
-	var msg string
-	// 获取目录下workload yaml文件到切片中
-	files := []string{}
-
-	workloadfile_path := base.WebRoot + "/workload-definition"
-	wkfiles, err := ioutil.ReadDir(workloadfile_path)
-	if err != nil {
-		log.Errorf("open file error: %v", err)
-		return err
-	}
-	for _, f := range wkfiles {
-		if f.IsDir() {
-			continue
-		}
-		files = append(files, workloadfile_path+"/"+f.Name())
-	}
-
-	// 遍历workload yaml文件进行解析入库
-	if len(files) != 0 {
-		for _, file := range files {
-			conf := new(modelkube.WorkloadDefinitionYaml)
-			tx := model.USE_MYSQL_DB().MustBegin()
-
-			yamlFile, err := ioutil.ReadFile(file)
-			if err != nil {
-				log.Errorf("[WorkloadDefinaInit] read workload yaml %v err:%v", file, err)
-				return fmt.Errorf("[WorkloadDefinaInit] read workload yaml %v err:%v", file, err)
-			}
-
-			js, err := enhanceyaml.YAMLToJSON(yamlFile)
-			if err != nil {
-				log.Errorf("[WorkloadDefinaInit] %v to json err: %v\n", file, err)
-				return fmt.Errorf("[WorkloadDefinaInit] %v to json err: %v\n", file, err)
-			}
-
-			err = json.Unmarshal(js, conf)
-			if err != nil {
-				log.Errorf("[WorkloadDefinaInit] unmarshal json error %v:", err)
-				return fmt.Errorf("[WorkloadDefinaInit] unmarshal json error %v:", err)
-			}
-			// workload definition表用到的参数
-			wkdef_version := conf.ApiVersion
-			wkdef_name := conf.Metadata.Name
-			wkdef_params, err := json.Marshal(conf.Spec.Params)
-			if err != nil {
-				log.Errorf("[WorkloadDefinaInit] marshal workloaddefinition_params json error %v:", err)
-				return fmt.Errorf("[WorkloadDefinaInit] marshal workloaddefinition_params json error %v:", err)
-			}
-			// workload part表用到的参数
-			wkpart_name := conf.Spec.WorkloadPatrs[0].Baseworkload.Name
-			wkpart_type := conf.Spec.WorkloadPatrs[0].Baseworkload.Type
-			wkpart_parameters, err := json.Marshal(conf.Spec.WorkloadPatrs[0].Baseworkload.Parameters)
-			if err != nil {
-				log.Errorf("[WorkloadDefinaInit] marshal workloadpart_parameters json error %v:", err)
-				return fmt.Errorf("[WorkloadDefinaInit] marshal workloadpart_parameters json error %v:", err)
-			}
-			// workload definition表处理
-			workload_id, err := modelkube.WorkloadDefinition.InsertOrUpdate(tx, wkdef_name, wkdef_version, string(wkdef_params))
-			if err != nil {
-				log.Errorf("[WorkloadDefinaInit] insert or update workload definifion error:%v", err)
-				return fmt.Errorf("[WorkloadDefinaInit] insert or update workload definifion error:%v", err)
-			}
-			// workload part表处理
-			workloadPartId, err := modelkube.WorkloadPart.InsertOrUpdate(tx, wkpart_name, wkpart_type, string(wkpart_parameters), workload_id)
-			if err != nil {
-				log.Errorf("[WorkloadDefinaInit] insert or update workload part error:%v", err)
-				return fmt.Errorf("[WorkloadDefinaInit] insert or update workload part error:%v", err)
-			}
-
-			// workload step表处理
-			for _, step := range conf.Spec.WorkloadPatrs[0].Steps {
-				wkstep_name := step.Name
-				wkstep_type := step.Type
-				wkstep_action := step.Action
-				wkstep_object, err := json.Marshal(step.Object)
-				if err != nil {
-					log.Errorf("[WorkloadDefinaInit] marshal workload_step object json error %v:", err)
-					return err
-				}
-				err = modelkube.WorkloadStep.InsertOrUpdate(tx, wkstep_name, wkstep_type, wkstep_action, string(wkstep_object), workloadPartId)
-				if err != nil {
-					log.Errorf("[WorkloadDefinaInit] insert or update workload step error:%v", err)
-					return fmt.Errorf("[WorkloadDefinaInit] insert or update workload step error:%v", err)
-				}
-			}
-			if err := tx.Commit(); err != nil {
-				tx.Rollback()
-				return err
-			}
-		}
-	} else {
-		msg = workloadfile_path + "目录下不存在workload定义文件！"
-	}
-
-	return msg
 }

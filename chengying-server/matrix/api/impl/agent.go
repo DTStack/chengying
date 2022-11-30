@@ -24,7 +24,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/url"
-	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -39,15 +38,11 @@ import (
 	"dtstack.com/dtstack/easymatrix/matrix/enums"
 	"dtstack.com/dtstack/easymatrix/matrix/grafana"
 	"dtstack.com/dtstack/easymatrix/matrix/host"
-	"dtstack.com/dtstack/easymatrix/matrix/k8s/node"
-	kutil "dtstack.com/dtstack/easymatrix/matrix/k8s/util"
-	xke_service "dtstack.com/dtstack/easymatrix/matrix/k8s/xke-service"
 	"dtstack.com/dtstack/easymatrix/matrix/log"
 	"dtstack.com/dtstack/easymatrix/matrix/model"
 	"dtstack.com/dtstack/easymatrix/matrix/util"
 	"github.com/kataras/iris/context"
 	uuid "github.com/satori/go.uuid"
-	"gopkg.in/yaml.v2"
 )
 
 const (
@@ -320,45 +315,7 @@ func execAgentInstallByPwd(installHost string, params *util.PwdInstallParams, re
 	}()
 
 	// if node is installed, change roles
-	err, info := model.DeployHostList.GetHostInfoByIp(installHost)
-	if err == nil && info.Status == 7 {
-
-		cluster, _ := model.DeployClusterList.GetClusterInfoById(params.ClusterId)
-		rkeConfig, _ := xke_service.BuildRKEConfigFromRaw(cluster.Yaml.String)
-
-		xke, err := xke_service.NewXkeService()
-		if err != nil {
-			return fmt.Sprintf("%v xke init error:", err)
-		}
-		// update role
-		for i := range rkeConfig.Nodes {
-			if rkeConfig.Nodes[i].Address == installHost {
-				var rkeRoles []string
-				for _, r := range strings.Split(params.Role, ",") {
-					if _, ok := node.RoleToRkeRole[r]; ok {
-						rkeRoles = append(rkeRoles, node.RoleToRkeRole[r])
-					}
-				}
-				rkeConfig.Nodes[i].Role = rkeRoles
-				break
-			}
-		}
-		log.Infof("update k8s with rke config: %v", rkeConfig)
-
-		rkeConfigYaml, err := yaml.Marshal(rkeConfig)
-		if err != nil {
-			return fmt.Sprintf("yaml marshal error:%v ", err)
-		}
-		err = xke.Create(rkeConfig.ClusterName, string(rkeConfigYaml), cluster.Id)
-		if err != nil {
-			return fmt.Sprintf("create rke error:%v ", err)
-		} else {
-			_ = model.DeployClusterHostRel.UpdateRolesWithSid(info.SidecarId, params.Role)
-			return fmt.Sprintf("update roles success:%v ", installHost)
-		}
-	}
-
-	err, _ = model.DeployHostList.GetHostInfoByIpAndStatus(installHost, host.InitStatus, host.InitInitializeShOk)
+	err, _ := model.DeployHostList.GetHostInfoByIpAndStatus(installHost, host.InitStatus, host.InitInitializeShOk)
 	if err == nil {
 		rt = fmt.Sprintf("%v 主机正在接入", installHost)
 		return
@@ -993,9 +950,6 @@ func HostInstallStepCluster(sid string, aid int, ctx context.Context) {
 		log.Errorf("\t\t%v", err.Error())
 		return
 	}
-	if ctype == model.DEPLOY_CLUSTER_TYPE_KUBERNETES {
-		agentInstallProcessK8SCluster(cid, aid, sid, roles)
-	}
 	log.Infof("<--Step HostInstallStepCluster Success sid: %v", sid)
 	log.OutputInfof(sid, "<--Step HostInstallStepCluster Success sid: %v", sid)
 }
@@ -1012,33 +966,6 @@ func agentInstallUpdateClusterHostRel(clusterId int, sid, roles string) error {
 	if err != nil {
 		return err
 	}
-	return nil
-}
-
-func agentInstallProcessK8SCluster(clusterId, aid int, sid, roles string) error {
-	info, err := model.DeployClusterList.GetClusterInfoById(clusterId)
-	if err != nil {
-		log.Errorf("%v", err)
-		return err
-	}
-	if info.Mode == model.DEPLOY_CLUSTER_MODE_IMPORT {
-		model.DeployHostList.UpdateStatus(aid, host.K8SNodeInitializeOk, host.K8S_SUCCESS_NODE_INIT)
-		model.DeployHostList.UpdateSteps(aid, host.K8SNodeInitializeOk)
-		return nil
-	}
-	err = host.AgentInstall.DockerEnvironmentInit(sid)
-	if err != nil {
-		log.Errorf("%v", err.Error())
-		model.DeployHostList.UpdateStatus(aid, host.K8SDockerInitializeFail, err.Error())
-		return err
-	}
-	// update host status
-	model.DeployHostList.UpdateStatus(aid, host.K8SDockerInitializeOk, host.K8S_SUCCESS_DOCKCER_INIT)
-	model.DeployHostList.UpdateSteps(aid, host.K8SDockerInitializeOk)
-
-	//do rke create in queue
-	node.NodeManager.AddNode(clusterId, aid, sid, info.Name, roles)
-
 	return nil
 }
 
@@ -1083,18 +1010,6 @@ func AgentInstallCallBack(ctx context.Context) apibase.Result {
 	}
 	model.DeployClusterHostRel.InsertClusterHostRel(cid, sid, "")
 	deployment := ctx.Request().Header.Get("Deploy")
-
-	// redirect log output
-	cluster, _ := model.DeployClusterList.GetClusterInfoById(cid)
-	fileName := kutil.BuildClusterLogName(cluster.Name, cid)
-	logf, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0766)
-	defer logf.Close()
-	if err == nil {
-		log.NewOutputPath(sid, logf)
-		// defer log.CloseOutputPath(sid)
-	} else {
-		log.Errorf(err.Error())
-	}
 
 	log.OutputInfof(sid, "%v", LINE_LOG)
 	log.OutputInfof(sid, "AgentInstallCallBack: %v", ctx.Request().RequestURI)
