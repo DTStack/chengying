@@ -3541,9 +3541,9 @@ func ShellStatusReport(ctx context.Context) apibase.Result {
 		return err
 	}
 	if errors.Is(err, sql.ErrNoRows) ||
-		execShellInfo.ExecStatus != enums.ExecStatusType.Running.Code ||
+		execShellInfo.ExecStatus != enums.ExecStatusType.Running.Code {
 		//如果脚本类型为启动  不允许修改
-		execShellInfo.ShellType == enums.ShellType.Start.Code {
+		//execShellInfo.ShellType == enums.ShellType.Start.Code {
 		return nil
 	}
 
