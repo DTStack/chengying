@@ -202,7 +202,7 @@ func FilteredSQLInject(ctx context.Context) (ret bool) {
 	}
 
 	//str := `(?:')|(?:--)|(/\\*(?:.|[\\n\\r])*?\\*/)|(\b(select|update|and|or|delete|insert|trancate|char|chr|into|substr|ascii|declare|exec|count|master|into|drop|execute)\b)`
-	str := `(?i)((\s|'|")(select|insert|update|delete|grant|revoke|create|drop|trancate|alter|and|or)(\s|'|"))`
+	str := `(?i)((\s*|'|")(select|insert|update|delete|grant|revoke|create|drop|trancate|alter|and|or|\|\|)(\s*|'|"))`
 	re, _ := regexp.Compile(str)
 	for _, v := range queryParams {
 		if re.MatchString(v) {
