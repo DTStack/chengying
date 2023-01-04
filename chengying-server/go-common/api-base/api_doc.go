@@ -205,6 +205,10 @@ func FilteredSQLInject(ctx context.Context) (ret bool) {
 	str := `(?i)((\s*|'|")(select|insert|update|delete|grant|revoke|create|drop|trancate|alter|and|or|\|\|)(\s*|'|"))`
 	re, _ := regexp.Compile(str)
 	for _, v := range queryParams {
+		if v == "create_time" {
+			continue
+		}
+
 		if re.MatchString(v) {
 			errs.AppendError(v, "Sql inject: Invalid parameter")
 		}
