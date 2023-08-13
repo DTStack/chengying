@@ -1,0 +1,35 @@
+# logger
+log.dir: /tmp/
+log.max-logger-size: 100
+log.max-logger-backups: 3
+log.days-to-keep: 1
+
+# databases
+mysqldb.host: 192.168.88.100
+mysqldb.port: 3306
+mysqldb.user: root
+mysqldb.password: dtstack
+mysqldb.dbname: dtagent
+
+# api
+api.port: 8864
+api.host:
+api.static-url: http://192.168.88.1:8864
+
+#agent
+agent.host: 192.168.88.100:8889
+agent.install-path: /opt/dtstack/easymanager/easyagent
+
+
+#grafana
+grafana-url: http://grafana:3000
+
+# 身份校验
+verify.identity: true
+verify.code: false
+
+autoflush.etc-host: true
+
+deploy.install-path: /opt/dtstack/
+
+prometheus.node-exporter-port: 9100

@@ -1,0 +1,42 @@
+# my global config
+global:
+  scrape_interval:     30s
+  evaluation_interval: 1m
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - {ALERTMANAGER_IP}:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - /prometheus/rules/*
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: node_exporter
+    file_sd_configs:
+    - files: ['/prometheus/node_sd_file.yml']
+      refresh_interval: 1m
+  - job_name: em-service
+    file_sd_configs:
+    - files: ['/prometheus/service_sd_file.yml']
+      refresh_interval: 30s
+  - job_name: easy-agent-server
+    static_configs:
+    - targets: ['{AGENT_IP}:8889']
+  - job_name: prometheus
+    static_configs:
+    - targets: ['{PROMETHEUS_IP}:9090']
+  - job_name: grafana
+    static_configs:
+    - targets: ['{GRAFANA_IP}:3000']
+  - job_name: pushgateway
+    honor_labels: true
+    static_configs:
+    - targets: ['{PUSHGATEWAY_IP}:9091']

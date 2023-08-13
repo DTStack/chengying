@@ -1,0 +1,18 @@
+FROM nginx:1.21.0-alpine
+
+COPY sources.list $CATALINA_HOME/
+RUN cat $CATALINA_HOME/sources.list > /etc/apk/repositories
+
+RUN apk --update add netcat-openbsd
+
+COPY health_check.sh /dtstack/
+COPY dist /usr/share/nginx/html/easymanager
+COPY dt-alert /usr/share/nginx/html/dt-alert
+
+COPY 404 /etc/nginx/404
+COPY nginx/nginx.conf /etc/nginx/
+COPY nginx.default.conf /etc/nginx/conf.d/default.conf
+COPY dt-alert.conf /etc/nginx/conf.d/
+COPY drpeco/entrypoint.sh /entrypoint.sh
+
+CMD ["/bin/sh","-c","/entrypoint.sh"]

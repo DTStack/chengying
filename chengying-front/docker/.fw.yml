@@ -1,0 +1,34 @@
+# 构建docker镜像(专有云)模版样例
+---
+version: 1.0
+name: dtstack-drpEco-managerfront
+
+# variables表示用户自定义的参数，可在构建脚本中引用
+variables:
+  version: 1.0
+
+# privatecloud标识专有云构建，version目前专有云支持v2和v3两个版本，v3会对编译过程中安装的依赖和安装包做源码溯源检查，v2版本不会
+privatecloud:
+  version: v3
+
+# tag: 构建成功之后是否打git tag，默认不打tag。true表示在构建成功之后自动打tag并push到remote，false表示在构建成功之后不打tag;
+# 默认tag的格式为{{BUILDID}}_{{FW_BUILD_TIME}}，例如：241199_20170723225428
+git:
+  tag: true
+
+machine:
+  standard:
+    5u7_docker_cache:
+      - default
+
+scripts:
+  - sudo docker build --pull -t reg.docker.alibaba-inc.com/apsara_stack/dtstack-drpeco-managerfront:{{version}} .
+  - sudo docker push reg.docker.alibaba-inc.com/apsara_stack/dtstack-drpeco-managerfront:{{version}}
+
+artifacts:
+  images:
+    - reg.docker.alibaba-inc.com/apsara_stack/dtstack-drpeco-managerfront:{{version}}
+
+notifications:
+  email:
+    - qingzheng.zqz@alibaba-inc.com

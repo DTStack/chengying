@@ -1,0 +1,21 @@
+FROM frolvlad/alpine-glibc:alpine-3.7
+
+RUN set -eux && sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+    && apk --update add  netcat-openbsd
+
+
+COPY matrix example-config.yml entrypoint.sh /matrix/
+
+COPY font /matrix/font
+
+RUN ln -sf /dev/stdout /tmp/matrix.log && ln -sf /dev/stderr /tmp/matrix-error.log && ln -sf /dev/stdout /tmp/matrix-api.log
+
+
+WORKDIR /matrix
+COPY bin /matrix/
+# COPY drpeco/environment_init.sh /matrix/
+# COPY drpeco/install_agentx.sh /matrix/
+
+CMD ./entrypoint.sh
+
+EXPOSE 8864

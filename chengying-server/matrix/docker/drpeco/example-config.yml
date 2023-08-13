@@ -1,0 +1,23 @@
+# logger
+log.dir: /tmp/
+log.max-logger-size: 100
+log.max-logger-backups: 3
+log.days-to-keep: 1
+
+# databases
+mysqldb.host: {DB_HOST}
+mysqldb.port: {DB_PORT}
+mysqldb.user: {DB_USER}
+mysqldb.password: {DB_PWD}
+mysqldb.dbname: dtagent
+
+# api
+api.port: 8864
+api.host:
+api.static-url: http://{MATRIX_IP}:8864
+
+#agent
+agent.host: {AGENT_IP}:8889
+agent.install-path: /opt/dtstack/easymanager/easyagent
+
+deploy.install-path: /opt/dtstack/
