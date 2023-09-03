@@ -41,12 +41,8 @@ import (
 	"dtstack.com/dtstack/easymatrix/matrix/event"
 	"dtstack.com/dtstack/easymatrix/matrix/harole"
 	"dtstack.com/dtstack/easymatrix/matrix/instance"
-	kdeploy "dtstack.com/dtstack/easymatrix/matrix/k8s/deploy"
-	"dtstack.com/dtstack/easymatrix/matrix/k8s/kube"
-	kmodel "dtstack.com/dtstack/easymatrix/matrix/k8s/model"
 	"dtstack.com/dtstack/easymatrix/matrix/log"
 	"dtstack.com/dtstack/easymatrix/matrix/model"
-	modelkube "dtstack.com/dtstack/easymatrix/matrix/model/kube"
 	"dtstack.com/dtstack/easymatrix/matrix/util"
 	"dtstack.com/dtstack/easymatrix/schema"
 	"github.com/kataras/iris/context"
@@ -1098,7 +1094,6 @@ func InstanceServiceConfig(ctx context.Context) apibase.Result {
 	instanceIdStr := ctx.Params().Get("id")
 	configfile := ctx.FormValue("configfile")
 	instanceId, err := strconv.Atoi(instanceIdStr)
-	namespace := ctx.GetCookie(COOKIE_CURRENT_K8S_NAMESPACE)
 
 	if instanceIdStr == "" || err != nil {
 		paramErrs.AppendError("$", fmt.Errorf("id is empty"))
@@ -1117,43 +1112,6 @@ func InstanceServiceConfig(ctx context.Context) apibase.Result {
 		return err
 	}
 
-	// 区分主机模式和k8s模式在deploy_cluster_product_rel表中查询
-	var productRel model.ClusterProductRel
-
-	productRel, err = model.DeployClusterProductRel.GetByPidAndClusterIdNamespace(info.Pid, info.ClusterId, namespace)
-	if err != nil && !errors.Is(err, sql.ErrNoRows) {
-		log.Errorf("[InstanceServiceConfig] get namespace by pid and clusterid error: %v", err)
-		return fmt.Errorf("[InstanceServiceConfig] get namespace by pid and clusterid error: %v", err)
-	}
-	if errors.Is(err, sql.ErrNoRows) {
-		smoothUpgradeProductRel, err := model.DeployClusterSmoothUpgradeProductRel.GetByPidAndClusterIdNamespace(info.Pid, info.ClusterId, namespace)
-		if err != nil {
-			log.Errorf("[InstanceServiceConfig] get namespace by pid and clusterid error: %v", err)
-			return fmt.Errorf("[InstanceServiceConfig] get namespace by pid and clusterid error: %v", err)
-		}
-		productRel = model.ClusterProductRel{
-			Id:            smoothUpgradeProductRel.Id,
-			Pid:           smoothUpgradeProductRel.Pid,
-			ClusterId:     smoothUpgradeProductRel.ClusterId,
-			Namespace:     smoothUpgradeProductRel.Namespace,
-			ProductParsed: smoothUpgradeProductRel.ProductParsed,
-			Status:        smoothUpgradeProductRel.Status,
-			DeployUUID:    smoothUpgradeProductRel.DeployUUID,
-			AlertRecover:  smoothUpgradeProductRel.AlertRecover,
-			UserId:        smoothUpgradeProductRel.UserId,
-			IsDeleted:     smoothUpgradeProductRel.IsDeleted,
-			UpdateTime:    smoothUpgradeProductRel.UpdateTime,
-			DeployTime:    smoothUpgradeProductRel.DeployTime,
-			CreateTime:    smoothUpgradeProductRel.CreateTime,
-		}
-	}
-
-	//productRel, err = model.DeployClusterProductRel.GetByPidAndClusterId(info.Pid, info.ClusterId)
-	//if err != nil {
-	//	log.Errorf("%v", err)
-	//	return err
-	//}
-
 	if cluster.Type == model.DEPLOY_CLUSTER_TYPE_HOSTS {
 		res, err := model.DeployInstanceList.GetInstanceServiceConfig(instanceId, configfile)
 		if err != nil {
@@ -1162,37 +1120,7 @@ func InstanceServiceConfig(ctx context.Context) apibase.Result {
 		}
 		return map[string]interface{}{"result": res}
 	}
-
-	sc, err := schema.Unmarshal(productRel.ProductParsed)
-	if err != nil {
-		return err
-	}
-	nsTbsc, err := modelkube.DeployNamespaceList.Get(productRel.Namespace, info.ClusterId)
-	if err != nil {
-		return err
-	}
-	cache, err := kube.ClusterNsClientCache.GetClusterNsClient(strconv.Itoa(info.ClusterId)).GetClientCache(kube.ImportType(nsTbsc.Type))
-	if err != nil {
-		return err
-	}
-	resp, err := kdeploy.GetConfigMaps(cache, sc, cluster.Id, productRel.Namespace, info.ServiceName)
-	if err != nil {
-		return err
-	}
-	configMap, err := kmodel.ConvertConfigMap(resp)
-	if err != nil {
-		return err
-	}
-	targetFile := ""
-	// Files with the same name are not supported temporarily
-	if sc.DeployType == "workload" {
-		targetFile = configfile[strings.LastIndex(configfile, "/")+1:]
-	} else {
-		targetFile = strings.Replace(configfile, "/", "_", -1)
-	}
-
-	return map[string]interface{}{"result": configMap.Data[targetFile]}
-
+	return nil
 }
 
 func InstanceEvent(ctx context.Context) apibase.Result {

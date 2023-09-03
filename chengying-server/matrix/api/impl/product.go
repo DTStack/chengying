@@ -2005,7 +2005,6 @@ func Service(ctx context.Context) apibase.Result {
 	paramErrs := apibase.NewApiParameterErrors()
 	productName := ctx.Params().Get("product_name")
 	productVersion := ctx.Params().Get("product_version")
-	relyNamespace := ctx.URLParam("relynamespace")
 	if productName == "" {
 		paramErrs.AppendError("$", fmt.Errorf("product_name is empty"))
 	}
@@ -2027,12 +2026,6 @@ func Service(ctx context.Context) apibase.Result {
 		baseService        string `json:"baseService"`
 	}
 
-	clusterinfo, err := model.DeployClusterList.GetClusterInfoById(clusterId)
-	if err != nil {
-		log.Errorf("[Product->Service] Get cluster info error:%v", err)
-		return fmt.Errorf("Get cluster info error:%v", err)
-	}
-
 	info, err := model.DeployProductList.GetByProductNameAndVersion(productName, productVersion)
 	if err != nil {
 		return err
@@ -2045,14 +2038,8 @@ func Service(ctx context.Context) apibase.Result {
 	}
 
 	// 获取该产品包下服务组件依赖对应服务的相关配置信息,主要用于获取依赖组件的版本号
-	if clusterinfo.Type == model.DEPLOY_CLUSTER_TYPE_KUBERNETES {
-		if err = inheritK8sBaseService(clusterId, relyNamespace, sc, model.USE_MYSQL_DB()); err != nil {
-			log.Errorf("[Product->Service] inheritK8sBaseService error:%v", err)
-		}
-	} else {
-		if err = inheritBaseService(clusterId, sc, model.USE_MYSQL_DB()); err != nil {
-			log.Errorf("[Product->Service] inheritBaseService err: %+v", err)
-		}
+	if err = inheritBaseService(clusterId, sc, model.USE_MYSQL_DB()); err != nil {
+		log.Errorf("[Product->Service] inheritBaseService err: %+v", err)
 	}
 
 	services := make([]serviceRes, 0)
@@ -2084,9 +2071,6 @@ func ServiceGroup(ctx context.Context) apibase.Result {
 	productName := ctx.Params().Get("product_name")
 	productVersion := ctx.Params().Get("product_version")
 	uncheckedServices := strings.Split(ctx.URLParam("unchecked_services"), ",")
-	// k8s模式下产品包依赖的namespace
-	relyNamespace := ctx.URLParam("relynamespace")
-	namespace := ctx.URLParam("namespace")
 	if productName == "" {
 		paramErrs.AppendError("$", fmt.Errorf("product_name is empty"))
 	}
@@ -2154,52 +2138,18 @@ func ServiceGroup(ctx context.Context) apibase.Result {
 		}
 		return res
 	}
-	cluster, err := model.DeployClusterList.GetClusterInfoById(clusterId)
-	if err != nil {
-		log.Errorf("[Product->ServiceGroup] get clusterinfo err : %v", err)
-		return fmt.Errorf("[ServiceGroup] get current cluster err:%v", err)
-	}
 	// do not judge if is kubenetes type by product info.
 	// now the product name and version identify a product, but as the kubenets type import,
 	//it is not a good way to identify a product only by product name and version
-	if cluster.Type == model.DEPLOY_CLUSTER_TYPE_KUBERNETES {
-		if err = inheritK8sBaseService(clusterId, relyNamespace, sc, model.USE_MYSQL_DB()); err != nil {
-			log.Errorf("[Product->ServiceGroup] inheritK8sBaseService err: %v", err)
-			return fmt.Errorf("[ServiceGroup] inheritK8sBaseService err: %v", err)
-		}
-		if err = setSchemaFieldDNS(clusterId, sc, model.USE_MYSQL_DB(), namespace); err != nil {
-			log.Errorf("[Product->ServiceGroup] setSchemaFieldDNS err %v", err)
-			return fmt.Errorf("[ServiceGroup] setSchemaFieldDNS err %v", err)
-		}
-		//beacause of the dtbase and all the product's depends is bridge.
-		//if the baseservice is deployed in the same cluster.
-		//and if the service's baseservice ip is modified.
-		//then, all the product in the cluster will deploy can see the change of the baseservice
 
-		//if the baseserivce is deployed in the other cluster.
-		//then, all the product will show the ip of the baseservice pod's hostip
-		//all of the service need to deploy will need to modify
-		//if err = setBaseServiceAddr(baseClusterId, sc, model.USE_MYSQL_DB()); err != nil {
-		//	log.Errorf("[Product->ServiceGroup] setBaseServiceAddr err: %v", err)
-		//	return err
-		//}
-		if err = setSchemafieldModifyInfo(clusterId, sc, namespace); err != nil {
-			log.Errorf("[product->ServiceGroup] service config modify fail,err: %v", err)
-			return fmt.Errorf("[ServiceGroup] service config modify fail,err: %v", err)
-		}
-		if err = BaseServiceAddrModify(clusterId, sc, namespace); err != nil {
-			log.Errorf("[product->ServiceGroup] set base service addr with modified fail,err: %v", err)
-			return fmt.Errorf("[erviceGroup] set base service addr with modified fail,err: %v", err)
-		}
-	} else {
-		if err = inheritBaseService(clusterId, sc, model.USE_MYSQL_DB()); err != nil {
-			log.Errorf("[Product->ServiceGroup] inheritBaseService warn: %+v", err)
-		}
-		if err = setSchemaFieldServiceAddr(clusterId, sc, model.USE_MYSQL_DB(), ""); err != nil {
-			log.Errorf("[Product->ServiceGroup] setSchemaFieldServiceAddr err: %v", err)
-			return err
-		}
+	if err = inheritBaseService(clusterId, sc, model.USE_MYSQL_DB()); err != nil {
+		log.Errorf("[Product->ServiceGroup] inheritBaseService warn: %+v", err)
 	}
+	if err = setSchemaFieldServiceAddr(clusterId, sc, model.USE_MYSQL_DB(), ""); err != nil {
+		log.Errorf("[Product->ServiceGroup] setSchemaFieldServiceAddr err: %v", err)
+		return err
+	}
+
 	if err = handleUncheckedServicesCore(sc, uncheckedServices); err != nil {
 		log.Errorf("[Product->ServiceGroup] handleUncheckedServicesCore warn: %+v", err)
 	}
@@ -2354,9 +2304,6 @@ func ServiceGroupFile(ctx context.Context) apibase.Result {
 	paramErrs := apibase.NewApiParameterErrors()
 	productName := ctx.Params().Get("product_name")
 	productVersion := ctx.Params().Get("product_version")
-	// k8s模式下产品包依赖的namespace
-	relyNamespace := ctx.URLParam("relynamespace")
-	namespace := ctx.URLParam("namespace")
 	serviceName := ctx.URLParam("servicename")
 	fileName := ctx.URLParam("file")
 	if productName == "" {
@@ -2388,39 +2335,15 @@ func ServiceGroupFile(ctx context.Context) apibase.Result {
 		paramErrs.AppendError("$", fmt.Errorf("serviceName %s not exist", serviceName))
 	}
 	paramErrs.CheckAndThrowApiParameterErrors()
-	cluster, err := model.DeployClusterList.GetClusterInfoById(clusterId)
-	if err != nil {
-		log.Errorf("[Product->ServiceGroup] get clusterinfo err : %v", err)
-		return fmt.Errorf("[ServiceGroup] get current cluster err:%v", err)
+
+	if err = inheritBaseService(clusterId, sc, model.USE_MYSQL_DB()); err != nil {
+		log.Errorf("[Product->ServiceGroup] inheritBaseService warn: %+v", err)
+	}
+	if err = setSchemaFieldServiceAddr(clusterId, sc, model.USE_MYSQL_DB(), ""); err != nil {
+		log.Errorf("[Product->ServiceGroup] setSchemaFieldServiceAddr err: %v", err)
+		return err
 	}
 
-	if cluster.Type == model.DEPLOY_CLUSTER_TYPE_KUBERNETES {
-		// k8s的未测试过
-		if err = inheritK8sBaseService(clusterId, relyNamespace, sc, model.USE_MYSQL_DB()); err != nil {
-			log.Errorf("[Product->ServiceGroup] inheritK8sBaseService err: %v", err)
-			return fmt.Errorf("[ServiceGroup] inheritK8sBaseService err: %v", err)
-		}
-		if err = setSchemaFieldDNS(clusterId, sc, model.USE_MYSQL_DB(), namespace); err != nil {
-			log.Errorf("[Product->ServiceGroup] setSchemaFieldDNS err %v", err)
-			return fmt.Errorf("[ServiceGroup] setSchemaFieldDNS err %v", err)
-		}
-		if err = setSchemafieldModifyInfo(clusterId, sc, namespace); err != nil {
-			log.Errorf("[product->ServiceGroup] service config modify fail,err: %v", err)
-			return fmt.Errorf("[ServiceGroup] service config modify fail,err: %v", err)
-		}
-		if err = BaseServiceAddrModify(clusterId, sc, namespace); err != nil {
-			log.Errorf("[product->ServiceGroup] set base service addr with modified fail,err: %v", err)
-			return fmt.Errorf("[erviceGroup] set base service addr with modified fail,err: %v", err)
-		}
-	} else {
-		if err = inheritBaseService(clusterId, sc, model.USE_MYSQL_DB()); err != nil {
-			log.Errorf("[Product->ServiceGroup] inheritBaseService warn: %+v", err)
-		}
-		if err = setSchemaFieldServiceAddr(clusterId, sc, model.USE_MYSQL_DB(), ""); err != nil {
-			log.Errorf("[Product->ServiceGroup] setSchemaFieldServiceAddr err: %v", err)
-			return err
-		}
-	}
 	var (
 		svc            = sc.Service[serviceName]
 		_, userInfo    = model.UserList.GetInfoByUserId(1)
@@ -5228,11 +5151,7 @@ func Deploy(ctx context.Context) apibase.Result {
 			log.Errorf("delete notify event error: %v", err)
 		}
 	}()
-	if cluster.Type == model.DEPLOY_CLUSTER_TYPE_KUBERNETES {
-		return DealK8SDeploy(param.Namespace, param.UncheckedServices, userId, param.ClusterId, param.RelyNamespace, param.Pid)
-	} else {
-		return DealDeploy(productName, productVersion, param.SourceVersion, param.UncheckedServices, userId, param.ClusterId, param.DeployMode, param.FinalUpgrade)
-	}
+	return DealDeploy(productName, productVersion, param.SourceVersion, param.UncheckedServices, userId, param.ClusterId, param.DeployMode, param.FinalUpgrade)
 }
 
 func DeployForDevOps(ctx context.Context) apibase.Result {
@@ -5262,11 +5181,7 @@ func DeployForDevOps(ctx context.Context) apibase.Result {
 			log.Errorf("delete notify event error: %v", err)
 		}
 	}()
-	if cluster.Type == model.DEPLOY_CLUSTER_TYPE_KUBERNETES {
-		return DealK8SDeploy(param.Namespace, param.UncheckedServices, userId, param.ClusterId, param.RelyNamespace, param.Pid)
-	} else {
-		return DealDeploy(productName, productVersion, "", param.UncheckedServices, userId, param.ClusterId, param.DeployMode, false)
-	}
+	return DealDeploy(productName, productVersion, "", param.UncheckedServices, userId, param.ClusterId, param.DeployMode, false)
 }
 
 func DealDeploy(productName, productVersion, sourceVersion string, uncheckedServices []string, userId, clusterId int, installMode int, finalUpgrade bool) (rlt interface{}) {
@@ -5608,15 +5523,7 @@ func DealUndeploy(productName, productVersion, namespace string, userId, cluster
 		return err
 	}
 
-	cluster, err := model.DeployClusterList.GetClusterInfoById(clusterId)
-	if err != nil {
-		return err
-	}
-	if cluster.Type == model.DEPLOY_CLUSTER_TYPE_KUBERNETES {
-		go K8sUndeploy(clusterId, sc, deployUUID, productListInfo.ID, namespace)
-	} else {
-		go undeploy(clusterId, sc, deployUUID, productListInfo.ID)
-	}
+	go undeploy(clusterId, sc, deployUUID, productListInfo.ID)
 
 	//维护deploy_product_select_history表  卸载的时候维护  例如自动部署了 a b c  手动卸载了 b  回显应该回显 a b
 	err = model.ProductSelectHistory.RemovePidByClusterId(strconv.Itoa(productListInfo.ID), clusterId)

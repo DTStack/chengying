@@ -41,14 +41,6 @@ var ProductOperationEasyMatrixAPIRoutes = apibase.Route{
 			},
 		},
 	}, {
-		Path: "workloadinit",
-		GET:  impl.WorkloadDefinaInit,
-		Docs: apibase.Docs{
-			POST: &apibase.ApiDoc{
-				Name: "workload加载接口",
-			},
-		},
-	}, {
 		Path: "uploadAsync",
 		POST: impl.UploadAsync,
 		Docs: apibase.Docs{

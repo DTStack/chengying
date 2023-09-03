@@ -703,7 +703,10 @@ func (this *instance) Stop(stopAgentOptionsTypeArr ...int) (ret error) {
 		stopAgentOptionsType = stopAgentOptionsTypeArr[0]
 	}
 
-	err, agentServerResp := agent.AgentClient.AgentStop(this.agentId, stopAgentOptionsType, "")
+	execId := uuid.NewV4().String()
+	model.ExecShellList.InsertExecShellInfo(this.clusterId, this.operationId, execId, this.schema.ProductName, this.name, this.sid, enums.ShellType.Start.Code)
+
+	err, agentServerResp := agent.AgentClient.AgentStop(this.agentId, stopAgentOptionsType, execId)
 	if err != nil {
 		msg := fmt.Sprintf("exec stop err: %v", err.Error())
 		return this.handleError(model.INSTANCE_STATUS_STOP_FAIL, msg, this.agentId, "")
